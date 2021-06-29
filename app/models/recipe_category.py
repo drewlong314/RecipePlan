@@ -5,7 +5,7 @@ recipe_categories = db.Table(
     db.Column(
         "category_id",
         db.Integer,
-        db.ForeignKey("category.id"),
+        db.ForeignKey("categories.id"),
         primary_key=True
     ),
     db.Column(

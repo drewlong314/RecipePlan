@@ -1,5 +1,6 @@
 from .db import db
 from .recipe_meal_plan import recipe_meal_plans
+from .recipe_category import recipe_categories
 
 class Recipe(db.Model):
     __tablename__ = 'recipes'
@@ -20,5 +21,11 @@ class Recipe(db.Model):
     meal_plans = db.relationship(
         "MealPlan",
         secondary=recipe_meal_plans,
+        back_populates="recipes"
+    )
+
+    categories = db.relationship(
+        "Category",
+        secondary=recipe_categories,
         back_populates="recipes"
     )
