@@ -38,6 +38,12 @@ def post_recipes():
         return form.errors
 
 
+@recipe_routes.route('/<id>')
+def get_specific_recipes(id):
+    recipe = Recipe.query.get(id)
+    return recipe.to_dict()
+
+
 @recipe_routes.route('/<id>', methods=['PUT'])
 def put_recipes(id):
     recipe = Recipe.query.get(id)
