@@ -3,6 +3,7 @@ from .recipe_meal_plan import recipe_meal_plans
 from .recipe_category import recipe_categories
 from .recipe_ingredient import recipe_ingredients
 
+
 class Recipe(db.Model):
     __tablename__ = 'recipes'
 
@@ -36,3 +37,17 @@ class Recipe(db.Model):
         secondary=recipe_ingredients,
         back_populates="recipes"
     )
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "image": self.image,
+            "servings": self.servings,
+            "time": self.time,
+            "instructions": self.instructions,
+            "user_id": self.user_id,
+            "day": self.day,
+            "planCategory": self.planCategory,
+        }
