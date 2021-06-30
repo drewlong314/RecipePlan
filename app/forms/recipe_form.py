@@ -21,4 +21,4 @@ class RecipeForm(FlaskForm):
     instructions = StringField('instructions', validators=[DataRequired()])
     user_id = IntegerField('user_id', validators=[DataRequired()])
     day = StringField('day')
-    planCategory = StringField('planCategory')
+    plan_category = StringField('plan_category')
