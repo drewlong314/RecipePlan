@@ -16,15 +16,14 @@ const RecipeEdit = () => {
   const [time, setTime] = useState(0);
   const [instructions, setInstructions] = useState("");
 
+  console.log(recipes);
   useEffect(() => {
-    if (recipes === null) {
-      dispatch(getAllRecipes());
-    } else {
+    if (recipes) {
       console.log(recipes);
-      const recipe = recipes.filter((recipe) => {
+      const recipe = recipes?.filter((recipe) => {
         return recipe.id === Number(id);
       });
-      console.log(recipe[0].name, 'This is recipe')
+      console.log(recipe[0].name, "This is recipe");
       setName(recipe[0].name);
       setDescription(recipe[0].description);
       setImage(recipe[0].image);
@@ -34,7 +33,7 @@ const RecipeEdit = () => {
     }
   }, [recipes]);
 
-  const createEdit = (e) => {
+  const createEdit = async (e) => {
     e.preventDefault();
     dispatch(
       editRecipe(
@@ -48,8 +47,8 @@ const RecipeEdit = () => {
         Number(id)
       )
     );
-    dispatch(getAllRecipes())
-    history.push("/recipes")
+    // dispatch(getAllRecipes())
+    history.push("/recipes");
   };
 
   return (

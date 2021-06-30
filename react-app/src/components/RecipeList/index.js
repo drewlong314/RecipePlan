@@ -4,22 +4,11 @@ import { getAllRecipes } from "../../store/recipes";
 import { useDispatch, useSelector } from "react-redux";
 
 const RecipeList = () => {
-  const dispatch = useDispatch();
   const allRecipes = useSelector((state) => state.recipeReducer.recipes);
-
-  const getAllRecipesFunction = async () => {
-    await dispatch(getAllRecipes());
-  };
-
-  useEffect(() => {
-    console.log("this is in the useEffect");
-    if (allRecipes === null) {
-      getAllRecipesFunction();
-    }
-  }, [allRecipes]);
 
   return (
     <div>
+      <Link to={`/recipes/create`}>Create A New Recipe</Link>
       <h1>Recipe List</h1>
       {allRecipes?.map((recipe) => {
         return [

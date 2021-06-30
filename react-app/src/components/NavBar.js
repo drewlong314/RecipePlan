@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { getAllRecipes } from '../store/recipes';
 import LogoutButton from './auth/LogoutButton';
 
 const NavBar = () => {
+  const dispatch = useDispatch()
+  const recipes = useSelector((state) => state.recipeReducer.recipes);
+
+  useEffect(() => {
+    if (recipes === null) {
+      dispatch(getAllRecipes());
+    }
+  })
+
   return (
     <nav>
       <ul>
@@ -24,6 +35,11 @@ const NavBar = () => {
         <li>
           <NavLink to="/users" exact={true} activeClassName="active">
             Users
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/recipes" exact={true} activeClassName="active">
+            Recipes
           </NavLink>
         </li>
         <li>
