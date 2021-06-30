@@ -30,7 +30,7 @@ def post_recipes():
             # user_id=,
             day=form.data['day'],
             plan_category=form.data['plan_category'],
-            )
+        )
         db.session.add(recipe)
         db.session.commit()
         return recipe.to_dict()
@@ -45,23 +45,24 @@ def get_specific_recipes(id):
 
 
 @recipe_routes.route('/<id>', methods=['PUT'])
-def put_recipes(id):
+def edit_recipes(id):
     recipe = Recipe.query.get(id)
-    if request.get_json()['name']:
-        recipe.name = request.get_json()['name']
-    if request.get_json()['description']:
-        recipe.description = request.get_json()['description']
-    if request.get_json()['image']:
-        recipe.image = request.get_json()['image']
-    if request.get_json()['servings']:
-        recipe.servings = request.get_json()['servings']
-    if request.get_json()['time']:
-        recipe.time = request.get_json()['time']
-    if request.get_json()['instructions']:
-        recipe.instructions = request.get_json()['instructions']
-
-    db.session.commit()
-    return "Put Request"
+    form = RecipeForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        recipe.name = form.data['name']
+        recipe.description = form.data['description']
+        recipe.image = form.data['image']
+        recipe.servings = form.data['servings']
+        recipe.time = form.data['time']
+        recipe.instructions = form.data['instructions']
+        recipe.user_id = form.data['user_id']
+        recipe.day = form.data['day']
+        recipe.plan_category = form.data['plan_category']
+        db.session.commit()
+        return recipe.to_dict()
+    else:
+        return form.errors
 
 
 @recipe_routes.route('/<id>', methods=['DELETE'])

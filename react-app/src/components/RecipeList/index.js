@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getAllRecipes } from "../../store/recipes";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -28,6 +29,7 @@ const RecipeList = () => {
           <p>{recipe.servings}</p>,
           <p>{recipe.time}</p>,
           <p>{recipe.instructions}</p>,
+          <Link to={`/recipes/${recipe.id}/edit`}>Edit</Link>
         ];
       })}
     </div>

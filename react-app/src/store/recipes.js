@@ -14,7 +14,6 @@ const addRecipe = (recipe) => ({
 export const getAllRecipes = () => async (dispatch) => {
   const res = await fetch("/api/recipes");
   const data = await res.json();
-  console.log(data, "-------------");
   dispatch(setRecipes(data));
 };
 
@@ -35,9 +34,28 @@ export const postRecipe = (name, description, image, servings, time, instruction
     }),
   });
   const data = await res.json();
-  console.log(data, "-------------");
   dispatch(addRecipe(data));
 };
+
+export const editRecipe = (name, description, image, servings, time, instructions, user_id, id) => async (dispatch) => {
+    const res = await fetch(`/api/recipes/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        description,
+        image,
+        servings,
+        time,
+        instructions,
+        user_id,
+      }),
+    });
+    const data = await res.json();
+    dispatch(addRecipe(data));
+  };
 
 const initialState = { recipes: null };
 
