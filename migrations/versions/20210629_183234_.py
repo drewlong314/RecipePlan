@@ -1,7 +1,7 @@
 """empty message
 
 Revision ID: afc4b1c0bee5
-Revises: 
+Revises:
 Create Date: 2021-06-29 18:32:34.010421
 
 """
@@ -45,7 +45,7 @@ def upgrade():
     sa.Column('instructions', sa.Text(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('day', sa.String(), nullable=True),
-    sa.Column('planCategory', sa.String(), nullable=True),
+    sa.Column('plan_category', sa.String(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

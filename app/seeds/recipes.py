@@ -11,7 +11,7 @@ def seed_recipes():
                   instructions="S.S. Anne Quagsire Seel Tornadus prepare for trouble Rotom Squirtle. Rage Lombre Cresselia Scolipede Shellos Meditite Thundershock. Excepteur sint occaecat cupidatat non proident Seedot Ground Great Ball Pachirisu Dwebble Hoenn. Poison Sting Rotom Oshawott Haxorus Woobat Plusle Hippopotas. Pokemon Heroes Floatzel Chinchou Doduo Kricketune Seismitoad Slowking.",
                   user_id=1,
                   day="Monday",
-                  planCategory="Breakfast",
+                  plan_category="Breakfast",
                   )
     demo2 = Recipe(name='Demo2',
                   description="S.S. Anne Quagsire Seel Tornadus prepare for trouble Rotom Squirtle. Rage Lombre Cresselia Scolipede Shellos Meditite Thundershock. Excepteur sint occaecat cupidatat non proident Seedot Ground Great Ball Pachirisu Dwebble Hoenn. Poison Sting Rotom Oshawott Haxorus Woobat Plusle Hippopotas. Pokemon Heroes Floatzel Chinchou Doduo Kricketune Seismitoad Slowking.",
@@ -21,7 +21,7 @@ def seed_recipes():
                   instructions="Pokem ipsum dolor sit amet Ralts Magmar Vileplume Darkrai I know it's my destiny Articuno. Bulbasaur Galvantula Rapidash Harden Rhyhorn Electrike ex ea commodo consequat. Rising Badge Shaymin Gothita Beheeyem Glalie Pupitar Gible. Glitch City Lillipup Ledyba Wingull Dome Fossil prepare for trouble Darkrai. Duis aute irure dolor in reprehenderit in voluptate Espeon Giratina Vine Whip Foongus Monferno Shuppet.",
                   user_id=1,
                   day="Tuesday",
-                  planCategory="Breakfast",
+                  plan_category="Breakfast",
                   )
     db.session.add(demo1)
     db.session.add(demo2)

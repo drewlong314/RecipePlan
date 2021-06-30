@@ -29,7 +29,7 @@ def post_recipes():
             user_id=form.data['user_id'],
             # user_id=,
             day=form.data['day'],
-            planCategory=form.data['planCategory'],
+            plan_category=form.data['plan_category'],
             )
         db.session.add(recipe)
         db.session.commit()

@@ -16,7 +16,7 @@ class Recipe(db.Model):
     instructions = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     day = db.Column(db.String)
-    planCategory = db.Column(db.String)
+    plan_category = db.Column(db.String)
 
     owner = db.relationship("User", back_populates="recipe")
 
@@ -49,5 +49,5 @@ class Recipe(db.Model):
             "instructions": self.instructions,
             "user_id": self.user_id,
             "day": self.day,
-            "planCategory": self.planCategory,
+            "plan_category": self.plan_category,
         }
