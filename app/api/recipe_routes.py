@@ -38,6 +38,12 @@ def post_recipes():
         return form.errors
 
 
+@recipe_routes.route('/<id>')
+def get_specific_recipes(id):
+    recipe = Recipe.query.get(id)
+    return recipe.to_dict()
+
+
 @recipe_routes.route('/<id>', methods=['PUT'])
 def put_recipes(id):
     recipe = Recipe.query.get(id)
@@ -55,4 +61,12 @@ def put_recipes(id):
         recipe.instructions = request.get_json()['instructions']
 
     db.session.commit()
-    return "Finished"
+    return "Put Request"
+
+
+@recipe_routes.route('/<id>', methods=['DELETE'])
+def delete_recipes(id):
+    recipe = Recipe.query.get(id)
+    db.session.delete(recipe)
+    db.session.commit()
+    return "Delete Request"
