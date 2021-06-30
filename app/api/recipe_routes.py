@@ -18,7 +18,6 @@ def post_recipes():
     # add a way to get the user id
     form = RecipeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('--------------', form.data)
     if form.validate_on_submit():
         recipe = Recipe(
             name=form.data['name'],
@@ -38,8 +37,22 @@ def post_recipes():
     else:
         return form.errors
 
-# @user_routes.route('/<int:id>')
-# # @login_required
-# def user(id):
-#     user = User.query.get(id)
-#     return user.to_dict()
+
+@recipe_routes.route('/<id>', methods=['PUT'])
+def put_recipes(id):
+    recipe = Recipe.query.get(id)
+    if request.get_json()['name']:
+        recipe.name = request.get_json()['name']
+    if request.get_json()['description']:
+        recipe.description = request.get_json()['description']
+    if request.get_json()['image']:
+        recipe.image = request.get_json()['image']
+    if request.get_json()['servings']:
+        recipe.servings = request.get_json()['servings']
+    if request.get_json()['time']:
+        recipe.time = request.get_json()['time']
+    if request.get_json()['instructions']:
+        recipe.instructions = request.get_json()['instructions']
+
+    db.session.commit()
+    return "Finished"
