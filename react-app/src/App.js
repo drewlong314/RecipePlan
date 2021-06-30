@@ -9,6 +9,7 @@ import UsersList from "./components/UsersList";
 import User from "./components/User";
 import RecipeList from "./components/RecipeList";
 import RecipeCreate from "./components/RecipeCreate";
+import RecipeEdit from "./components/RecipeEdit";
 import { authenticate } from "./store/session";
 
 function App() {
@@ -48,6 +49,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/recipes/create" exact={true}>
           <RecipeCreate />
+        </ProtectedRoute>
+        <ProtectedRoute path="/recipes/:id/edit" exact={true}>
+          <RecipeEdit />
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true}>
           <h1>My Home Page</h1>

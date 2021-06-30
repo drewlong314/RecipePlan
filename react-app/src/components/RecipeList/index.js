@@ -28,6 +28,7 @@ const RecipeList = () => {
           <p>{recipe.servings}</p>,
           <p>{recipe.time}</p>,
           <p>{recipe.instructions}</p>,
+          <button onClick={() => console.log('I have been clicked', recipe.id)}>Edit</button>
         ];
       })}
     </div>
