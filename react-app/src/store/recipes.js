@@ -1,6 +1,7 @@
 const SET_RECIPES = "recipes/SET_RECIPES";
 const ADD_RECIPE = "recipes/ADD_RECIPE";
 const UPDATE_RECIPE = "recipes/UPDATE_RECIPE";
+const REMOVE_RECIPE = "recipes/REMOVE_RECIPE";
 
 const setRecipes = (recipes) => ({
   type: SET_RECIPES,
@@ -14,6 +15,11 @@ const addRecipe = (recipe) => ({
 
 const updateRecipe = (recipe) => ({
   type: UPDATE_RECIPE,
+  payload: recipe,
+});
+
+const removeRecipe = (recipe) => ({
+  type: REMOVE_RECIPE,
   payload: recipe,
 });
 
@@ -64,9 +70,16 @@ export const editRecipe =
       }),
     });
     const data = await res.json();
-    console.log(data);
     dispatch(updateRecipe(data));
   };
+
+export const deleteRecipe = (id) => async (dispatch) => {
+  const res = await fetch(`/api/recipes/${id}`, {
+    method: "DELETE",
+  });
+  const data = await res.json();
+  dispatch(removeRecipe(data));
+};
 
 const initialState = { recipes: null };
 
@@ -86,7 +99,13 @@ export default function recipeReducer(state = initialState, action) {
       recipe[0].name = action.payload.name;
       recipe[0].description = action.payload.description;
       return (state.recipes = { recipes: updateState });
-    // need to complete the add a recipe case
+    case REMOVE_RECIPE:
+        const deleteState = [...state.recipes]
+        const recipeToDelete = deleteState.filter((recipe) => {
+            return recipe.id === action.payload.id
+        })
+        deleteState.splice(deleteState.indexOf(recipeToDelete[0]), 1)
+        return (state.recipes = {recipes: deleteState})
     default:
       return state;
   }

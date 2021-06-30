@@ -70,4 +70,4 @@ def delete_recipes(id):
     recipe = Recipe.query.get(id)
     db.session.delete(recipe)
     db.session.commit()
-    return "Delete Request"
+    return recipe.to_dict()
