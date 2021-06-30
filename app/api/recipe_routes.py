@@ -55,4 +55,12 @@ def put_recipes(id):
         recipe.instructions = request.get_json()['instructions']
 
     db.session.commit()
-    return "Finished"
+    return "Put Request"
+
+
+@recipe_routes.route('/<id>', methods=['DELETE'])
+def delete_recipes(id):
+    recipe = Recipe.query.get(id)
+    db.session.delete(recipe)
+    db.session.commit()
+    return "Delete Request"
