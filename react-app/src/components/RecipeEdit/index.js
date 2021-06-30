@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { getAllRecipes, editRecipe } from "../../store/recipes";
 
 const RecipeEdit = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { id } = useParams();
   const user = useSelector((state) => state.session.user);
   const recipes = useSelector((state) => state.recipeReducer.recipes);
@@ -47,6 +48,8 @@ const RecipeEdit = () => {
         Number(id)
       )
     );
+    dispatch(getAllRecipes())
+    history.push("/recipes")
   };
 
   return (
