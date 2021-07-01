@@ -8,5 +8,5 @@ def seed_recipe_categories():
 
 
 def undo_recipe_categories():
-    db.session.execute('TRUNCATE users RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE recipe_category RESTART IDENTITY CASCADE;')
     db.session.commit()

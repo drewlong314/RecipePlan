@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import login_required
 from app.forms import RecipeForm
-from app.models import Recipe, db
+from app.models import Recipe, db, recipe_categories
 
 recipe_routes = Blueprint('recipes', __name__)
 
@@ -31,8 +31,17 @@ def post_recipes():
             day=form.data['day'],
             plan_category=form.data['plan_category'],
         )
+        print('-------------', form.data['category'])
         db.session.add(recipe)
         db.session.commit()
+        db.session.execute(recipe_categories.insert().values(
+            category_id=form.data['category'], recipe_id=recipe.id))
+        db.session.commit()
+        # categories = recipe_categories(
+        #     category_id=form.data['category'],
+        #     recipe_id=recipe.id
+        # )
+        print('******************', recipe.id)
         return recipe.to_dict()
     else:
         return form.errors

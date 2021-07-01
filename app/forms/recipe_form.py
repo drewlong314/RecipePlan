@@ -22,3 +22,4 @@ class RecipeForm(FlaskForm):
     user_id = IntegerField('user_id', validators=[DataRequired()])
     day = StringField('day')
     plan_category = StringField('plan_category')
+    category = StringField('category', validators=[DataRequired()])
