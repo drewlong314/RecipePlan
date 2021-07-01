@@ -5,7 +5,7 @@ import { postRecipe } from "../../store/recipes";
 
 const RecipeCreate = () => {
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
   const user = useSelector((state) => state.session.user);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -13,6 +13,7 @@ const RecipeCreate = () => {
   const [servings, setServings] = useState(0);
   const [time, setTime] = useState(0);
   const [instructions, setInstructions] = useState("");
+  const [category, setCategory] = useState(1);
 
   const createRecipe = (e) => {
     e.preventDefault();
@@ -24,7 +25,8 @@ const RecipeCreate = () => {
         servings,
         time,
         instructions,
-        user.id
+        user.id,
+        category
       )
     );
     history.push("/recipes");
@@ -87,6 +89,20 @@ const RecipeCreate = () => {
             onChange={(e) => setInstructions(e.target.value)}
             value={instructions}
           ></textarea>
+        </div>
+        <div>
+          <label>Time of Day</label>
+          <select
+            type="text"
+            name="category"
+            onChange={(e) => setCategory(e.target.value)}
+            value={category}
+          >
+            <option value='1'>Breakfast</option>
+            <option value='2'>Lunch</option>
+            <option value='3'>Dinner</option>
+            <option value='4'>Dessert</option>
+          </select>
         </div>
         <div>
           <button type="submit">Create Recipe</button>

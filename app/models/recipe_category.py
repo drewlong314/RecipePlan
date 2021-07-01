@@ -2,6 +2,7 @@ from .db import db
 
 recipe_categories = db.Table(
     'recipe_category',
+    db.Model.metadata,
     db.Column(
         "category_id",
         db.Integer,
