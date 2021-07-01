@@ -13,3 +13,17 @@ class Category(db.Model):
         secondary=recipe_categories,
         back_populates="categories"
     )
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+        }
+
+    # This is for listing all recipes that have the same category,
+    # without this there will be an infinite loop
+    def to_other_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+        }

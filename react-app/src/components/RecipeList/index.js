@@ -19,6 +19,7 @@ const RecipeList = () => {
           <p>{recipe.servings}</p>,
           <p>{recipe.time}</p>,
           <p>{recipe.instructions}</p>,
+          <p>{recipe.categories[0].name}</p>,
           <Link to={`/recipes/${recipe.id}/edit`}>Edit</Link>,
           <button onClick={() => dispatch(deleteRecipe(recipe.id))}>
             Delete Recipe

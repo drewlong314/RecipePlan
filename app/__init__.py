@@ -45,6 +45,7 @@ CORS(app)
 # request made over http is redirected to https.
 # Well.........
 
+
 @app.before_request
 def https_redirect():
     if os.environ.get('FLASK_ENV') == 'production':

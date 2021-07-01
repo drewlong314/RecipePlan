@@ -50,4 +50,5 @@ class Recipe(db.Model):
             "user_id": self.user_id,
             "day": self.day,
             "plan_category": self.plan_category,
+            "categories": [category.to_dict() for category in self.categories]
         }
