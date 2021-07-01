@@ -45,7 +45,7 @@ export const postRecipe =
         time,
         instructions,
         user_id,
-        category
+        category: [category]
       }),
     });
     const data = await res.json();
