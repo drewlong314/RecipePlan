@@ -10,45 +10,30 @@ recipe_routes = Blueprint('recipes', __name__)
 # @login_required
 def get_recipes():
     recipes = Recipe.query.all()
-    # print('**********', recipes)
-    # recipe_category = recipe_categories.query.all()
-    # recipe_category = db.session.execute(
-    #     f"SELECT recipes.id, recipe_category.category_id FROM recipes JOIN recipe_category ON recipe_category.recipe_id=recipes.id JOIN categories ON categories.id=recipe_category.category_id")
-    # print('___________________', recipe_category.fetchall())
-    # recipe_category = Recipe.query.join(recipe_categories).join(Category).filter((recipe_categories.c.recipe_id == Recipe.id) & (recipe_categories.c.category_id == Category.id)).all()
-    # recipe_category = Recipe.query.join(recipe_categories).join(Category).all()
-    # print('this is the recipe category table', recipe_category)
-    # for recipe in recipe_category:
-        # print(recipe)
-        # return_this = recipe.to_dict()
-        # print("-----------------", return_this)
-        # print('--------------', recipe.to_dict())
     return {"recipes": [recipe.to_dict() for recipe in recipes]}
 
 
 @recipe_routes.route('/', methods=['POST'])
 def post_recipes():
-    # add a way to get the user id
     form = RecipeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         recipe = Recipe(
             name=form.data['name'],
             description=form.data['description'],
-            image=form.data['image'],  # change this
+            image=form.data['image'],
             servings=form.data['servings'],
             time=form.data['time'],
             instructions=form.data['instructions'],
             user_id=form.data['user_id'],
-            # user_id=,
             day=form.data['day'],
             plan_category=form.data['plan_category'],
         )
         db.session.add(recipe)
         db.session.commit()
-
-        category = Category.query.filter_by(id=form.data['category']).first()
-        recipe.categories.append(category)
+        for category in form.data['category']:
+            if category != 0:
+                recipe.categories.append(Category.query.filter_by(id=category).first())
         db.session.commit()
         return recipe.to_dict()
     else:

@@ -12,6 +12,12 @@ const RecipeList = () => {
       <Link to={`/recipes/create`}>Create A New Recipe</Link>
       <h1>Recipe List</h1>
       {allRecipes?.map((recipe) => {
+        let index = 1;
+        const recipeCategories = recipe.categories.map((r) => {
+          if (index === recipe.categories.length) return r.name;
+          index++;
+          return r.name + ", ";
+        });
         return [
           <h1>{recipe.name}</h1>,
           <p>{recipe.description}</p>,
@@ -19,7 +25,7 @@ const RecipeList = () => {
           <p>{recipe.servings}</p>,
           <p>{recipe.time}</p>,
           <p>{recipe.instructions}</p>,
-          <p>{recipe.categories[0].name}</p>,
+          <p>{recipeCategories}</p>,
           <Link to={`/recipes/${recipe.id}/edit`}>Edit</Link>,
           <button onClick={() => dispatch(deleteRecipe(recipe.id))}>
             Delete Recipe

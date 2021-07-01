@@ -13,7 +13,10 @@ const RecipeCreate = () => {
   const [servings, setServings] = useState(0);
   const [time, setTime] = useState(0);
   const [instructions, setInstructions] = useState("");
-  const [category, setCategory] = useState(1);
+  const [category1, setCategory1] = useState(0);
+  const [category2, setCategory2] = useState(0);
+  const [category3, setCategory3] = useState(0);
+  const [category4, setCategory4] = useState(0);
 
   const createRecipe = (e) => {
     e.preventDefault();
@@ -26,7 +29,7 @@ const RecipeCreate = () => {
         time,
         instructions,
         user.id,
-        category
+        [category1, category2, category3, category4]
       )
     );
     history.push("/recipes");
@@ -91,18 +94,39 @@ const RecipeCreate = () => {
           ></textarea>
         </div>
         <div>
-          <label>Time of Day</label>
-          <select
-            type="text"
-            name="category"
-            onChange={(e) => setCategory(e.target.value)}
-            value={category}
-          >
-            <option value='1'>Breakfast</option>
-            <option value='2'>Lunch</option>
-            <option value='3'>Dinner</option>
-            <option value='4'>Dessert</option>
-          </select>
+          Time of Day:
+          <input
+            type="checkbox"
+            onChange={() =>
+              category1 === 0 ? setCategory1(1) : setCategory1(0)
+            }
+            value={category1}
+          ></input>
+          <label>Breakfast</label>
+          <input
+            type="checkbox"
+            onChange={() =>
+              category2 === 0 ? setCategory2(2) : setCategory2(0)
+            }
+            value={category2}
+          ></input>
+          <label>Lunch</label>
+          <input
+            type="checkbox"
+            onChange={() =>
+              category3 === 0 ? setCategory3(3) : setCategory3(0)
+            }
+            value={category3}
+          ></input>
+          <label>Dinner</label>
+          <input
+            type="checkbox"
+            onChange={() =>
+              category4 === 0 ? setCategory4(4) : setCategory4(0)
+            }
+            value={category4}
+          ></input>
+          <label>Dessert</label>
         </div>
         <div>
           <button type="submit">Create Recipe</button>
