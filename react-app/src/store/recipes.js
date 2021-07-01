@@ -98,6 +98,10 @@ export default function recipeReducer(state = initialState, action) {
       });
       recipe[0].name = action.payload.name;
       recipe[0].description = action.payload.description;
+      recipe[0].image = action.payload.image;
+      recipe[0].servings = action.payload.servings;
+      recipe[0].time = action.payload.time;
+      recipe[0].instructions = action.payload.instructions;
       return (state.recipes = { recipes: updateState });
     case REMOVE_RECIPE:
         const deleteState = [...state.recipes]
