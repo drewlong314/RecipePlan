@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { postRecipe } from "../../store/recipes";
+import "./style.css";
 
 const RecipeCreate = () => {
   const dispatch = useDispatch();
@@ -96,60 +97,40 @@ const RecipeCreate = () => {
         <div>
           Time of Day:
           <button
+            className={category1 === 0 ? null : "category_chosen"}
             onClick={(e) => {
               e.preventDefault();
-              if (category1 === 0) {
-                setCategory1(1);
-                e.target.style.backgroundColor = "green";
-              } else {
-                setCategory1(0);
-                e.target.style.backgroundColor = "";
-              }
+              category1 === 0 ? setCategory1(1) : setCategory1(0);
             }}
             value={category1}
           >
             Breakfast
           </button>
           <button
+            className={category2 === 0 ? null : "category_chosen"}
             onClick={(e) => {
               e.preventDefault();
-              if (category2 === 0) {
-                setCategory2(2);
-                e.target.style.backgroundColor = "green";
-              } else {
-                setCategory2(0);
-                e.target.style.backgroundColor = "";
-              }
+              category2 === 0 ? setCategory2(2) : setCategory2(0);
             }}
             value={category2}
           >
             Lunch
           </button>
           <button
+            className={category3 === 0 ? null : "category_chosen"}
             onClick={(e) => {
               e.preventDefault();
-              if (category3 === 0) {
-                setCategory3(3);
-                e.target.style.backgroundColor = "green";
-              } else {
-                setCategory3(0);
-                e.target.style.backgroundColor = "";
-              }
+              category3 === 0 ? setCategory3(3) : setCategory3(0);
             }}
             value={category3}
           >
             Dinner
           </button>
           <button
+            className={category4 === 0 ? null : "category_chosen"}
             onClick={(e) => {
               e.preventDefault();
-              if (category4 === 0) {
-                setCategory4(4);
-                e.target.style.backgroundColor = "green";
-              } else {
-                setCategory4(0);
-                e.target.style.backgroundColor = "";
-              }
+              category4 === 0 ? setCategory4(4) : setCategory4(0);
             }}
             value={category4}
           >
