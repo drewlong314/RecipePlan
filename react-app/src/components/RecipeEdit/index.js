@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getAllRecipes, editRecipe } from "../../store/recipes";
-import './style.css'
+import "./style.css";
 
 const RecipeEdit = () => {
   const dispatch = useDispatch();
@@ -132,48 +132,45 @@ const RecipeEdit = () => {
         <div>
           Time of Day:
           <button
-            className={category1 === 0 ? null : 'category_chosen'}
+            className={category1 === 0 ? null : "category_chosen"}
             onClick={(e) => {
               e.preventDefault();
-              if (category1 === 0) {
-                setCategory1(1);
-                // e.target.style.backgroundColor = "green";
-              } else {
-                setCategory1(0);
-                // e.target.style.backgroundColor = "";
-              }
+              category1 === 0 ? setCategory1(1) : setCategory1(0);
             }}
             value={category1}
           >
             Breakfast
           </button>
-          <input
-            type="checkbox"
-            onChange={() =>
-              category2 === 0 ? setCategory2(2) : setCategory2(0)
-            }
-            checked={category2}
+          <button
+            className={category2 === 0 ? null : "category_chosen"}
+            onClick={(e) => {
+              e.preventDefault();
+              category2 === 0 ? setCategory2(2) : setCategory2(0);
+            }}
             value={category2}
-          ></input>
-          <label>Lunch</label>
-          <input
-            type="checkbox"
-            onChange={() =>
-              category3 === 0 ? setCategory3(3) : setCategory3(0)
-            }
-            checked={category3}
+          >
+            Lunch
+          </button>
+          <button
+            className={category3 === 0 ? null : "category_chosen"}
+            onClick={(e) => {
+              e.preventDefault();
+              category3 === 0 ? setCategory3(3) : setCategory3(0);
+            }}
             value={category3}
-          ></input>
-          <label>Dinner</label>
-          <input
-            type="checkbox"
-            onChange={() =>
-              category4 === 0 ? setCategory4(4) : setCategory4(0)
-            }
-            checked={category4}
+          >
+            Dinner
+          </button>
+          <button
+            className={category4 === 0 ? null : "category_chosen"}
+            onClick={(e) => {
+              e.preventDefault();
+              category4 === 0 ? setCategory4(4) : setCategory4(0);
+            }}
             value={category4}
-          ></input>
-          <label>Dessert</label>
+          >
+            Dessert
+          </button>
         </div>
         <div>
           <button type="submit">Submit Changes</button>
