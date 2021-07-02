@@ -95,38 +95,66 @@ const RecipeCreate = () => {
         </div>
         <div>
           Time of Day:
-          <input
-            type="checkbox"
-            onChange={() =>
-              category1 === 0 ? setCategory1(1) : setCategory1(0)
-            }
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              if (category1 === 0) {
+                setCategory1(1);
+                e.target.style.backgroundColor = "green";
+              } else {
+                setCategory1(0);
+                e.target.style.backgroundColor = "";
+              }
+            }}
             value={category1}
-          ></input>
-          <label>Breakfast</label>
-          <input
-            type="checkbox"
-            onChange={() =>
-              category2 === 0 ? setCategory2(2) : setCategory2(0)
-            }
+          >
+            Breakfast
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              if (category2 === 0) {
+                setCategory2(2);
+                e.target.style.backgroundColor = "green";
+              } else {
+                setCategory2(0);
+                e.target.style.backgroundColor = "";
+              }
+            }}
             value={category2}
-          ></input>
-          <label>Lunch</label>
-          <input
-            type="checkbox"
-            onChange={() =>
-              category3 === 0 ? setCategory3(3) : setCategory3(0)
-            }
+          >
+            Lunch
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              if (category3 === 0) {
+                setCategory3(3);
+                e.target.style.backgroundColor = "green";
+              } else {
+                setCategory3(0);
+                e.target.style.backgroundColor = "";
+              }
+            }}
             value={category3}
-          ></input>
-          <label>Dinner</label>
-          <input
-            type="checkbox"
-            onChange={() =>
-              category4 === 0 ? setCategory4(4) : setCategory4(0)
-            }
+          >
+            Dinner
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              if (category4 === 0) {
+                setCategory4(4);
+                e.target.style.backgroundColor = "green";
+              } else {
+                setCategory4(0);
+                e.target.style.backgroundColor = "";
+              }
+            }}
             value={category4}
-          ></input>
-          <label>Dessert</label>
+          >
+            Dessert
+          </button>
         </div>
         <div>
           <button type="submit">Create Recipe</button>

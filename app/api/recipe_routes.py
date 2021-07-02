@@ -49,6 +49,7 @@ def get_specific_recipes(id):
 @recipe_routes.route('/<id>', methods=['PUT'])
 def edit_recipes(id):
     recipe = Recipe.query.get(id)
+    print("********************", recipe.to_dict())
     form = RecipeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -61,6 +62,10 @@ def edit_recipes(id):
         recipe.user_id = form.data['user_id']
         recipe.day = form.data['day']
         recipe.plan_category = form.data['plan_category']
+        db.session.commit()
+        for category in form.data['category']:
+            if category != 0:
+                recipe.categories.append(Category.query.filter_by(id=category).first())
         db.session.commit()
         return recipe.to_dict()
     else:
