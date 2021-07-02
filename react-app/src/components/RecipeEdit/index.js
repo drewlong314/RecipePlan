@@ -35,21 +35,21 @@ const RecipeEdit = () => {
       setServings(recipe[0].servings);
       setTime(recipe[0].time);
       setInstructions(recipe[0].instructions);
-      setCategories(recipe[0].categories)
-      console.log('--------------------', recipe[0].categories)
-      recipe[0].categories.forEach(cat => {
-        console.log(cat)
-        if (cat.name === "Breakfast") setCategory1(1)
-        if (cat.name === "Lunch") setCategory2(2)
-        if (cat.name === "Dinner") setCategory3(3)
-        if (cat.name === "Dessert") setCategory4(4)
+      setCategories(recipe[0].categories);
+      console.log("--------------------", recipe[0].categories);
+      recipe[0].categories.forEach((cat) => {
+        console.log(cat);
+        if (cat.name === "Breakfast") setCategory1(1);
+        if (cat.name === "Lunch") setCategory2(2);
+        if (cat.name === "Dinner") setCategory3(3);
+        if (cat.name === "Dessert") setCategory4(4);
       });
     }
   }, [recipes]);
 
   const createEdit = async (e) => {
     e.preventDefault();
-    console.log(category1, category2, category3, category4)
+    console.log(category1, category2, category3, category4);
     dispatch(
       editRecipe(
         name,
@@ -130,15 +130,21 @@ const RecipeEdit = () => {
         </div>
         <div>
           Time of Day:
-          <input
-            type="checkbox"
-            onChange={() =>
-              category1 === 0 ? setCategory1(1) : setCategory1(0)
-            }
-            checked={category1}
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              if (category1 === 0) {
+                setCategory1(1);
+                e.target.style.backgroundColor = "green";
+              } else {
+                setCategory1(0);
+                e.target.style.backgroundColor = "";
+              }
+            }}
             value={category1}
-          ></input>
-          <label>Breakfast</label>
+          >
+            Breakfast
+          </button>
           <input
             type="checkbox"
             onChange={() =>
