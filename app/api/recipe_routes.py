@@ -63,9 +63,11 @@ def edit_recipes(id):
         recipe.day = form.data['day']
         recipe.plan_category = form.data['plan_category']
         db.session.commit()
+        recipe.categories = []
         for category in form.data['category']:
             if category != 0:
                 recipe.categories.append(Category.query.filter_by(id=category).first())
+        print('###########################', recipe.categories)
         db.session.commit()
         return recipe.to_dict()
     else:

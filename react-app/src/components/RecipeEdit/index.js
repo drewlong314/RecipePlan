@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getAllRecipes, editRecipe } from "../../store/recipes";
+import './style.css'
 
 const RecipeEdit = () => {
   const dispatch = useDispatch();
@@ -131,14 +132,15 @@ const RecipeEdit = () => {
         <div>
           Time of Day:
           <button
+            className={category1 === 0 ? null : 'category_chosen'}
             onClick={(e) => {
               e.preventDefault();
               if (category1 === 0) {
                 setCategory1(1);
-                e.target.style.backgroundColor = "green";
+                // e.target.style.backgroundColor = "green";
               } else {
                 setCategory1(0);
-                e.target.style.backgroundColor = "";
+                // e.target.style.backgroundColor = "";
               }
             }}
             value={category1}
