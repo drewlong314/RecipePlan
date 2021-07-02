@@ -8,8 +8,11 @@ class Ingredient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
 
-    recipes = db.relationship(
-        "Recipe",
-        secondary=recipe_ingredients,
-        back_populates="ingredients"
-    )
+    recipe_ingredients = db.relationship(
+        "Recipe_Ingredients", back_populates="ingredients")
+
+    # recipes = db.relationship(
+    #     "Recipe",
+    #     secondary=recipe_ingredients,
+    #     back_populates="ingredients"
+    # )

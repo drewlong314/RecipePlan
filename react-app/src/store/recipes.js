@@ -24,7 +24,7 @@ const removeRecipe = (recipe) => ({
 });
 
 export const getAllRecipes = () => async (dispatch) => {
-  const res = await fetch("/api/recipes");
+  const res = await fetch("/api/recipes/");
   const data = await res.json();
   dispatch(setRecipes(data));
 };
