@@ -1,1 +1,12 @@
 /* TODO Add site wide styles */
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    width: 100px;
+    height: 30px;
+}
+button:hover {
+    opacity: 50%;
+    /* background-color: lawngreen; */
+}

@@ -19,7 +19,8 @@ class Recipe(db.Model):
     plan_category = db.Column(db.String)
 
     owner = db.relationship("User", back_populates="recipe")
-
+    recipe_ingredients = db.relationship(
+        "Recipe_Ingredients", back_populates="recipes")
     meal_plans = db.relationship(
         "MealPlan",
         secondary=recipe_meal_plans,
@@ -32,11 +33,11 @@ class Recipe(db.Model):
         back_populates="recipes"
     )
 
-    ingredients = db.relationship(
-        "Ingredient",
-        secondary=recipe_ingredients,
-        back_populates="recipes"
-    )
+    # ingredients = db.relationship(
+    #     "Ingredient",
+    #     secondary=recipe_ingredients,
+    #     back_populates="recipes"
+    # )
 
     def to_dict(self):
         return {
