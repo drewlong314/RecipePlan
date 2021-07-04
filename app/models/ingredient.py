@@ -1,5 +1,5 @@
 from .db import db
-from .recipe_ingredient import recipe_ingredients
+from .recipe_ingredient import Recipe_Ingredient
 
 
 class Ingredient(db.Model):
@@ -9,10 +9,16 @@ class Ingredient(db.Model):
     name = db.Column(db.String, nullable=False)
 
     recipe_ingredients = db.relationship(
-        "Recipe_Ingredients", back_populates="ingredients")
+        "Recipe_Ingredient", back_populates="ingredients")
 
     # recipes = db.relationship(
     #     "Recipe",
     #     secondary=recipe_ingredients,
     #     back_populates="ingredients"
     # )
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+        }

@@ -30,7 +30,7 @@ export const getAllRecipes = () => async (dispatch) => {
 };
 
 export const postRecipe =
-  (name, description, image, servings, time, instructions, user_id, category) =>
+  (name, description, image, servings, time, instructions, user_id, category, ingredient) =>
   async (dispatch) => {
     const res = await fetch("/api/recipes/", {
       method: "POST",
@@ -45,7 +45,8 @@ export const postRecipe =
         time,
         instructions,
         user_id,
-        category: [category]
+        category: [category],
+        ingredient
       }),
     });
     const data = await res.json();

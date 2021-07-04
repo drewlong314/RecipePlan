@@ -1,7 +1,7 @@
 from .db import db
 from .recipe_meal_plan import recipe_meal_plans
 from .recipe_category import recipe_categories
-from .recipe_ingredient import recipe_ingredients
+from .recipe_ingredient import Recipe_Ingredient
 
 
 class Recipe(db.Model):
@@ -20,7 +20,7 @@ class Recipe(db.Model):
 
     owner = db.relationship("User", back_populates="recipe")
     recipe_ingredients = db.relationship(
-        "Recipe_Ingredients", back_populates="recipes")
+        "Recipe_Ingredient", back_populates="recipes")
     meal_plans = db.relationship(
         "MealPlan",
         secondary=recipe_meal_plans,
@@ -51,5 +51,6 @@ class Recipe(db.Model):
             "user_id": self.user_id,
             "day": self.day,
             "plan_category": self.plan_category,
-            "categories": [category.to_dict() for category in self.categories]
+            "categories": [category.to_dict() for category in self.categories],
+            "recipe_ingredients": [ingredient.to_dict() for ingredient in self.recipe_ingredients]
         }
