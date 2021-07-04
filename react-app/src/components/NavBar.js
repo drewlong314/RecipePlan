@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { getAllMeasurements } from '../store/measurements';
 import { getAllRecipes } from '../store/recipes';
 import LogoutButton from './auth/LogoutButton';
 
@@ -11,6 +12,7 @@ const NavBar = () => {
   useEffect(() => {
     if (recipes === null) {
       dispatch(getAllRecipes());
+      dispatch(getAllMeasurements())
     }
   })
 
