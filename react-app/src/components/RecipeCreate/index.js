@@ -18,6 +18,7 @@ const RecipeCreate = () => {
   const [category2, setCategory2] = useState(0);
   const [category3, setCategory3] = useState(0);
   const [category4, setCategory4] = useState(0);
+  const [ingredient, setIngredient] = useState("gge");
 
   const createRecipe = (e) => {
     e.preventDefault();
@@ -30,11 +31,18 @@ const RecipeCreate = () => {
         time,
         instructions,
         user.id,
-        [category1, category2, category3, category4]
+        [category1, category2, category3, category4],
+        ingredient
       )
     );
     history.push("/recipes");
   };
+
+  // let measurements;
+
+  // const getMeasurements = async () => {
+  //   const res = await fetch('/api/recipes/measurements')
+  // }
 
   return (
     <div>
@@ -136,6 +144,13 @@ const RecipeCreate = () => {
           >
             Dessert
           </button>
+        </div>
+        <div>
+          <p>Ingredients:</p>
+          <input
+            onChange={(e) => setIngredient(e.target.value)}
+            value={ingredient}
+          ></input>
         </div>
         <div>
           <button type="submit">Create Recipe</button>

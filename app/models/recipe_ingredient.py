@@ -10,19 +10,13 @@ class Recipe_Ingredient(db.Model):
     amount = db.Column(db.Integer, nullable=False)
     measurement_id = db.Column(db.Integer, db.ForeignKey('measurements.id'))
     recipes = db.relationship("Recipe", back_populates="recipe_ingredients")
-    ingredients = db.relationship("Ingredient", back_populates="recipe_ingredients")
-# recipe_ingredients = db.Table(
-#     'recipe_ingredient',
-#     db.Column(
-#         "ingredient_id",
-#         db.Integer,
-#         db.ForeignKey("ingredients.id"),
-#         primary_key=True
-#     ),
-#     db.Column(
-#         "recipe_id",
-#         db.Integer,
-#         db.ForeignKey("recipes.id"),
-#         primary_key=True
-#     )
-# )
+    ingredients = db.relationship(
+        "Ingredient", back_populates="recipe_ingredients")
+
+    def to_dict(self):
+        return {
+            "ingredient_id": self.ingredient_id,
+            "recipe_id": self.recipe_id,
+            "amount": self.amount,
+            "measurement_id": self.measurement_id,
+        }

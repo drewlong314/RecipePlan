@@ -16,3 +16,9 @@ class Ingredient(db.Model):
     #     secondary=recipe_ingredients,
     #     back_populates="ingredients"
     # )
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+        }

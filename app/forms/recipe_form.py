@@ -23,3 +23,4 @@ class RecipeForm(FlaskForm):
     day = StringField('day')
     plan_category = StringField('plan_category')
     category = StringField('category', validators=[DataRequired()])
+    ingredient = StringField('ingredient')
