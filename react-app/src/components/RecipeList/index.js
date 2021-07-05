@@ -6,6 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 const RecipeList = () => {
   const dispatch = useDispatch();
   const allRecipes = useSelector((state) => state.recipeReducer.recipes);
+  const allMeasurements = useSelector(
+    (state) => state.measurementReducer.measurements
+  );
+  const allIngredients = useSelector((state) => state.ingredientReducer.ingredients)
 
   return (
     <div>
@@ -18,6 +22,17 @@ const RecipeList = () => {
           index++;
           return r.name + ", ";
         });
+        const ingredients = recipe.recipe_ingredients.map((ingredient) => {
+          const ingredientMeasurement = allMeasurements.filter((m) => {
+            return m.id === ingredient.measurement_id;
+          });
+          const ingredientIngredient = allIngredients.filter((i) => {
+            return i.id === ingredient.ingredient_id;
+          });
+          return (
+            <p>{`${ingredient.amount} ${ingredientMeasurement[0].name} ${ingredientIngredient[0].name}`}</p>
+          );
+        });
         return [
           <h1>{recipe.name}</h1>,
           <p>{recipe.description}</p>,
@@ -26,6 +41,7 @@ const RecipeList = () => {
           <p>{recipe.time}</p>,
           <p>{recipe.instructions}</p>,
           <p>{recipeCategories}</p>,
+          <div>{ingredients}</div>,
           <Link to={`/recipes/${recipe.id}/edit`}>Edit</Link>,
           <button onClick={() => dispatch(deleteRecipe(recipe.id))}>
             Delete Recipe
