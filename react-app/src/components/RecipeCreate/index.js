@@ -8,6 +8,9 @@ const RecipeCreate = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
+  const measurements = useSelector(
+    (state) => state.measurementReducer.measurements
+  );
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
@@ -18,7 +21,11 @@ const RecipeCreate = () => {
   const [category2, setCategory2] = useState(0);
   const [category3, setCategory3] = useState(0);
   const [category4, setCategory4] = useState(0);
-  const [ingredient, setIngredient] = useState("gge");
+  const [ingredient, setIngredient] = useState("");
+  const [measurement, setMeasurement] = useState("");
+  const [quantity, setQuantity] = useState(0);
+  const [ingredientList, setIngredientList] = useState([]);
+  // Try an array of arrays [[1, tsp, salt], [2, "", apples]]
 
   const createRecipe = (e) => {
     e.preventDefault();
@@ -35,14 +42,26 @@ const RecipeCreate = () => {
         ingredient
       )
     );
-    history.push("/recipes");
+    // history.push("/recipes");
   };
 
-  // let measurements;
+  useEffect(() => {
+    console.log(ingredientList)
+  }, [ingredientList])
 
-  // const getMeasurements = async () => {
-  //   const res = await fetch('/api/recipes/measurements')
-  // }
+  const addIngredient = (e) => {
+    e.preventDefault();
+    console.log("1", ingredientList)
+    setIngredientList([...ingredientList, [quantity, measurement, ingredient]]);
+    console.log("2", ingredientList)
+    const li = document.createElement("li");
+    const ul = document.querySelector(".ingredient_list");
+    li.innerText = `${quantity} ${measurement} ${ingredient}`;
+    ul.appendChild(li);
+    setQuantity(0)
+    setMeasurement("")
+    setIngredient("")
+  };
 
   return (
     <div>
@@ -146,11 +165,31 @@ const RecipeCreate = () => {
           </button>
         </div>
         <div>
-          <p>Ingredients:</p>
-          <input
-            onChange={(e) => setIngredient(e.target.value)}
-            value={ingredient}
-          ></input>
+          <form>
+            <span>Ingredients:</span>
+            <input
+              type="number"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+            ></input>
+            <select
+              value={measurement}
+              onChange={(e) => setMeasurement(e.target.value)}
+            >
+              <option></option>;
+              {/* {console.log('ththththththththththththht', measurements)} */}
+              {measurements.map((measurement) => {
+                return <option>{measurement.name}</option>;
+              })}
+            </select>
+            <input
+              onChange={(e) => setIngredient(e.target.value)}
+              placeholder="eggs"
+              value={ingredient}
+            ></input>
+            <button onClick={addIngredient}>Add Ingredient</button>
+          </form>
+          <ul className="ingredient_list"></ul>
         </div>
         <div>
           <button type="submit">Create Recipe</button>
