@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { addCurrentIngredient } from "../../store/ingredients";
 import { postRecipe } from "../../store/recipes";
+import IngredientCard from "../IngredientCard";
 import "./style.css";
 
 const RecipeCreate = () => {
@@ -25,6 +27,7 @@ const RecipeCreate = () => {
   const [measurement, setMeasurement] = useState("");
   const [quantity, setQuantity] = useState(0);
   const [ingredientList, setIngredientList] = useState([]);
+  const [other, setOther] = useState([])
   // Try an array of arrays [[1, tsp, salt], [2, "", apples]]
 
   const createRecipe = (e) => {
@@ -47,17 +50,18 @@ const RecipeCreate = () => {
 
   useEffect(() => {
     console.log(ingredientList)
-  }, [ingredientList])
+    console.log(other)
+  }, [ingredientList, other])
+
+  let count = 0
 
   const addIngredient = (e) => {
     e.preventDefault();
     console.log("1", ingredientList)
     setIngredientList([...ingredientList, [quantity, measurement, ingredient]]);
-    console.log("2", ingredientList)
-    const li = document.createElement("li");
-    const ul = document.querySelector(".ingredient_list");
-    li.innerText = `${quantity} ${measurement} ${ingredient}`;
-    ul.appendChild(li);
+    dispatch(addCurrentIngredient(
+      <IngredientCard key={count} quantity={quantity} measurement={measurement} ingredient={ingredient} difference={count}/>))
+    setOther([...other, <IngredientCard key={ingredient} quantity={quantity} measurement={measurement} ingredient={ingredient}/>])
     setQuantity(0)
     setMeasurement("")
     setIngredient("")
@@ -179,7 +183,6 @@ const RecipeCreate = () => {
                 setMeasurement(e.target.value)
               }}
             >
-              {/* {console.log('ththththththththththththht', measurements)} */}
               {measurements.map((measurement) => {
                 return <option value={measurement.name}>{measurement.name}</option>;
               })}
@@ -192,6 +195,9 @@ const RecipeCreate = () => {
             <button onClick={addIngredient}>Add Ingredient</button>
           </form>
           <ul className="ingredient_list"></ul>
+        </div>
+        <div>
+          {other}
         </div>
         <div>
           <button type="submit">Create Recipe</button>
