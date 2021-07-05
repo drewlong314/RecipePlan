@@ -2,6 +2,7 @@ from app.models import db, Measurement
 
 
 def seed_measurements():
+    none = Measurement(name='')
     a = Measurement(name='tsp.')
     b = Measurement(name='Tbsp.')
     c = Measurement(name='cup')
@@ -22,6 +23,7 @@ def seed_measurements():
     r = Measurement(name='drop')
     s = Measurement(name='drops')
 
+    db.session.add(none)
     db.session.add(a)
     db.session.add(b)
     db.session.add(c)

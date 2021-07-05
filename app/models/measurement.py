@@ -9,3 +9,9 @@ class Measurement(db.Model):
     name = db.Column(db.String)
 
     recipe_ingredients = db.relationship("Recipe_Ingredient")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+        }

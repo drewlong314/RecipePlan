@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.forms import RecipeForm
-from app.models import Recipe, db, recipe_categories, Category, Ingredient, Recipe_Ingredient
+from app.models import Recipe, db, recipe_categories, Category, Ingredient, Recipe_Ingredient, Measurement
 
 recipe_routes = Blueprint('recipes', __name__)
 
@@ -35,33 +35,20 @@ def post_recipes():
             if category != 0:
                 recipe.categories.append(
                     Category.query.filter_by(id=category).first())
-        # for ingredient in form.data['ingredient']:
-        # ingredinet = Ingredient.query.filter_by(name=form.data['ingredient']).first()
-        # if ingredinet is None:
-        #     ingredient_add = Ingredient(name=form.data['ingredient'])
-        #     db.session.add(ingredient_add)
-        #     # MAYBE ADD A DB.SESSION.COMMIT HERE
-        #     e = recipe.to_dict()
-        #     print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', e)
-        #     recipe['ingredients'].append(ingredient_add)
-        #     print('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF', ingredient_add)
-        ingredient_add = Ingredient(name=form.data['ingredient'])
-        db.session.add(ingredient_add)
-        db.session.commit()
-        print('==============================', ingredient_add.to_dict()['id'])
-        recipe_ingredients = Recipe_Ingredient(
-            ingredient_id=ingredient_add.to_dict()['id'],
-            recipe_id=recipe.to_dict()['id'],
-            amount=3,
-            measurement_id=1,)
-        db.session.add(recipe_ingredients)
-        db.session.commit()
-
-        e = recipe.to_dict()
-        print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', e)
-
-        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", recipe.recipe_ingredients)
-        db.session.commit()
+        for ingredient in form.data['ingredient_list']:
+            check_ingredient = Ingredient.query.filter_by(name=ingredient[2]).first()
+            if check_ingredient is None:
+                check_ingredient = Ingredient(name=ingredient[2])
+                db.session.add(check_ingredient)
+                db.session.commit()
+            measurement_id = Measurement.query.filter_by(name=ingredient[1]).first()
+            recipe_ingredients = Recipe_Ingredient(
+                ingredient_id=check_ingredient.to_dict()['id'],
+                recipe_id=recipe.to_dict()['id'],
+                amount=ingredient[0],
+                measurement_id=measurement_id.id,)
+            db.session.add(recipe_ingredients)
+            db.session.commit()
         return recipe.to_dict()
     else:
         return form.errors
