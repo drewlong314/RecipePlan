@@ -39,7 +39,7 @@ const RecipeCreate = () => {
         instructions,
         user.id,
         [category1, category2, category3, category4],
-        ingredient
+        ingredientList
       )
     );
     // history.push("/recipes");
@@ -174,12 +174,14 @@ const RecipeCreate = () => {
             ></input>
             <select
               value={measurement}
-              onChange={(e) => setMeasurement(e.target.value)}
+              onChange={(e) => {
+                console.log(e.target.value)
+                setMeasurement(e.target.value)
+              }}
             >
-              <option></option>;
               {/* {console.log('ththththththththththththht', measurements)} */}
               {measurements.map((measurement) => {
-                return <option>{measurement.name}</option>;
+                return <option value={measurement.name}>{measurement.name}</option>;
               })}
             </select>
             <input
