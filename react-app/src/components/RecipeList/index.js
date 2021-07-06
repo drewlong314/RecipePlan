@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { deleteRecipe, getAllRecipes } from "../../store/recipes";
 import { useDispatch, useSelector } from "react-redux";
+import { setCurrentIngredient } from "../../store/ingredients";
 
 const RecipeList = () => {
   const dispatch = useDispatch();
@@ -10,6 +11,10 @@ const RecipeList = () => {
     (state) => state.measurementReducer.measurements
   );
   const allIngredients = useSelector((state) => state.ingredientReducer.ingredients)
+
+  useEffect(() => {
+    dispatch(setCurrentIngredient([]))
+  }, [])
 
   return (
     <div>

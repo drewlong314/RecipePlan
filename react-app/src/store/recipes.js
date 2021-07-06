@@ -75,7 +75,7 @@ export const editRecipe =
       }),
     });
     const data = await res.json();
-    dispatch(removeRecipe(data));
+    dispatch(updateRecipe(data));
   };
 
 export const deleteRecipe = (id) => async (dispatch) => {

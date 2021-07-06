@@ -16,7 +16,7 @@ const NavBar = () => {
       dispatch(getAllMeasurements())
       dispatch(getAllIngredients())
     }
-  })
+  },[])
 
   return (
     <nav>

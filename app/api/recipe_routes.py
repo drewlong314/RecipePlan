@@ -89,13 +89,17 @@ def edit_recipes(id):
                 db.session.add(check_ingredient)
                 db.session.commit()
             measurement_id = Measurement.query.filter_by(name=ingredient['props']['measurement']).first()
-            recipe_ingredients = Recipe_Ingredient(
-                ingredient_id=check_ingredient.to_dict()['id'],
-                recipe_id=recipe.to_dict()['id'],
-                amount=ingredient['props']['quantity'],
-                measurement_id=measurement_id.id,)
-            db.session.add(recipe_ingredients)
-            db.session.commit()
+            check_recipe_ingredients = Recipe_Ingredient.query.filter_by(ingredient_id=check_ingredient.to_dict()['id'], recipe_id=recipe.to_dict()['id']).first()
+            print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', check_recipe_ingredients)
+            if check_recipe_ingredients is None:
+                print('in there after the ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+                recipe_ingredients = Recipe_Ingredient(
+                    ingredient_id=check_ingredient.to_dict()['id'],
+                    recipe_id=recipe.to_dict()['id'],
+                    amount=ingredient['props']['quantity'],
+                    measurement_id=measurement_id.id,)
+                db.session.add(recipe_ingredients)
+                db.session.commit()
         db.session.commit()
         return recipe.to_dict()
     else:

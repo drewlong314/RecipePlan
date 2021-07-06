@@ -1,5 +1,3 @@
-import IngredientCard from "../components/IngredientCard";
-
 const SET_INGREDIENT = "ingredients/SET_INGREDIENT";
 const SET_CURRENT = "ingredients/SET_CURRENT";
 const ADD_CURRENT = "ingredients/ADD_CURRENT";
@@ -83,8 +81,8 @@ export default function ingredientReducer(state = initialState, action) {
       return state;
     case SET_CURRENT:
       console.log('it made it', action.payload)
-      console.log(IngredientCard)
-      return (state.current = action.payload);
+      state.current = action.payload
+      return state
     case ADD_CURRENT:
       state.current = [...state.current, action.payload];
       return state;
