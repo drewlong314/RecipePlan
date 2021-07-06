@@ -109,6 +109,9 @@ def edit_recipes(id):
 @recipe_routes.route('/<id>', methods=['DELETE'])
 def delete_recipes(id):
     recipe = Recipe.query.get(id)
+    recipe_ingredient_to_delete = Recipe_Ingredient.query.filter_by(recipe_id=id).all()
+    for rec_ing in recipe_ingredient_to_delete:
+        db.session.delete(rec_ing)
     db.session.delete(recipe)
     db.session.commit()
     return recipe.to_dict()
