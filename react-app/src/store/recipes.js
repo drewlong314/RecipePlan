@@ -56,7 +56,6 @@ export const postRecipe =
 export const editRecipe =
   (name, description, image, servings, time, instructions, user_id, id, categories, ingredient_list) =>
   async (dispatch) => {
-    console.log(categories)
     const res = await fetch(`/api/recipes/${id}`, {
       method: "PUT",
       headers: {
@@ -98,11 +97,9 @@ export default function recipeReducer(state = initialState, action) {
       return (state.recipes = { recipes: newState });
     case UPDATE_RECIPE:
       const updateState = [...state.recipes];
-      console.log(updateState, action.payload.id)
       const recipe = updateState.filter((recipe) => {
         return recipe.id === action.payload.id;
       });
-      console.log(action.payload)
       recipe[0].name = action.payload.name;
       recipe[0].description = action.payload.description;
       recipe[0].image = action.payload.image;

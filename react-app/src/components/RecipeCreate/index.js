@@ -31,7 +31,6 @@ const RecipeCreate = () => {
   const [quantity, setQuantity] = useState(0);
   const [ingredientList, setIngredientList] = useState([]);
   const [count, setCount] = useState(0);
-  // Try an array of arrays [[1, tsp, salt], [2, "", apples]]
 
   const createRecipe = (e) => {
     e.preventDefault();
@@ -52,15 +51,12 @@ const RecipeCreate = () => {
   };
 
   useEffect(() => {
-    console.log(ingredientList);
-    console.log("CURRENT", currentIngredients);
     setIngredientList(currentIngredients)
   }, [ingredientList, count, currentIngredients]);
 
 
   const addIngredient = (e) => {
     e.preventDefault();
-    // setIngredientList([...ingredientList, [quantity, measurement, ingredient]]);
     dispatch(
       addCurrentIngredient(
         <IngredientCard
@@ -190,7 +186,6 @@ const RecipeCreate = () => {
             <select
               value={measurement}
               onChange={(e) => {
-                console.log(e.target.value);
                 setMeasurement(e.target.value);
               }}
             >

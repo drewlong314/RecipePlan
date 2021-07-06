@@ -4,14 +4,6 @@ from wtforms.validators import DataRequired, Email, ValidationError
 from app.models import Recipe
 
 
-# def user_exists(form, field):
-#     print("Checking if user exits", field.data)
-#     email = field.data
-#     user = User.query.filter(User.email == email).first()
-#     if user:
-#         raise ValidationError("User is already registered.")
-
-
 class RecipeForm(FlaskForm):
     name = StringField('name', validators=[DataRequired()])
     description = StringField('description', validators=[DataRequired()])

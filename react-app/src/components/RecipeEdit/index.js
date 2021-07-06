@@ -27,7 +27,7 @@ const RecipeEdit = () => {
   const [servings, setServings] = useState(0);
   const [time, setTime] = useState(0);
   const [instructions, setInstructions] = useState("");
-  const [categories, setCategories] = useState([]); // This is probaly not needed
+  const [categories, setCategories] = useState([]);
   const [category1, setCategory1] = useState(0);
   const [category2, setCategory2] = useState(0);
   const [category3, setCategory3] = useState(0);
@@ -40,7 +40,6 @@ const RecipeEdit = () => {
   const [loaded, setLoaded] = useState(false);
 
   const convertRecipe = async (amount, measurement, ingredient, i) => {
-    console.log('What is this?', ingredient)
     const res = await fetch("/api/recipes/convert", {
       method: "POST",
       headers: {
@@ -53,7 +52,6 @@ const RecipeEdit = () => {
       }),
     });
     const data = await res.json();
-    console.log('in the function', data)
 
     dispatch(
       addCurrentIngredient(
@@ -85,8 +83,6 @@ const RecipeEdit = () => {
       if (loaded === false) {
         let i = 0
         recipe[0].recipe_ingredients.map((ingredient) => {
-          console.log('This is the ingredient I am looking at', ingredient);
-          // dispatch(setCurrentIngredients(ingredient.amount, ingredient.measurement_id, ingredient.ingredient_id))
           convertRecipe(ingredient.amount, ingredient.measurement_id, ingredient.ingredient_id, i)
           i++
         });
@@ -106,7 +102,6 @@ const RecipeEdit = () => {
 
   const createEdit = async (e) => {
     e.preventDefault();
-    console.log('This is goiung to be changed ', ingredientList)
     dispatch(
       editRecipe(
         name,
@@ -126,7 +121,6 @@ const RecipeEdit = () => {
 
   const addIngredient = (e) => {
     e.preventDefault();
-    // setIngredientList([...ingredientList, [quantity, measurement, ingredient]]);
     dispatch(
       addCurrentIngredient(
         <IngredientCard
@@ -163,7 +157,6 @@ const RecipeEdit = () => {
             type="text"
             name="description"
             onChange={(e) => {
-              console.log(description);
               setDescription(e.target.value);
             }}
             value={description}
@@ -259,7 +252,6 @@ const RecipeEdit = () => {
             <select
               value={measurement}
               onChange={(e) => {
-                console.log(e.target.value);
                 setMeasurement(e.target.value);
               }}
             >

@@ -81,7 +81,6 @@ def edit_recipes(id):
             if category != 0:
                 recipe.categories.append(
                     Category.query.filter_by(id=category).first())
-        print('INGREDIENTS:',  form.data['ingredient_list'])
         for ingredient in form.data['ingredient_list']:
             check_ingredient = Ingredient.query.filter_by(name=ingredient['props']['ingredient']).first()
             if check_ingredient is None:
@@ -90,9 +89,7 @@ def edit_recipes(id):
                 db.session.commit()
             measurement_id = Measurement.query.filter_by(name=ingredient['props']['measurement']).first()
             check_recipe_ingredients = Recipe_Ingredient.query.filter_by(ingredient_id=check_ingredient.to_dict()['id'], recipe_id=recipe.to_dict()['id']).first()
-            print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', check_recipe_ingredients)
             if check_recipe_ingredients is None:
-                print('in there after the ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
                 recipe_ingredients = Recipe_Ingredient(
                     ingredient_id=check_ingredient.to_dict()['id'],
                     recipe_id=recipe.to_dict()['id'],
