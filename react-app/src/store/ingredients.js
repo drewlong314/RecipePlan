@@ -47,7 +47,7 @@ export const removeCurrentIngredientID = (ingredient) => ({
 });
 
 export const removeIngredient = (ingredient) => async (dispatch) => {
-  const ingredient_id = ingredient.props.recipe_id
+  const ingredient_id = ingredient.props.ingredient_id
   const recipe_id = ingredient.props.recipe_id
   console.log(ingredient_id, recipe_id)
   console.log('IDS to be deleted', ingredient_id, recipe_id)
@@ -63,7 +63,6 @@ export const removeIngredient = (ingredient) => async (dispatch) => {
   });
   const data = await res.json();
   dispatch(removeCurrentIngredientID(data));
-  return
 }
 
 export const getAllIngredients = () => async (dispatch) => {

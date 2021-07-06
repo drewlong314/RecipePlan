@@ -40,6 +40,7 @@ const RecipeEdit = () => {
   const [loaded, setLoaded] = useState(false);
 
   const convertRecipe = async (amount, measurement, ingredient, i) => {
+    console.log('What is this?', ingredient)
     const res = await fetch("/api/recipes/convert", {
       method: "POST",
       headers: {
@@ -84,7 +85,7 @@ const RecipeEdit = () => {
       if (loaded === false) {
         let i = 0
         recipe[0].recipe_ingredients.map((ingredient) => {
-          console.log(ingredient);
+          console.log('This is the ingredient I am looking at', ingredient);
           // dispatch(setCurrentIngredients(ingredient.amount, ingredient.measurement_id, ingredient.ingredient_id))
           convertRecipe(ingredient.amount, ingredient.measurement_id, ingredient.ingredient_id, i)
           i++
