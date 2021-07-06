@@ -48,7 +48,7 @@ const RecipeCreate = () => {
         ingredientList
       )
     );
-    // history.push("/recipes");
+    history.push("/recipes");
   };
 
   useEffect(() => {

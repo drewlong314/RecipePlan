@@ -61,6 +61,8 @@ const RecipeEdit = () => {
           quantity={amount}
           measurement={data.info[0]}
           ingredient={data.info[1]}
+          ingredient_id={ingredient}
+          recipe_id={id}
           identifier={i}
         />
       )
@@ -103,6 +105,7 @@ const RecipeEdit = () => {
 
   const createEdit = async (e) => {
     e.preventDefault();
+    console.log('This is goiung to be changed ', ingredientList)
     dispatch(
       editRecipe(
         name,
@@ -113,7 +116,8 @@ const RecipeEdit = () => {
         instructions,
         user.id,
         Number(id),
-        [category1, category2, category3, category4]
+        [category1, category2, category3, category4],
+        ingredientList
       )
     );
     history.push("/recipes");

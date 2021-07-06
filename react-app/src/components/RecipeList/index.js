@@ -30,7 +30,7 @@ const RecipeList = () => {
             return i.id === ingredient.ingredient_id;
           });
           return (
-            <p>{`${ingredient.amount} ${ingredientMeasurement[0].name} ${ingredientIngredient[0].name}`}</p>
+            <p>{`${ingredient.amount} ${ingredientMeasurement[0]?.name} ${ingredientIngredient[0]?.name}`}</p>
           );
         });
         return [

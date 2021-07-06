@@ -54,7 +54,7 @@ export const postRecipe =
   };
 
 export const editRecipe =
-  (name, description, image, servings, time, instructions, user_id, id, categories) =>
+  (name, description, image, servings, time, instructions, user_id, id, categories, ingredient_list) =>
   async (dispatch) => {
     console.log(categories)
     const res = await fetch(`/api/recipes/${id}`, {
@@ -70,11 +70,12 @@ export const editRecipe =
         time,
         instructions,
         user_id,
-        category: [categories]
+        category: [categories],
+        ingredient_list: [ingredient_list]
       }),
     });
     const data = await res.json();
-    dispatch(updateRecipe(data));
+    dispatch(removeRecipe(data));
   };
 
 export const deleteRecipe = (id) => async (dispatch) => {
@@ -101,6 +102,7 @@ export default function recipeReducer(state = initialState, action) {
       const recipe = updateState.filter((recipe) => {
         return recipe.id === action.payload.id;
       });
+      console.log(action.payload)
       recipe[0].name = action.payload.name;
       recipe[0].description = action.payload.description;
       recipe[0].image = action.payload.image;
@@ -108,6 +110,7 @@ export default function recipeReducer(state = initialState, action) {
       recipe[0].time = action.payload.time;
       recipe[0].instructions = action.payload.instructions;
       recipe[0].categories = action.payload.categories
+      recipe[0].recipe_ingredients = action.payload.recipe_ingredients
       return (state.recipes = { recipes: updateState });
     case REMOVE_RECIPE:
         const deleteState = [...state.recipes]

@@ -36,7 +36,6 @@ def post_recipes():
                 recipe.categories.append(
                     Category.query.filter_by(id=category).first())
         for ingredient in form.data['ingredient_list']:
-            print('THIS IS INGREDIENT', ingredient['props'], '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
             check_ingredient = Ingredient.query.filter_by(name=ingredient['props']['ingredient']).first()
             if check_ingredient is None:
                 check_ingredient = Ingredient(name=ingredient['props']['ingredient'])
@@ -64,7 +63,6 @@ def get_specific_recipes(id):
 @recipe_routes.route('/<id>', methods=['PUT'])
 def edit_recipes(id):
     recipe = Recipe.query.get(id)
-    print("********************", recipe.to_dict())
     form = RecipeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -83,7 +81,21 @@ def edit_recipes(id):
             if category != 0:
                 recipe.categories.append(
                     Category.query.filter_by(id=category).first())
-        print('###########################', recipe.categories)
+        print('INGREDIENTS:',  form.data['ingredient_list'])
+        for ingredient in form.data['ingredient_list']:
+            check_ingredient = Ingredient.query.filter_by(name=ingredient['props']['ingredient']).first()
+            if check_ingredient is None:
+                check_ingredient = Ingredient(name=ingredient['props']['ingredient'])
+                db.session.add(check_ingredient)
+                db.session.commit()
+            measurement_id = Measurement.query.filter_by(name=ingredient['props']['measurement']).first()
+            recipe_ingredients = Recipe_Ingredient(
+                ingredient_id=check_ingredient.to_dict()['id'],
+                recipe_id=recipe.to_dict()['id'],
+                amount=ingredient['props']['quantity'],
+                measurement_id=measurement_id.id,)
+            db.session.add(recipe_ingredients)
+            db.session.commit()
         db.session.commit()
         return recipe.to_dict()
     else:
@@ -101,12 +113,9 @@ def delete_recipes(id):
 @recipe_routes.route('/convert', methods=['POST'])
 def convert_recipes():
     requestItems = request.get_json()
-    print(requestItems)
     requestItems['amount']
     measurement = Measurement.query.filter_by(id=requestItems['measurement']).first()
     ingredient = Ingredient.query.filter_by(id=requestItems['ingredient']).first()
-    print('totototototototototototototo', measurement.to_dict(), ingredient.to_dict())
     measurement_name = measurement.to_dict()['name']
-    print(measurement_name)
     ingredient_name = ingredient.to_dict()['name']
     return {'info': [measurement_name, ingredient_name]}
