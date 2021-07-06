@@ -10,6 +10,7 @@ const RecipeCreate = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
+  const currentIngredients = useSelector((state) => state.ingredientReducer.current)
   const measurements = useSelector(
     (state) => state.measurementReducer.measurements
   );
@@ -27,7 +28,7 @@ const RecipeCreate = () => {
   const [measurement, setMeasurement] = useState("");
   const [quantity, setQuantity] = useState(0);
   const [ingredientList, setIngredientList] = useState([]);
-  const [other, setOther] = useState([])
+  const [count, setCount] = useState(0)
   // Try an array of arrays [[1, tsp, salt], [2, "", apples]]
 
   const createRecipe = (e) => {
@@ -50,18 +51,16 @@ const RecipeCreate = () => {
 
   useEffect(() => {
     console.log(ingredientList)
-    console.log(other)
-  }, [ingredientList, other])
-
-  let count = 0
+    console.log('CURRENT', currentIngredients)
+  }, [ingredientList, count, currentIngredients])
 
   const addIngredient = (e) => {
     e.preventDefault();
     console.log("1", ingredientList)
     setIngredientList([...ingredientList, [quantity, measurement, ingredient]]);
     dispatch(addCurrentIngredient(
-      <IngredientCard key={count} quantity={quantity} measurement={measurement} ingredient={ingredient} difference={count}/>))
-    setOther([...other, <IngredientCard key={ingredient} quantity={quantity} measurement={measurement} ingredient={ingredient}/>])
+      <IngredientCard key={count} quantity={quantity} measurement={measurement} ingredient={ingredient} identifier={count}/>))
+    setCount(count + 1)
     setQuantity(0)
     setMeasurement("")
     setIngredient("")
@@ -197,7 +196,7 @@ const RecipeCreate = () => {
           <ul className="ingredient_list"></ul>
         </div>
         <div>
-          {other}
+          {currentIngredients}
         </div>
         <div>
           <button type="submit">Create Recipe</button>

@@ -1,6 +1,7 @@
 const SET_INGREDIENT = "ingredients/SET_INGREDIENT";
 const SET_CURRENT = "ingredients/SET_CURRENT";
 const ADD_CURRENT = "ingredients/ADD_CURRENT";
+const REMOVE_CURRENT = "ingredients/REMOVE_CURRENT";
 
 const setIngredient = (ingredient) => ({
   type: SET_INGREDIENT,
@@ -16,6 +17,11 @@ export const addCurrentIngredient = (ingredient) => ({
   type: ADD_CURRENT,
   payload: ingredient,
 });
+
+export const removeCurrentIngredient = (ingredient) => ({
+    type: REMOVE_CURRENT,
+    payload: ingredient,
+  });
 
 export const getAllIngredients = () => async (dispatch) => {
   const res = await fetch("/api/ingredients/");
@@ -35,6 +41,12 @@ export default function ingredientReducer(state = initialState, action) {
     case ADD_CURRENT:
         (state.current = [...state.current, action.payload]);
       return state
+    case REMOVE_CURRENT:
+        const newState = state.current.filter(current => {
+           return !(current.props.identifier === action.payload.props.identifier)
+        })
+        state.current = newState
+        return state
     default:
       return state;
   }
