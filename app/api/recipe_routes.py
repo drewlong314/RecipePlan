@@ -36,16 +36,17 @@ def post_recipes():
                 recipe.categories.append(
                     Category.query.filter_by(id=category).first())
         for ingredient in form.data['ingredient_list']:
-            check_ingredient = Ingredient.query.filter_by(name=ingredient[2]).first()
+            print('THIS IS INGREDIENT', ingredient['props'], '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+            check_ingredient = Ingredient.query.filter_by(name=ingredient['props']['ingredient']).first()
             if check_ingredient is None:
-                check_ingredient = Ingredient(name=ingredient[2])
+                check_ingredient = Ingredient(name=ingredient['props']['ingredient'])
                 db.session.add(check_ingredient)
                 db.session.commit()
-            measurement_id = Measurement.query.filter_by(name=ingredient[1]).first()
+            measurement_id = Measurement.query.filter_by(name=ingredient['props']['measurement']).first()
             recipe_ingredients = Recipe_Ingredient(
                 ingredient_id=check_ingredient.to_dict()['id'],
                 recipe_id=recipe.to_dict()['id'],
-                amount=ingredient[0],
+                amount=ingredient['props']['quantity'],
                 measurement_id=measurement_id.id,)
             db.session.add(recipe_ingredients)
             db.session.commit()
