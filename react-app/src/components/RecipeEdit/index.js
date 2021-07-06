@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { addCurrentIngredient } from "../../store/ingredients";
+import {
+  addCurrentIngredient,
+  setCurrentIngredients,
+} from "../../store/ingredients";
 import { getAllRecipes, editRecipe } from "../../store/recipes";
 import IngredientCard from "../IngredientCard";
 import "./style.css";
@@ -34,10 +37,39 @@ const RecipeEdit = () => {
   const [quantity, setQuantity] = useState(0);
   const [ingredientList, setIngredientList] = useState([]);
   const [count, setCount] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+
+  const convertRecipe = async (amount, measurement, ingredient, i) => {
+    const res = await fetch("/api/recipes/convert", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        amount,
+        measurement,
+        ingredient,
+      }),
+    });
+    const data = await res.json();
+    console.log('in the function', data)
+
+    dispatch(
+      addCurrentIngredient(
+        <IngredientCard
+          key={i}
+          quantity={amount}
+          measurement={data.info[0]}
+          ingredient={data.info[1]}
+          identifier={i}
+        />
+      )
+    );
+  };
 
   useEffect(() => {
     if (recipes) {
-      const recipe = recipes?.filter((recipe) => {
+      const recipe = recipes.filter((recipe) => {
         return recipe.id === Number(id);
       });
       setName(recipe[0].name);
@@ -47,10 +79,19 @@ const RecipeEdit = () => {
       setTime(recipe[0].time);
       setInstructions(recipe[0].instructions);
       setCategories(recipe[0].categories);
-      console.log('oooooooooooooooooooooooooo', recipe[0].recipe_ingredients)
-      recipe[0].recipe_ingredients.forEach(ingredient => {
-        
-      })
+      if (loaded === false) {
+        let i = 0
+        recipe[0].recipe_ingredients.map((ingredient) => {
+          console.log(ingredient);
+          // dispatch(setCurrentIngredients(ingredient.amount, ingredient.measurement_id, ingredient.ingredient_id))
+          convertRecipe(ingredient.amount, ingredient.measurement_id, ingredient.ingredient_id, i)
+          i++
+        });
+        setCount(i);
+        setLoaded(true)
+      }
+
+      setIngredientList(currentIngredients);
       recipe[0].categories.forEach((cat) => {
         if (cat.name === "Breakfast") setCategory1(1);
         if (cat.name === "Lunch") setCategory2(2);
@@ -58,7 +99,7 @@ const RecipeEdit = () => {
         if (cat.name === "Dessert") setCategory4(4);
       });
     }
-  }, [recipes]);
+  }, [recipes, currentIngredients, count]);
 
   const createEdit = async (e) => {
     e.preventDefault();
@@ -80,7 +121,7 @@ const RecipeEdit = () => {
 
   const addIngredient = (e) => {
     e.preventDefault();
-    setIngredientList([...ingredientList, [quantity, measurement, ingredient]]);
+    // setIngredientList([...ingredientList, [quantity, measurement, ingredient]]);
     dispatch(
       addCurrentIngredient(
         <IngredientCard

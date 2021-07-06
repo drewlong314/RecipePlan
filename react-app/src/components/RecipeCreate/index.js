@@ -60,7 +60,7 @@ const RecipeCreate = () => {
 
   const addIngredient = (e) => {
     e.preventDefault();
-    setIngredientList([...ingredientList, [quantity, measurement, ingredient]]);
+    // setIngredientList([...ingredientList, [quantity, measurement, ingredient]]);
     dispatch(
       addCurrentIngredient(
         <IngredientCard

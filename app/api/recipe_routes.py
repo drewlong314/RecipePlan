@@ -96,3 +96,17 @@ def delete_recipes(id):
     db.session.delete(recipe)
     db.session.commit()
     return recipe.to_dict()
+
+
+@recipe_routes.route('/convert', methods=['POST'])
+def convert_recipes():
+    requestItems = request.get_json()
+    print(requestItems)
+    requestItems['amount']
+    measurement = Measurement.query.filter_by(id=requestItems['measurement']).first()
+    ingredient = Ingredient.query.filter_by(id=requestItems['ingredient']).first()
+    print('totototototototototototototo', measurement.to_dict(), ingredient.to_dict())
+    measurement_name = measurement.to_dict()['name']
+    print(measurement_name)
+    ingredient_name = ingredient.to_dict()['name']
+    return {'info': [measurement_name, ingredient_name]}
