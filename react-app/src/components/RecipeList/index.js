@@ -35,20 +35,20 @@ const RecipeList = () => {
             return i.id === ingredient.ingredient_id;
           });
           return (
-            <p>{`${ingredient.amount} ${ingredientMeasurement[0]?.name} ${ingredientIngredient[0]?.name}`}</p>
+            <p key={`${ingredient.id}${ingredient.amount}${index}`}>{`${ingredient.amount} ${ingredientMeasurement[0]?.name} ${ingredientIngredient[0]?.name}`}</p>
           );
         });
         return [
-          <h1>{recipe.name}</h1>,
-          <p>{recipe.description}</p>,
-          <img src={recipe.image} />,
-          <p>{recipe.servings}</p>,
-          <p>{recipe.time}</p>,
-          <p>{recipe.instructions}</p>,
-          <p>{recipeCategories}</p>,
-          <div>{ingredients}</div>,
-          <Link to={`/recipes/${recipe.id}/edit`}>Edit</Link>,
-          <button onClick={() => dispatch(deleteRecipe(recipe.id))}>
+          <h1 key={'r1'}>{recipe.name}</h1>,
+          <p key={'r2'}>{recipe.description}</p>,
+          <img key={'r3'} src={recipe.image} />,
+          <p key={'r4'}>{recipe.servings}</p>,
+          <p key={'r5'}>{recipe.time}</p>,
+          <p key={'r6'}>{recipe.instructions}</p>,
+          <p key={'r7'}>{recipeCategories}</p>,
+          <div key={'r8'}>{ingredients}</div>,
+          <Link key={'r9'} to={`/recipes/${recipe.id}/edit`}>Edit</Link>,
+          <button key={'r10'} onClick={() => dispatch(deleteRecipe(recipe.id))}>
             Delete Recipe
           </button>,
         ];

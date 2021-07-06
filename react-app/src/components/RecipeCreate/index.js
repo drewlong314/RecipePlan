@@ -176,7 +176,6 @@ const RecipeCreate = () => {
           </button>
         </div>
         <div>
-          <form>
             <span>Ingredients:</span>
             <input
               type="number"
@@ -191,7 +190,7 @@ const RecipeCreate = () => {
             >
               {measurements.map((measurement) => {
                 return (
-                  <option value={measurement.name}>{measurement.name}</option>
+                  <option key={measurement.name} value={measurement.name}>{measurement.name}</option>
                 );
               })}
             </select>
@@ -201,7 +200,6 @@ const RecipeCreate = () => {
               value={ingredient}
             ></input>
             <button onClick={addIngredient}>Add Ingredient</button>
-          </form>
           <ul className="ingredient_list"></ul>
         </div>
         <div>{currentIngredients}</div>
