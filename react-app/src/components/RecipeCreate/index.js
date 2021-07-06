@@ -10,7 +10,9 @@ const RecipeCreate = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
-  const currentIngredients = useSelector((state) => state.ingredientReducer.current)
+  const currentIngredients = useSelector(
+    (state) => state.ingredientReducer.current
+  );
   const measurements = useSelector(
     (state) => state.measurementReducer.measurements
   );
@@ -28,8 +30,7 @@ const RecipeCreate = () => {
   const [measurement, setMeasurement] = useState("");
   const [quantity, setQuantity] = useState(0);
   const [ingredientList, setIngredientList] = useState([]);
-  const [count, setCount] = useState(0)
-  // Try an array of arrays [[1, tsp, salt], [2, "", apples]]
+  const [count, setCount] = useState(0);
 
   const createRecipe = (e) => {
     e.preventDefault();
@@ -46,24 +47,31 @@ const RecipeCreate = () => {
         ingredientList
       )
     );
-    // history.push("/recipes");
+    history.push("/recipes");
   };
 
   useEffect(() => {
-    console.log(ingredientList)
-    console.log('CURRENT', currentIngredients)
-  }, [ingredientList, count, currentIngredients])
+    setIngredientList(currentIngredients)
+  }, [ingredientList, count, currentIngredients]);
+
 
   const addIngredient = (e) => {
     e.preventDefault();
-    console.log("1", ingredientList)
-    setIngredientList([...ingredientList, [quantity, measurement, ingredient]]);
-    dispatch(addCurrentIngredient(
-      <IngredientCard key={count} quantity={quantity} measurement={measurement} ingredient={ingredient} identifier={count}/>))
-    setCount(count + 1)
-    setQuantity(0)
-    setMeasurement("")
-    setIngredient("")
+    dispatch(
+      addCurrentIngredient(
+        <IngredientCard
+          key={count}
+          quantity={quantity}
+          measurement={measurement}
+          ingredient={ingredient}
+          identifier={count}
+        />
+      )
+    );
+    setCount(count + 1);
+    setQuantity(0);
+    setMeasurement("");
+    setIngredient("");
   };
 
   return (
@@ -168,7 +176,6 @@ const RecipeCreate = () => {
           </button>
         </div>
         <div>
-          <form>
             <span>Ingredients:</span>
             <input
               type="number"
@@ -178,12 +185,13 @@ const RecipeCreate = () => {
             <select
               value={measurement}
               onChange={(e) => {
-                console.log(e.target.value)
-                setMeasurement(e.target.value)
+                setMeasurement(e.target.value);
               }}
             >
               {measurements.map((measurement) => {
-                return <option value={measurement.name}>{measurement.name}</option>;
+                return (
+                  <option key={measurement.name} value={measurement.name}>{measurement.name}</option>
+                );
               })}
             </select>
             <input
@@ -192,12 +200,9 @@ const RecipeCreate = () => {
               value={ingredient}
             ></input>
             <button onClick={addIngredient}>Add Ingredient</button>
-          </form>
           <ul className="ingredient_list"></ul>
         </div>
-        <div>
-          {currentIngredients}
-        </div>
+        <div>{currentIngredients}</div>
         <div>
           <button type="submit">Create Recipe</button>
         </div>

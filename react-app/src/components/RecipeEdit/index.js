@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import {
+  addCurrentIngredient,
+  setCurrentIngredients,
+} from "../../store/ingredients";
 import { getAllRecipes, editRecipe } from "../../store/recipes";
+import IngredientCard from "../IngredientCard";
 import "./style.css";
 
 const RecipeEdit = () => {
@@ -10,26 +15,64 @@ const RecipeEdit = () => {
   const { id } = useParams();
   const user = useSelector((state) => state.session.user);
   const recipes = useSelector((state) => state.recipeReducer.recipes);
+  const currentIngredients = useSelector(
+    (state) => state.ingredientReducer.current
+  );
+  const measurements = useSelector(
+    (state) => state.measurementReducer.measurements
+  );
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [servings, setServings] = useState(0);
   const [time, setTime] = useState(0);
   const [instructions, setInstructions] = useState("");
-  const [categories, setCategories] = useState([]); // This is probaly not needed
+  const [categories, setCategories] = useState([]);
   const [category1, setCategory1] = useState(0);
   const [category2, setCategory2] = useState(0);
   const [category3, setCategory3] = useState(0);
   const [category4, setCategory4] = useState(0);
+  const [ingredient, setIngredient] = useState("");
+  const [measurement, setMeasurement] = useState("");
+  const [quantity, setQuantity] = useState(0);
+  const [ingredientList, setIngredientList] = useState([]);
+  const [count, setCount] = useState(0);
+  const [loaded, setLoaded] = useState(false);
 
-  console.log(recipes);
+  const convertRecipe = async (amount, measurement, ingredient, i) => {
+    const res = await fetch("/api/recipes/convert", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        amount,
+        measurement,
+        ingredient,
+      }),
+    });
+    const data = await res.json();
+
+    dispatch(
+      addCurrentIngredient(
+        <IngredientCard
+          key={i}
+          quantity={amount}
+          measurement={data.info[0]}
+          ingredient={data.info[1]}
+          ingredient_id={ingredient}
+          recipe_id={id}
+          identifier={i}
+        />
+      )
+    );
+  };
+
   useEffect(() => {
     if (recipes) {
-      console.log(recipes);
-      const recipe = recipes?.filter((recipe) => {
+      const recipe = recipes.filter((recipe) => {
         return recipe.id === Number(id);
       });
-      console.log(recipe[0].name, "This is recipe");
       setName(recipe[0].name);
       setDescription(recipe[0].description);
       setImage(recipe[0].image);
@@ -37,20 +80,28 @@ const RecipeEdit = () => {
       setTime(recipe[0].time);
       setInstructions(recipe[0].instructions);
       setCategories(recipe[0].categories);
-      console.log("--------------------", recipe[0].categories);
+      if (loaded === false) {
+        let i = 0
+        recipe[0].recipe_ingredients.map((ingredient) => {
+          convertRecipe(ingredient.amount, ingredient.measurement_id, ingredient.ingredient_id, i)
+          i++
+        });
+        setCount(i);
+        setLoaded(true)
+      }
+
+      setIngredientList(currentIngredients);
       recipe[0].categories.forEach((cat) => {
-        console.log(cat);
         if (cat.name === "Breakfast") setCategory1(1);
         if (cat.name === "Lunch") setCategory2(2);
         if (cat.name === "Dinner") setCategory3(3);
         if (cat.name === "Dessert") setCategory4(4);
       });
     }
-  }, [recipes]);
+  }, [recipes, currentIngredients, count]);
 
   const createEdit = async (e) => {
     e.preventDefault();
-    console.log(category1, category2, category3, category4);
     dispatch(
       editRecipe(
         name,
@@ -61,11 +112,30 @@ const RecipeEdit = () => {
         instructions,
         user.id,
         Number(id),
-        [category1, category2, category3, category4]
+        [category1, category2, category3, category4],
+        ingredientList
       )
     );
-    // dispatch(getAllRecipes())
     history.push("/recipes");
+  };
+
+  const addIngredient = (e) => {
+    e.preventDefault();
+    dispatch(
+      addCurrentIngredient(
+        <IngredientCard
+          key={count}
+          quantity={quantity}
+          measurement={measurement}
+          ingredient={ingredient}
+          identifier={count}
+        />
+      )
+    );
+    setCount(count + 1);
+    setQuantity(0);
+    setMeasurement("");
+    setIngredient("");
   };
 
   return (
@@ -87,7 +157,6 @@ const RecipeEdit = () => {
             type="text"
             name="description"
             onChange={(e) => {
-              console.log(description);
               setDescription(e.target.value);
             }}
             value={description}
@@ -172,6 +241,34 @@ const RecipeEdit = () => {
             Dessert
           </button>
         </div>
+        <div>
+            <span>Ingredients:</span>
+            <input
+              type="number"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+            ></input>
+            <select
+              value={measurement}
+              onChange={(e) => {
+                setMeasurement(e.target.value);
+              }}
+            >
+              {measurements.map((measurement) => {
+                return (
+                  <option key={measurement.name} value={measurement.name}>{measurement.name}</option>
+                );
+              })}
+            </select>
+            <input
+              onChange={(e) => setIngredient(e.target.value)}
+              placeholder="eggs"
+              value={ingredient}
+            ></input>
+            <button onClick={addIngredient}>Add Ingredient</button>
+          <ul className="ingredient_list"></ul>
+        </div>
+        <div>{currentIngredients}</div>
         <div>
           <button type="submit">Submit Changes</button>
         </div>
