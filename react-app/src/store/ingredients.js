@@ -1,6 +1,7 @@
 const SET_INGREDIENT = "ingredients/SET_INGREDIENT";
 const SET_CURRENT = "ingredients/SET_CURRENT";
 const ADD_CURRENT = "ingredients/ADD_CURRENT";
+const EDIT_CURRENT = "ingredients/EDIT_CURRENT"
 const REMOVE_CURRENT = "ingredients/REMOVE_CURRENT";
 const REMOVE_CURRENT_ID = "ingredients/REMOVE_CURRENT_ID";
 
@@ -33,6 +34,11 @@ export const setCurrentIngredients = (amount, measurement, ingredient) => async 
 export const addCurrentIngredient = (ingredient) => ({
   type: ADD_CURRENT,
   payload: ingredient,
+});
+
+export const editIngredient = (ingredientToEdit, ingredient, measurement, quantity) => ({
+  type: EDIT_CURRENT,
+  payload: [ingredientToEdit, ingredient, measurement, quantity]
 });
 
 export const removeCurrentIngredient = (ingredient) => ({
@@ -81,15 +87,23 @@ export default function ingredientReducer(state = initialState, action) {
     case ADD_CURRENT:
       state.current = [...state.current, action.payload];
       return state;
+    case EDIT_CURRENT:
+      const editState = state.current.filter((current) => {
+        return (current.identifier === action.payload[0].identifier);
+      });
+      editState[0].ingredient = action.payload[1]
+      editState[0].measurement = action.payload[2]
+      editState[0].quantity = action.payload[3]
+      return state
     case REMOVE_CURRENT:
       const newState = state.current.filter((current) => {
-        return !(current.props.identifier === action.payload.props.identifier);
+        return !(current.identifier === action.payload.identifier);
       });
       state.current = newState;
       return state;
     case REMOVE_CURRENT_ID:
       const newStateID = state.current.filter((current) => {
-        return !(current.props.recipe_id === action.payload.recipe_id && current.props.ingredient_id === Number(action.payload.ingredient_id));
+        return !(current.recipe_id === action.payload.recipe_id && current.ingredient_id === Number(action.payload.ingredient_id));
       });
       state.current = newStateID;
       return state;
