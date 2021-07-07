@@ -19,8 +19,8 @@ const RecipeCreate = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
-  const [servings, setServings] = useState(0);
-  const [time, setTime] = useState(0);
+  const [servings, setServings] = useState();
+  const [time, setTime] = useState();
   const [instructions, setInstructions] = useState("");
   const [category1, setCategory1] = useState(0);
   const [category2, setCategory2] = useState(0);
@@ -28,12 +28,24 @@ const RecipeCreate = () => {
   const [category4, setCategory4] = useState(0);
   const [ingredient, setIngredient] = useState("");
   const [measurement, setMeasurement] = useState("");
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState();
   const [ingredientList, setIngredientList] = useState([]);
   const [count, setCount] = useState(0);
+  const [categoryError, setCategoryError] = useState(false)
+  const [ingredientError, setIngredientError] = useState(false)
 
   const createRecipe = (e) => {
     e.preventDefault();
+    if (!category1 && !category2 && !category3 && !category4) {
+      setCategoryError(true)
+      return
+    }
+    setCategoryError(false)
+    if (currentIngredients.length === 0) {
+      setIngredientError(true)
+      return
+    }
+    setIngredientError(false)
     dispatch(
       postRecipe(
         name,
@@ -56,6 +68,7 @@ const RecipeCreate = () => {
 
   const addIngredient = (e) => {
     e.preventDefault();
+    setIngredientError(false)
     dispatch(
       addCurrentIngredient({
         key: count,
@@ -71,6 +84,11 @@ const RecipeCreate = () => {
     setIngredient("");
   };
 
+  const isEmpty = (field) => {
+    console.log(field, !!field);
+    if (!field) console.log("This field is empty");
+  };
+
   return (
     <div>
       <h1>Recipe Creation Page </h1>
@@ -80,8 +98,12 @@ const RecipeCreate = () => {
           <input
             type="text"
             name="name"
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              isEmpty(e.target.value);
+              setName(e.target.value);
+            }}
             value={name}
+            required={true}
           ></input>
         </div>
         <div>
@@ -89,8 +111,12 @@ const RecipeCreate = () => {
           <textarea
             type="text"
             name="description"
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) => {
+              isEmpty(e.target.value);
+              setDescription(e.target.value);
+            }}
             value={description}
+            required={true}
           ></textarea>
         </div>
         <div>
@@ -98,8 +124,12 @@ const RecipeCreate = () => {
           <input
             type="text"
             name="image"
-            onChange={(e) => setImage(e.target.value)}
+            onChange={(e) => {
+              isEmpty(e.target.value);
+              setImage(e.target.value);
+            }}
             value={image}
+            required={true}
           ></input>
         </div>
         <div>
@@ -107,8 +137,12 @@ const RecipeCreate = () => {
           <input
             type="number"
             name="servings"
-            onChange={(e) => setServings(e.target.value)}
+            onChange={(e) => {
+              isEmpty(e.target.value);
+              setServings(e.target.value);
+            }}
             value={servings}
+            required={true}
           ></input>
         </div>
         <div>
@@ -116,8 +150,12 @@ const RecipeCreate = () => {
           <input
             type="number"
             name="time"
-            onChange={(e) => setTime(e.target.value)}
+            onChange={(e) => {
+              isEmpty(e.target.value);
+              setTime(e.target.value);
+            }}
             value={time}
+            required={true}
           ></input>
         </div>
         <div>
@@ -125,8 +163,12 @@ const RecipeCreate = () => {
           <textarea
             type="text"
             name="instructions"
-            onChange={(e) => setInstructions(e.target.value)}
+            onChange={(e) => {
+              isEmpty(e.target.value);
+              setInstructions(e.target.value);
+            }}
             value={instructions}
+            required={true}
           ></textarea>
         </div>
         <div>
@@ -171,13 +213,18 @@ const RecipeCreate = () => {
           >
             Dessert
           </button>
+          {categoryError ? <p>You must select at least one category.</p> : null}
         </div>
         <div>
           <span>Ingredients:</span>
           <input
             type="number"
             value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
+            onChange={(e) => {
+              isEmpty(e.target.value);
+              setQuantity(e.target.value);
+            }}
+            required={true}
           ></input>
           <select
             value={measurement}
@@ -194,7 +241,10 @@ const RecipeCreate = () => {
             })}
           </select>
           <input
-            onChange={(e) => setIngredient(e.target.value)}
+            onChange={(e) => {
+              isEmpty(e.target.value);
+              setIngredient(e.target.value);
+            }}
             placeholder="eggs"
             value={ingredient}
           ></input>
@@ -213,6 +263,7 @@ const RecipeCreate = () => {
               />
             );
           })}
+          {ingredientError ? <p>You must select at least one ingredient.</p> : null}
         </div>
         <div>
           <button type="submit">Create Recipe</button>

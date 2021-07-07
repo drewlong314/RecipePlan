@@ -5,6 +5,16 @@ from app.models import Recipe, db, recipe_categories, Category, Ingredient, Reci
 
 recipe_routes = Blueprint('recipes', __name__)
 
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f"{field} : {error}")
+    return errorMessages
+
 
 @recipe_routes.route('/')
 # @login_required
@@ -54,7 +64,7 @@ def post_recipes():
             db.session.commit()
         return recipe.to_dict()
     else:
-        return form.errors
+        return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
 @recipe_routes.route('/<id>')
@@ -111,7 +121,7 @@ def edit_recipes(id):
         db.session.commit()
         return recipe.to_dict()
     else:
-        return form.errors
+        return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
 @recipe_routes.route('/<id>', methods=['DELETE'])
