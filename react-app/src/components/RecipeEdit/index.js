@@ -38,6 +38,8 @@ const RecipeEdit = () => {
   const [ingredientList, setIngredientList] = useState([]);
   const [count, setCount] = useState(0);
   const [loaded, setLoaded] = useState(false);
+  const [categoryError, setCategoryError] = useState(false)
+  const [ingredientError, setIngredientError] = useState(false)
 
   const convertRecipe = async (amount, measurement, ingredient, i) => {
     const res = await fetch("/api/recipes/convert", {
@@ -106,6 +108,16 @@ const RecipeEdit = () => {
 
   const createEdit = async (e) => {
     e.preventDefault();
+    if (!category1 && !category2 && !category3 && !category4) {
+      setCategoryError(true)
+      return
+    }
+    setCategoryError(false)
+    if (currentIngredients.length === 0) {
+      setIngredientError(true)
+      return
+    }
+    setIngredientError(false)
     dispatch(
       editRecipe(
         name,
@@ -125,6 +137,11 @@ const RecipeEdit = () => {
 
   const addIngredient = (e) => {
     e.preventDefault();
+    if (!ingredient) {
+      setIngredientError(true)
+      return
+    }
+    setIngredientError(false)
     dispatch(
       addCurrentIngredient({
         key: count,
@@ -151,6 +168,7 @@ const RecipeEdit = () => {
             name="name"
             onChange={(e) => setName(e.target.value)}
             value={name}
+            required={true}
           ></input>
         </div>
         <div>
@@ -162,6 +180,7 @@ const RecipeEdit = () => {
               setDescription(e.target.value);
             }}
             value={description}
+            required={true}
           ></textarea>
         </div>
         <div>
@@ -171,6 +190,7 @@ const RecipeEdit = () => {
             name="image"
             onChange={(e) => setImage(e.target.value)}
             value={image}
+            required={true}
           ></input>
         </div>
         <div>
@@ -180,6 +200,7 @@ const RecipeEdit = () => {
             name="servings"
             onChange={(e) => setServings(e.target.value)}
             value={servings}
+            required={true}
           ></input>
         </div>
         <div>
@@ -189,6 +210,7 @@ const RecipeEdit = () => {
             name="time"
             onChange={(e) => setTime(e.target.value)}
             value={time}
+            required={true}
           ></input>
         </div>
         <div>
@@ -198,6 +220,7 @@ const RecipeEdit = () => {
             name="instructions"
             onChange={(e) => setInstructions(e.target.value)}
             value={instructions}
+            required={true}
           ></textarea>
         </div>
         <div>
@@ -242,6 +265,7 @@ const RecipeEdit = () => {
           >
             Dessert
           </button>
+          {categoryError ? <p>You must select at least one category.</p> : null}
         </div>
         <div>
           <span>Ingredients:</span>
@@ -249,6 +273,7 @@ const RecipeEdit = () => {
             type="number"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
+            required={true}
           ></input>
           <select
             value={measurement}
@@ -284,6 +309,7 @@ const RecipeEdit = () => {
               />
             );
           })}
+          {ingredientError ? <p>You must select at least one ingredient.</p> : null}
         </div>
         <div>
           <button type="submit">Submit Changes</button>
