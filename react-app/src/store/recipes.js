@@ -50,7 +50,7 @@ export const postRecipe =
       }),
     });
     const data = await res.json();
-    dispatch(addRecipe(data));
+    if (!data.errors) dispatch(addRecipe(data));
   };
 
 export const editRecipe =
@@ -74,7 +74,7 @@ export const editRecipe =
       }),
     });
     const data = await res.json();
-    dispatch(updateRecipe(data));
+    if (!data.errors) dispatch(updateRecipe(data));
   };
 
 export const deleteRecipe = (id) => async (dispatch) => {

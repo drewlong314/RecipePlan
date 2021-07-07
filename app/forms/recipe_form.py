@@ -15,4 +15,4 @@ class RecipeForm(FlaskForm):
     day = StringField('day')
     plan_category = StringField('plan_category')
     category = StringField('category', validators=[DataRequired()])
-    ingredient_list = StringField('ingredient_list')
+    ingredient_list = StringField('ingredient_list', validators=[DataRequired()])
