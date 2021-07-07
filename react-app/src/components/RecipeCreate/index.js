@@ -51,22 +51,19 @@ const RecipeCreate = () => {
   };
 
   useEffect(() => {
-    setIngredientList(currentIngredients)
+    setIngredientList(currentIngredients);
   }, [ingredientList, count, currentIngredients]);
-
 
   const addIngredient = (e) => {
     e.preventDefault();
     dispatch(
-      addCurrentIngredient(
-        <IngredientCard
-          key={count}
-          quantity={quantity}
-          measurement={measurement}
-          ingredient={ingredient}
-          identifier={count}
-        />
-      )
+      addCurrentIngredient({
+        key: count,
+        quantity: quantity,
+        measurement: measurement,
+        ingredient: ingredient,
+        identifier: count,
+      })
     );
     setCount(count + 1);
     setQuantity(0);
@@ -176,33 +173,47 @@ const RecipeCreate = () => {
           </button>
         </div>
         <div>
-            <span>Ingredients:</span>
-            <input
-              type="number"
-              value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
-            ></input>
-            <select
-              value={measurement}
-              onChange={(e) => {
-                setMeasurement(e.target.value);
-              }}
-            >
-              {measurements.map((measurement) => {
-                return (
-                  <option key={measurement.name} value={measurement.name}>{measurement.name}</option>
-                );
-              })}
-            </select>
-            <input
-              onChange={(e) => setIngredient(e.target.value)}
-              placeholder="eggs"
-              value={ingredient}
-            ></input>
-            <button onClick={addIngredient}>Add Ingredient</button>
+          <span>Ingredients:</span>
+          <input
+            type="number"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+          ></input>
+          <select
+            value={measurement}
+            onChange={(e) => {
+              setMeasurement(e.target.value);
+            }}
+          >
+            {measurements.map((measurement) => {
+              return (
+                <option key={measurement.name} value={measurement.name}>
+                  {measurement.name}
+                </option>
+              );
+            })}
+          </select>
+          <input
+            onChange={(e) => setIngredient(e.target.value)}
+            placeholder="eggs"
+            value={ingredient}
+          ></input>
+          <button onClick={addIngredient}>Add Ingredient</button>
           <ul className="ingredient_list"></ul>
         </div>
-        <div>{currentIngredients}</div>
+        <div>
+          {currentIngredients.map((ingredientObject) => {
+            return (
+              <IngredientCard
+                key={ingredientObject.key}
+                quantity={ingredientObject.quantity}
+                measurement={ingredientObject.measurement}
+                ingredient={ingredientObject.ingredient}
+                identifier={ingredientObject.identifier}
+              />
+            );
+          })}
+        </div>
         <div>
           <button type="submit">Create Recipe</button>
         </div>

@@ -54,16 +54,15 @@ const RecipeEdit = () => {
     const data = await res.json();
 
     dispatch(
-      addCurrentIngredient(
-        <IngredientCard
-          key={i}
-          quantity={amount}
-          measurement={data.info[0]}
-          ingredient={data.info[1]}
-          ingredient_id={ingredient}
-          recipe_id={id}
-          identifier={i}
-        />
+      addCurrentIngredient({
+          key:i,
+          quantity:amount,
+          measurement:data.info[0],
+          ingredient:data.info[1],
+          ingredient_id:ingredient,
+          recipe_id:id,
+          identifier:i,
+      }
       )
     );
   };
@@ -81,13 +80,18 @@ const RecipeEdit = () => {
       setInstructions(recipe[0].instructions);
       setCategories(recipe[0].categories);
       if (loaded === false) {
-        let i = 0
+        let i = 0;
         recipe[0].recipe_ingredients.map((ingredient) => {
-          convertRecipe(ingredient.amount, ingredient.measurement_id, ingredient.ingredient_id, i)
-          i++
+          convertRecipe(
+            ingredient.amount,
+            ingredient.measurement_id,
+            ingredient.ingredient_id,
+            i
+          );
+          i++;
         });
         setCount(i);
-        setLoaded(true)
+        setLoaded(true);
       }
 
       setIngredientList(currentIngredients);
@@ -122,15 +126,13 @@ const RecipeEdit = () => {
   const addIngredient = (e) => {
     e.preventDefault();
     dispatch(
-      addCurrentIngredient(
-        <IngredientCard
-          key={count}
-          quantity={quantity}
-          measurement={measurement}
-          ingredient={ingredient}
-          identifier={count}
-        />
-      )
+      addCurrentIngredient({
+        key: count,
+        quantity: quantity,
+        measurement: measurement,
+        ingredient: ingredient,
+        identifier: count,
+      })
     );
     setCount(count + 1);
     setQuantity(0);
@@ -242,33 +244,47 @@ const RecipeEdit = () => {
           </button>
         </div>
         <div>
-            <span>Ingredients:</span>
-            <input
-              type="number"
-              value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
-            ></input>
-            <select
-              value={measurement}
-              onChange={(e) => {
-                setMeasurement(e.target.value);
-              }}
-            >
-              {measurements.map((measurement) => {
-                return (
-                  <option key={measurement.name} value={measurement.name}>{measurement.name}</option>
-                );
-              })}
-            </select>
-            <input
-              onChange={(e) => setIngredient(e.target.value)}
-              placeholder="eggs"
-              value={ingredient}
-            ></input>
-            <button onClick={addIngredient}>Add Ingredient</button>
+          <span>Ingredients:</span>
+          <input
+            type="number"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+          ></input>
+          <select
+            value={measurement}
+            onChange={(e) => {
+              setMeasurement(e.target.value);
+            }}
+          >
+            {measurements.map((measurement) => {
+              return (
+                <option key={measurement.name} value={measurement.name}>
+                  {measurement.name}
+                </option>
+              );
+            })}
+          </select>
+          <input
+            onChange={(e) => setIngredient(e.target.value)}
+            placeholder="eggs"
+            value={ingredient}
+          ></input>
+          <button onClick={addIngredient}>Add Ingredient</button>
           <ul className="ingredient_list"></ul>
         </div>
-        <div>{currentIngredients}</div>
+        <div>
+          {currentIngredients.map((ingredientObject) => {
+            return (
+              <IngredientCard
+                key={ingredientObject.key}
+                quantity={ingredientObject.quantity}
+                measurement={ingredientObject.measurement}
+                ingredient={ingredientObject.ingredient}
+                identifier={ingredientObject.identifier}
+              />
+            );
+          })}
+        </div>
         <div>
           <button type="submit">Submit Changes</button>
         </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  editIngredient,
   removeCurrentIngredient,
   removeIngredient,
 } from "../../store/ingredients";
@@ -30,16 +31,21 @@ const IngredientCard = ({
   // }, [quantityUsed, measurementUsed, ingredientUsed])
 
   const removeAnIngredient = () => {
+
     const ingredientToRemove = currentIngredients.filter((ingredient) => {
-      return ingredient.props.identifier === identifier;
+      return ingredient.identifier === identifier;
     });
     if (recipe_id) dispatch(removeIngredient(ingredientToRemove[0]));
     else dispatch(removeCurrentIngredient(ingredientToRemove[0]));
   };
-  const editIngredient = () => {
+  const showEditIngredient = () => {
     setShow(true);
   };
   const submitEditIngredient = () => {
+    const ingredientToEdit = currentIngredients.filter((ingredient) => {
+      return ingredient.identifier === identifier;
+    });
+    dispatch(editIngredient(ingredientToEdit[0], ingredientUsed, measurementUsed, quantityUsed))
     setShow(false)
   }
   return (
@@ -48,7 +54,7 @@ const IngredientCard = ({
         <li>
           {`${quantityUsed} ${measurementUsed} ${ingredientUsed}`}
           <span>
-            <button onClick={editIngredient} type="button">
+            <button onClick={showEditIngredient} type="button">
               Edit
             </button>
             <button onClick={removeAnIngredient} type="button">
