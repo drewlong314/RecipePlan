@@ -1,12 +1,21 @@
 /* TODO Add site wide styles */
+* {
+    margin: 0;
+}
+
+#root {
+    height: 100vh;
+    background-color: #E5E5E5;
+}
+
 button {
     cursor: pointer;
-    border: none;
-    border-radius: 6px;
     width: 100px;
     height: 30px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
 }
 button:hover {
     opacity: 50%;
-    /* background-color: lawngreen; */
 }

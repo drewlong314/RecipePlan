@@ -10,6 +10,7 @@ import User from "./components/User";
 import RecipeList from "./components/RecipeList";
 import RecipeCreate from "./components/RecipeCreate";
 import RecipeEdit from "./components/RecipeEdit";
+import Navigation from "./components/Navigation";
 import { authenticate } from "./store/session";
 
 function App() {
@@ -30,7 +31,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      {/* <NavBar /> */}
+      <Navigation/>
       <Switch>
         <Route path="/login" exact={true}>
           <LoginForm />
@@ -49,6 +51,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/recipes/create" exact={true}>
           <RecipeCreate />
+        </ProtectedRoute>
+        <ProtectedRoute path="/recipes/:id" exact={true}>
+          <RecipeEdit />
         </ProtectedRoute>
         <ProtectedRoute path="/recipes/:id/edit" exact={true}>
           <RecipeEdit />
