@@ -1,24 +1,29 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteRecipe } from "../../store/recipes";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./style.css";
 
 const RecipeCard = ({ recipe }) => {
   const dispatch = useDispatch();
+  const history = useHistory()
+
   const allMeasurements = useSelector(
     (state) => state.measurementReducer.measurements
   );
+
   const allIngredients = useSelector(
     (state) => state.ingredientReducer.ingredients
   );
 
   let index = 1;
+
   const recipeCategories = recipe.categories.map((r) => {
     if (index === recipe.categories.length) return r.name;
     index++;
     return r.name + ", ";
   });
+
   const ingredients = recipe.recipe_ingredients.map((ingredient) => {
     const ingredientMeasurement = allMeasurements.filter((m) => {
       return m.id === ingredient.measurement_id;
@@ -32,11 +37,21 @@ const RecipeCard = ({ recipe }) => {
       >{`${ingredient.amount} ${ingredientMeasurement[0]?.name} ${ingredientIngredient[0]?.name}`}</p>
     );
   });
+
+  const redirectOnClick = () => {
+    console.log(recipe.id)
+    history.push(`/recipes/${recipe.id}`)
+  }
+
   return (
-    <div className={'recipe-card'}>
-      <img key={"r3"} className={'recipe-image'} src={recipe.image} />
-      <h1 key={"r1"} className={'recipe-name'}>{recipe.name}</h1>
-      <p key={"r2"} className={'recipe-description'}>{recipe.description}</p>
+    <div onClick={redirectOnClick} className={"recipe-card"}>
+      <img key={"r3"} className={"recipe-image"} src={recipe.image} />
+      <h1 key={"r1"} className={"recipe-name"}>
+        {recipe.name}
+      </h1>
+      <p key={"r2"} className={"recipe-description"}>
+        {recipe.description}
+      </p>
       {/* <p key={"r4"}>{recipe.servings}</p>
       <p key={"r5"}>{recipe.time}</p>
       <p key={"r6"}>{recipe.instructions}</p>

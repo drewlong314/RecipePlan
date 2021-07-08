@@ -7,6 +7,11 @@
     border: none;
     box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
     margin: 7px;
+    cursor: pointer;
+}
+
+.recipe-card:hover > .recipe-name, .recipe-card:hover > .recipe-description {
+    opacity: 50%;
 }
 
 .recipe-name {
