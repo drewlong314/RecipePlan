@@ -3,7 +3,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: tomato;
+    background-color: #fff;
     height: 62px;
 }
 
@@ -41,7 +41,7 @@
 
 .nav-recipes {
     display: flex;
-    background-color: tomato;
+    /* background-color: #fff; */
     height: 62px;
     width: 120px;
     justify-content: center;
@@ -79,7 +79,7 @@
     font-weight: 600;
     font-family:sans-serif;
     font-size: 16px;
-    background-color: tomato;
+    background-color: #fff;
     box-shadow: none;
 }
 

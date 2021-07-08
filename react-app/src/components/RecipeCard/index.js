@@ -34,8 +34,8 @@ const RecipeCard = ({ recipe }) => {
   });
   return (
     <div className={'recipe-card'}>
-      <h1 key={"r1"} className={'recipe-name'}>{recipe.name}</h1>
       <img key={"r3"} className={'recipe-image'} src={recipe.image} />
+      <h1 key={"r1"} className={'recipe-name'}>{recipe.name}</h1>
       <p key={"r2"} className={'recipe-description'}>{recipe.description}</p>
       {/* <p key={"r4"}>{recipe.servings}</p>
       <p key={"r5"}>{recipe.time}</p>
