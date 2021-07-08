@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { deleteRecipe, getAllRecipes } from "../../store/recipes";
+import { deleteRecipe} from "../../store/recipes";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentIngredient } from "../../store/ingredients";
+import RecipeCard from "../RecipeCard"
 
 const RecipeList = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const RecipeList = () => {
       <Link to={`/recipes/create`}>Create A New Recipe</Link>
       <h1>Recipe List</h1>
       {allRecipes?.map((recipe) => {
+        return <RecipeCard key={recipe.id} recipe={recipe}></RecipeCard>
         let index = 1;
         const recipeCategories = recipe.categories.map((r) => {
           if (index === recipe.categories.length) return r.name;

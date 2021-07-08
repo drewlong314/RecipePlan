@@ -1,0 +1,91 @@
+.nav-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: tomato;
+    height: 62px;
+}
+
+.nav-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-evenly
+}
+
+.nav-home {
+    display: flex;
+    height: 62px;
+    width: 120px;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    font-family:sans-serif;
+    font-size: 16px;
+}
+
+.nav-search {
+    border: none;
+    width: 250px;
+    height: 24px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+
+}
+
+.nav-search:focus {
+    outline: none;
+}
+
+.nav-recipes {
+    display: flex;
+    background-color: tomato;
+    height: 62px;
+    width: 120px;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-family:sans-serif;
+    font-size: 16px;
+}
+
+.nav-login {
+    display: flex;
+    height: 62px;
+    width: 120px;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    font-family:sans-serif;
+    font-size: 16px;
+}
+
+.nav-logout {
+    display: flex;
+    height: 62px;
+    width: 120px;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    font-family:sans-serif;
+    font-size: 16px;
+    background-color: tomato;
+    box-shadow: none;
+}
+
+.nav-home:hover,
+.nav-recipes:hover,
+.nav-login:hover,
+.nav-logout:hover {
+    opacity: 50%;
+}
