@@ -53,7 +53,7 @@ const RecipeCreate = () => {
         description,
         image,
         servings,
-        prep+cook,
+        prep + cook,
         instructions,
         user.id,
         [category1, category2, category3, category4],
@@ -112,6 +112,7 @@ const RecipeCreate = () => {
     <div className={"create-container"}>
       <form className={"create-form"} onSubmit={createRecipe}>
         <div>
+          <p className={"create-label"}>Recipe Name</p>
           <input
             className={"create-input"}
             type="text"
@@ -122,10 +123,11 @@ const RecipeCreate = () => {
             }}
             value={name}
             required={true}
-            placeholder={"Recipe Name"}
+            placeholder={"Chicken Alfredo"}
           ></input>
         </div>
         <div>
+          <p className={"create-label"}>Recipe Description</p>
           <textarea
             className={"create-textarea"}
             type="text"
@@ -136,10 +138,13 @@ const RecipeCreate = () => {
             }}
             value={description}
             required={true}
-            placeholder={"Recipe Description"}
+            placeholder={
+              "This Chicken Alfredo recipe is perfect for a tasty homemade and easy weeknight meal. Made with creamy fettuccini pasta, heavy cream and parmesan, this traditional Italian pasta dish is simple and quick to make."
+            }
           ></textarea>
         </div>
         <div>
+          <p className={"create-label"}>Image Url</p>
           <input
             className={"create-input"}
             type="url"
@@ -150,68 +155,70 @@ const RecipeCreate = () => {
             }}
             value={image}
             required={true}
-            placeholder={"Recipe Image Url"}
+            placeholder={"https://"}
           ></input>
         </div>
-        <div>
-          <span>Number of Servings </span>
-          <select
-            className={"create-select"}
-            type="number"
-            name="servings"
-            onChange={(e) => {
-              isEmpty(e.target.value);
-              setServings(e.target.value);
-            }}
-            value={servings}
-            required={true}
-            // placeholder={'Number of Servings'}
-          >
-            {oneToEighteenArray().map((num) => {
-              return <option>{num}</option>;
-            })}
-          </select>
-        </div>
-        <div>
-          <span>Time to Prepare</span>
-          <select
-            className={"create-select"}
-            type="number"
-            name="prep"
-            onChange={(e) => {
-              isEmpty(e.target.value);
-              setPrep(e.target.value);
-            }}
-            value={prep}
-            required={true}
-            placeholder={"Time to Prepare"}
-          >
-            {increaseBy5().map((num) => {
-              return <option>{num}</option>;
-            })}
-          </select>
+        <div className={"create-select__container"}>
+          <div className={"create-select__div"}>
+            <span>Servings</span>
+            <select
+              className={"create-select"}
+              type="number"
+              name="servings"
+              onChange={(e) => {
+                isEmpty(e.target.value);
+                setServings(e.target.value);
+              }}
+              value={servings}
+              required={true}
+              // placeholder={'Number of Servings'}
+            >
+              {oneToEighteenArray().map((num) => {
+                return <option key={num}>{num}</option>;
+              })}
+            </select>
           </div>
-          <div>
-          <span>Time to Cook</span>
-          <select
-            className={"create-select"}
-            type="number"
-            name="cook"
-            onChange={(e) => {
-              isEmpty(e.target.value);
-              setCook(e.target.value);
-            }}
-            value={cook}
-            required={true}
-            placeholder={"Time to cook"}
-          >
-            {increaseBy5().map((num) => {
-              return <option>{num}</option>;
-            })}
-          </select>
+          <div className={"create-select__div"}>
+            <span>Prep. Time</span>
+            <select
+              className={"create-select"}
+              type="number"
+              name="prep"
+              onChange={(e) => {
+                isEmpty(e.target.value);
+                setPrep(e.target.value);
+              }}
+              value={prep}
+              required={true}
+              placeholder={"Time to Prepare"}
+            >
+              {increaseBy5().map((num) => {
+                return <option key={num}>{num}</option>;
+              })}
+            </select>
+          </div>
+          <div className={"create-select__div"}>
+            <span>Cook Time</span>
+            <select
+              className={"create-select"}
+              type="number"
+              name="cook"
+              onChange={(e) => {
+                isEmpty(e.target.value);
+                setCook(e.target.value);
+              }}
+              value={cook}
+              required={true}
+              placeholder={"Time to cook"}
+            >
+              {increaseBy5().map((num) => {
+                return <option key={num}>{num}</option>;
+              })}
+            </select>
+          </div>
         </div>
         <div>
-          <input
+          <select
             type="number"
             value={quantity}
             onChange={(e) => {
@@ -219,7 +226,11 @@ const RecipeCreate = () => {
               setQuantity(e.target.value);
             }}
             required={true}
-          ></input>
+          >
+            {oneToEighteenArray().map((num) => {
+              return <option key={num}>{num}</option>;
+            })}
+          </select>
           <select
             value={measurement}
             onChange={(e) => {

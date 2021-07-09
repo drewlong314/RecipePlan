@@ -16,12 +16,24 @@
     background-color: #fff;
 }
 
+.create-label {
+    box-sizing: border-box;
+    font-size: 17px;
+    border-radius: 6px;
+    width: 450px;
+    height: 15px;
+    margin: 14px;
+    margin-top: 14px;
+    margin-bottom: 5px;
+}
+
 .create-input {
     box-sizing: border-box;
     font-size: 17px;
     border-radius: 6px;
     padding: 20px;
-    width: 300px;
+    padding-left: 15px;
+    width: 450px;
     height: 15px;
     margin: 10px;
 }
@@ -30,8 +42,9 @@
     box-sizing: border-box;
     font-size: 17px;
     border-radius: 6px;
-    /* padding: 20px; */
-    width: 400px;
+    padding-left: 15px;
+    padding-top: 10px;
+    width: 450px;
     height: 200px;
     margin: 10px;
 }
@@ -39,4 +52,15 @@
 .category_chosen{
     background-color: green;
     color: white;
+}
+
+.create-select__container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 400px;
+}
+
+.create-select__div {
+    display: flex;
+    flex-direction: column;
 }
