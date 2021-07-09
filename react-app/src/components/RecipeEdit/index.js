@@ -186,7 +186,7 @@ const RecipeEdit = () => {
         <div>
           <label>Recipe Image</label>
           <input
-            type="text"
+            type="url"
             name="image"
             onChange={(e) => setImage(e.target.value)}
             value={image}

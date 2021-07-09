@@ -1,3 +1,41 @@
+.create-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.create-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+    background-color: #fff;
+}
+
+.create-input {
+    box-sizing: border-box;
+    font-size: 17px;
+    border-radius: 6px;
+    padding: 20px;
+    width: 300px;
+    height: 15px;
+    margin: 10px;
+}
+
+.create-textarea {
+    box-sizing: border-box;
+    font-size: 17px;
+    border-radius: 6px;
+    /* padding: 20px; */
+    width: 400px;
+    height: 200px;
+    margin: 10px;
+}
+
 .category_chosen{
     background-color: green;
     color: white;

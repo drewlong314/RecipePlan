@@ -31,21 +31,21 @@ const RecipeCreate = () => {
   const [quantity, setQuantity] = useState();
   const [ingredientList, setIngredientList] = useState([]);
   const [count, setCount] = useState(0);
-  const [categoryError, setCategoryError] = useState(false)
-  const [ingredientError, setIngredientError] = useState(false)
+  const [categoryError, setCategoryError] = useState(false);
+  const [ingredientError, setIngredientError] = useState(false);
 
   const createRecipe = (e) => {
     e.preventDefault();
     if (!category1 && !category2 && !category3 && !category4) {
-      setCategoryError(true)
-      return
+      setCategoryError(true);
+      return;
     }
-    setCategoryError(false)
+    setCategoryError(false);
     if (currentIngredients.length === 0) {
-      setIngredientError(true)
-      return
+      setIngredientError(true);
+      return;
     }
-    setIngredientError(false)
+    setIngredientError(false);
     dispatch(
       postRecipe(
         name,
@@ -68,7 +68,7 @@ const RecipeCreate = () => {
 
   const addIngredient = (e) => {
     e.preventDefault();
-    setIngredientError(false)
+    setIngredientError(false);
     dispatch(
       addCurrentIngredient({
         key: count,
@@ -89,13 +89,20 @@ const RecipeCreate = () => {
     if (!field) console.log("This field is empty");
   };
 
+  const oneToEighteenArray = () => {
+    let array = [];
+    for (let i = 1; i <= 18; i++) {
+      array.push(i);
+    }
+    return array;
+  };
+
   return (
-    <div>
-      <h1>Recipe Creation Page </h1>
-      <form onSubmit={createRecipe}>
+    <div className={"create-container"}>
+      <form className={"create-form"} onSubmit={createRecipe}>
         <div>
-          <label>Recipe Name</label>
           <input
+            className={"create-input"}
             type="text"
             name="name"
             onChange={(e) => {
@@ -104,11 +111,12 @@ const RecipeCreate = () => {
             }}
             value={name}
             required={true}
+            placeholder={"Recipe Name"}
           ></input>
         </div>
         <div>
-          <label>Recipe Description</label>
           <textarea
+            className={"create-textarea"}
             type="text"
             name="description"
             onChange={(e) => {
@@ -117,12 +125,13 @@ const RecipeCreate = () => {
             }}
             value={description}
             required={true}
+            placeholder={"Recipe Description"}
           ></textarea>
         </div>
         <div>
-          <label>Recipe Image</label>
           <input
-            type="text"
+            className={"create-input"}
+            type="url"
             name="image"
             onChange={(e) => {
               isEmpty(e.target.value);
@@ -130,11 +139,13 @@ const RecipeCreate = () => {
             }}
             value={image}
             required={true}
+            placeholder={"Recipe Image Url"}
           ></input>
         </div>
         <div>
-          <label>Recipe Servings</label>
-          <input
+          <span>Number of Servings  </span>
+          <select
+            className={"create-select"}
             type="number"
             name="servings"
             onChange={(e) => {
@@ -143,11 +154,16 @@ const RecipeCreate = () => {
             }}
             value={servings}
             required={true}
-          ></input>
+            // placeholder={'Number of Servings'}
+          >
+            {oneToEighteenArray().map((num) => {
+              return <option>{num}</option>;
+            })}
+          </select>
         </div>
         <div>
-          <label>Time Needed To Cook</label>
           <input
+            className={"create-input"}
             type="number"
             name="time"
             onChange={(e) => {
@@ -156,67 +172,10 @@ const RecipeCreate = () => {
             }}
             value={time}
             required={true}
+            placeholder={"Time to cook"}
           ></input>
         </div>
         <div>
-          <label>Recipe Instructions</label>
-          <textarea
-            type="text"
-            name="instructions"
-            onChange={(e) => {
-              isEmpty(e.target.value);
-              setInstructions(e.target.value);
-            }}
-            value={instructions}
-            required={true}
-          ></textarea>
-        </div>
-        <div>
-          Time of Day:
-          <button
-            className={category1 === 0 ? null : "category_chosen"}
-            onClick={(e) => {
-              e.preventDefault();
-              category1 === 0 ? setCategory1(1) : setCategory1(0);
-            }}
-            value={category1}
-          >
-            Breakfast
-          </button>
-          <button
-            className={category2 === 0 ? null : "category_chosen"}
-            onClick={(e) => {
-              e.preventDefault();
-              category2 === 0 ? setCategory2(2) : setCategory2(0);
-            }}
-            value={category2}
-          >
-            Lunch
-          </button>
-          <button
-            className={category3 === 0 ? null : "category_chosen"}
-            onClick={(e) => {
-              e.preventDefault();
-              category3 === 0 ? setCategory3(3) : setCategory3(0);
-            }}
-            value={category3}
-          >
-            Dinner
-          </button>
-          <button
-            className={category4 === 0 ? null : "category_chosen"}
-            onClick={(e) => {
-              e.preventDefault();
-              category4 === 0 ? setCategory4(4) : setCategory4(0);
-            }}
-            value={category4}
-          >
-            Dessert
-          </button>
-          {categoryError ? <p>You must select at least one category.</p> : null}
-        </div>
-        <div>
-          <span>Ingredients:</span>
           <input
             type="number"
             value={quantity}
@@ -263,7 +222,66 @@ const RecipeCreate = () => {
               />
             );
           })}
-          {ingredientError ? <p>You must select at least one ingredient.</p> : null}
+          {ingredientError ? (
+            <p>You must select at least one ingredient.</p>
+          ) : null}
+        </div>
+        <div>
+          <textarea
+            className={"create-textarea"}
+            type="text"
+            name="instructions"
+            onChange={(e) => {
+              isEmpty(e.target.value);
+              setInstructions(e.target.value);
+            }}
+            value={instructions}
+            required={true}
+            placeholder={"Recipe Instructions"}
+          ></textarea>
+        </div>
+        <div>
+          <button
+            className={category1 === 0 ? null : "category_chosen"}
+            onClick={(e) => {
+              e.preventDefault();
+              category1 === 0 ? setCategory1(1) : setCategory1(0);
+            }}
+            value={category1}
+          >
+            Breakfast
+          </button>
+          <button
+            className={category2 === 0 ? null : "category_chosen"}
+            onClick={(e) => {
+              e.preventDefault();
+              category2 === 0 ? setCategory2(2) : setCategory2(0);
+            }}
+            value={category2}
+          >
+            Lunch
+          </button>
+          <button
+            className={category3 === 0 ? null : "category_chosen"}
+            onClick={(e) => {
+              e.preventDefault();
+              category3 === 0 ? setCategory3(3) : setCategory3(0);
+            }}
+            value={category3}
+          >
+            Dinner
+          </button>
+          <button
+            className={category4 === 0 ? null : "category_chosen"}
+            onClick={(e) => {
+              e.preventDefault();
+              category4 === 0 ? setCategory4(4) : setCategory4(0);
+            }}
+            value={category4}
+          >
+            Dessert
+          </button>
+          {categoryError ? <p>You must select at least one category.</p> : null}
         </div>
         <div>
           <button type="submit">Create Recipe</button>
