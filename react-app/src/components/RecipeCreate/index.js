@@ -20,7 +20,8 @@ const RecipeCreate = () => {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [servings, setServings] = useState();
-  const [time, setTime] = useState();
+  const [prep, setPrep] = useState();
+  const [cook, setCook] = useState();
   const [instructions, setInstructions] = useState("");
   const [category1, setCategory1] = useState(0);
   const [category2, setCategory2] = useState(0);
@@ -52,7 +53,7 @@ const RecipeCreate = () => {
         description,
         image,
         servings,
-        time,
+        prep+cook,
         instructions,
         user.id,
         [category1, category2, category3, category4],
@@ -89,9 +90,19 @@ const RecipeCreate = () => {
     if (!field) console.log("This field is empty");
   };
 
+  //========== Creates an array for the Servings Select ==============
   const oneToEighteenArray = () => {
     let array = [];
     for (let i = 1; i <= 18; i++) {
+      array.push(i);
+    }
+    return array;
+  };
+
+  //========== Creates an array for the Time Selects ==============
+  const increaseBy5 = () => {
+    let array = [];
+    for (let i = 5; i <= 120; i += 5) {
       array.push(i);
     }
     return array;
@@ -143,7 +154,7 @@ const RecipeCreate = () => {
           ></input>
         </div>
         <div>
-          <span>Number of Servings  </span>
+          <span>Number of Servings </span>
           <select
             className={"create-select"}
             type="number"
@@ -162,18 +173,42 @@ const RecipeCreate = () => {
           </select>
         </div>
         <div>
-          <input
-            className={"create-input"}
+          <span>Time to Prepare</span>
+          <select
+            className={"create-select"}
             type="number"
-            name="time"
+            name="prep"
             onChange={(e) => {
               isEmpty(e.target.value);
-              setTime(e.target.value);
+              setPrep(e.target.value);
             }}
-            value={time}
+            value={prep}
+            required={true}
+            placeholder={"Time to Prepare"}
+          >
+            {increaseBy5().map((num) => {
+              return <option>{num}</option>;
+            })}
+          </select>
+          </div>
+          <div>
+          <span>Time to Cook</span>
+          <select
+            className={"create-select"}
+            type="number"
+            name="cook"
+            onChange={(e) => {
+              isEmpty(e.target.value);
+              setCook(e.target.value);
+            }}
+            value={cook}
             required={true}
             placeholder={"Time to cook"}
-          ></input>
+          >
+            {increaseBy5().map((num) => {
+              return <option>{num}</option>;
+            })}
+          </select>
         </div>
         <div>
           <input
