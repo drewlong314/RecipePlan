@@ -5,6 +5,7 @@ import {
   removeCurrentIngredient,
   removeIngredient,
 } from "../../store/ingredients";
+import "./style.css";
 
 const IngredientCard = ({
   quantity,
@@ -26,9 +27,13 @@ const IngredientCard = ({
   const [ingredientUsed, setIngredientUsed] = useState(ingredient)
   const [show, setShow] = useState(false);
 
-  // useEffect(() => {
-
-  // }, [quantityUsed, measurementUsed, ingredientUsed])
+  const oneToEighteenArray = () => {
+    let array = [];
+    for (let i = 1; i <= 18; i++) {
+      array.push(i);
+    }
+    return array;
+  };
 
   const removeAnIngredient = () => {
 
@@ -49,27 +54,31 @@ const IngredientCard = ({
     setShow(false)
   }
   return (
-    <div>
+    <div className={'ingredient-container'}>
       {show === false && (
         <li>
           {`${quantityUsed} ${measurementUsed} ${ingredientUsed}`}
           <span>
-            <button onClick={showEditIngredient} type="button">
+            <button className={'ingredient-edit'} onClick={showEditIngredient} type="button">
               Edit
             </button>
-            <button onClick={removeAnIngredient} type="button">
+            <button className={'ingredient-remove'} onClick={removeAnIngredient} type="button">
               Remove
             </button>
           </span>
         </li>
       )}
       {show === true && (
-        <div>
-          <input
-              type="number"
+        <div className={'ingredient-edit__container'}>
+          <select
               value={quantityUsed}
               onChange={(e) => setQuantityUsed(e.target.value)}
-            ></input>
+              required={true}
+            >
+              {oneToEighteenArray().map((num) => {
+              return <option key={num}>{num}</option>;
+            })}
+            </select>
             <select
               value={measurementUsed}
               onChange={(e) => {
@@ -87,7 +96,7 @@ const IngredientCard = ({
               placeholder="eggs"
               value={ingredientUsed}
             ></input>
-            <button onClick={submitEditIngredient}>Submit</button>
+            <button className={'ingredient-edit__button'} onClick={submitEditIngredient}>Submit</button>
         </div>
       )}
     </div>

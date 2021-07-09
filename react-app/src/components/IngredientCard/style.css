@@ -1,0 +1,18 @@
+.ingredient-container {
+    display: flex;
+    align-items: flex-start;
+}
+
+.ingredient-edit {
+    margin: 10px;
+}
+
+.ingredient-edit__container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.ingredient-edit__button {
+    margin-left: 20px;
+}

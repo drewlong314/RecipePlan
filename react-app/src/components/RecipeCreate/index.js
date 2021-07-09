@@ -19,9 +19,9 @@ const RecipeCreate = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
-  const [servings, setServings] = useState();
-  const [prep, setPrep] = useState();
-  const [cook, setCook] = useState();
+  const [servings, setServings] = useState(1);
+  const [prep, setPrep] = useState(5);
+  const [cook, setCook] = useState(5);
   const [instructions, setInstructions] = useState("");
   const [category1, setCategory1] = useState(0);
   const [category2, setCategory2] = useState(0);
@@ -29,7 +29,7 @@ const RecipeCreate = () => {
   const [category4, setCategory4] = useState(0);
   const [ingredient, setIngredient] = useState("");
   const [measurement, setMeasurement] = useState("");
-  const [quantity, setQuantity] = useState();
+  const [quantity, setQuantity] = useState(1);
   const [ingredientList, setIngredientList] = useState([]);
   const [count, setCount] = useState(0);
   const [categoryError, setCategoryError] = useState(false);
@@ -80,7 +80,7 @@ const RecipeCreate = () => {
       })
     );
     setCount(count + 1);
-    setQuantity(0);
+    setQuantity(1);
     setMeasurement("");
     setIngredient("");
   };
@@ -138,6 +138,7 @@ const RecipeCreate = () => {
             }}
             value={description}
             required={true}
+            // ========== Recipe Description from https://easychickenrecipes.com/homemade-chicken-alfredo-recipe/ author name: Becky Hardin ==============
             placeholder={
               "This Chicken Alfredo recipe is perfect for a tasty homemade and easy weeknight meal. Made with creamy fettuccini pasta, heavy cream and parmesan, this traditional Italian pasta dish is simple and quick to make."
             }
@@ -217,9 +218,8 @@ const RecipeCreate = () => {
             </select>
           </div>
         </div>
-        <div>
+        <div className={'create-ingredient__container'}>
           <select
-            type="number"
             value={quantity}
             onChange={(e) => {
               isEmpty(e.target.value);
@@ -250,10 +250,10 @@ const RecipeCreate = () => {
               isEmpty(e.target.value);
               setIngredient(e.target.value);
             }}
-            placeholder="eggs"
+            placeholder="Chicken"
             value={ingredient}
           ></input>
-          <button onClick={addIngredient}>Add Ingredient</button>
+          <button className={'create-ingredient__button'} onClick={addIngredient}>Add Ingredient</button>
           <ul className="ingredient_list"></ul>
         </div>
         <div>
@@ -283,12 +283,13 @@ const RecipeCreate = () => {
             }}
             value={instructions}
             required={true}
-            placeholder={"Recipe Instructions"}
+            //========== Recipe Instructions from https://easychickenrecipes.com/homemade-chicken-alfredo-recipe/ author name: Becky Hardin ==============
+            placeholder={`Wash chicken breast then pat dry. Cut into thin strips. Boil fettuccine pasta according to box instructions, when ready, set aside. Heat a non-stick pan with olive oil and add chicken strips. Cook for 6-7 minutes on each side until golden brown, on medium heat. Remove chicken from pan when ready and set aside. Add minced garlic and saute for 3 minutes. Deglaze pan with chicken stock, add lemon juice and bring to boil. Add heavy cream, then add the cooked pasta and chicken. Add parmesan and stir until everything is well combined. Sprinkle with parsley and enjoy!`}
           ></textarea>
         </div>
-        <div>
+        <div className={'create-category__container'}>
           <button
-            className={category1 === 0 ? null : "category_chosen"}
+            className={category1 === 0 ? 'category' : "category_chosen"}
             onClick={(e) => {
               e.preventDefault();
               category1 === 0 ? setCategory1(1) : setCategory1(0);
@@ -298,7 +299,7 @@ const RecipeCreate = () => {
             Breakfast
           </button>
           <button
-            className={category2 === 0 ? null : "category_chosen"}
+            className={category2 === 0 ? 'category' : "category_chosen"}
             onClick={(e) => {
               e.preventDefault();
               category2 === 0 ? setCategory2(2) : setCategory2(0);
@@ -308,7 +309,7 @@ const RecipeCreate = () => {
             Lunch
           </button>
           <button
-            className={category3 === 0 ? null : "category_chosen"}
+            className={category3 === 0 ? 'category' : "category_chosen"}
             onClick={(e) => {
               e.preventDefault();
               category3 === 0 ? setCategory3(3) : setCategory3(0);
@@ -318,7 +319,7 @@ const RecipeCreate = () => {
             Dinner
           </button>
           <button
-            className={category4 === 0 ? null : "category_chosen"}
+            className={category4 === 0 ? 'category' : "category_chosen"}
             onClick={(e) => {
               e.preventDefault();
               category4 === 0 ? setCategory4(4) : setCategory4(0);
@@ -330,7 +331,7 @@ const RecipeCreate = () => {
           {categoryError ? <p>You must select at least one category.</p> : null}
         </div>
         <div>
-          <button type="submit">Create Recipe</button>
+          <button className={'create-submit'} type="submit">Create Recipe</button>
         </div>
       </form>
     </div>

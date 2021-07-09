@@ -3,6 +3,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    font-weight: 600;
 }
 
 .create-form {
@@ -49,9 +50,16 @@
     margin: 10px;
 }
 
+.category {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
 .category_chosen{
     background-color: green;
     color: white;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .create-select__container {
@@ -63,4 +71,25 @@
 .create-select__div {
     display: flex;
     flex-direction: column;
+}
+
+.create-ingredient__container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.create-ingredient__button {
+    margin-left: 20px;
+}
+
+.create-category__container {
+    margin: 20px;
+}
+
+.create-submit {
+    border-radius: 0;
+    background-color: black;
+    color:white;
+    margin-bottom: 20px;
 }
