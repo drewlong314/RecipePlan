@@ -3,11 +3,33 @@ from app.models import db, Ingredient
 
 def seed_ingredients():
 
-    demo1 = Ingredient(name='Egg')
-    demo2 = Ingredient(name='Bacon')
+    a = Ingredient(name='boneless skinless chicken breast')
+    b = Ingredient(name='kosher salt')
+    c = Ingredient(name='black pepper')
+    d = Ingredient(name='paprika')
+    e = Ingredient(name='water')
+    f = Ingredient(name='fettuccine')
+    g = Ingredient(name='olive oil')
+    h = Ingredient(name='minced garlic')
+    i = Ingredient(name='unsalted butter')
+    j = Ingredient(name='heavy cream')
+    k = Ingredient(name='parmesan cheese')
+    l = Ingredient(name='nutmeg')
+    m = Ingredient(name='chopped parsley')
 
-    db.session.add(demo1)
-    db.session.add(demo2)
+    db.session.add(a)
+    db.session.add(b)
+    db.session.add(c)
+    db.session.add(d)
+    db.session.add(e)
+    db.session.add(f)
+    db.session.add(g)
+    db.session.add(h)
+    db.session.add(i)
+    db.session.add(j)
+    db.session.add(k)
+    db.session.add(l)
+    db.session.add(m)
 
     db.session.commit()
 

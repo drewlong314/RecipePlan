@@ -19,8 +19,9 @@ const RecipeCreate = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
-  const [servings, setServings] = useState();
-  const [time, setTime] = useState();
+  const [servings, setServings] = useState(1);
+  const [prep, setPrep] = useState(5);
+  const [cook, setCook] = useState(5);
   const [instructions, setInstructions] = useState("");
   const [category1, setCategory1] = useState(0);
   const [category2, setCategory2] = useState(0);
@@ -28,31 +29,31 @@ const RecipeCreate = () => {
   const [category4, setCategory4] = useState(0);
   const [ingredient, setIngredient] = useState("");
   const [measurement, setMeasurement] = useState("");
-  const [quantity, setQuantity] = useState();
+  const [quantity, setQuantity] = useState(1);
   const [ingredientList, setIngredientList] = useState([]);
   const [count, setCount] = useState(0);
-  const [categoryError, setCategoryError] = useState(false)
-  const [ingredientError, setIngredientError] = useState(false)
+  const [categoryError, setCategoryError] = useState(false);
+  const [ingredientError, setIngredientError] = useState(false);
 
   const createRecipe = (e) => {
     e.preventDefault();
     if (!category1 && !category2 && !category3 && !category4) {
-      setCategoryError(true)
-      return
+      setCategoryError(true);
+      return;
     }
-    setCategoryError(false)
+    setCategoryError(false);
     if (currentIngredients.length === 0) {
-      setIngredientError(true)
-      return
+      setIngredientError(true);
+      return;
     }
-    setIngredientError(false)
+    setIngredientError(false);
     dispatch(
       postRecipe(
         name,
         description,
         image,
         servings,
-        time,
+        prep + cook,
         instructions,
         user.id,
         [category1, category2, category3, category4],
@@ -68,7 +69,7 @@ const RecipeCreate = () => {
 
   const addIngredient = (e) => {
     e.preventDefault();
-    setIngredientError(false)
+    setIngredientError(false);
     dispatch(
       addCurrentIngredient({
         key: count,
@@ -79,7 +80,7 @@ const RecipeCreate = () => {
       })
     );
     setCount(count + 1);
-    setQuantity(0);
+    setQuantity(1);
     setMeasurement("");
     setIngredient("");
   };
@@ -89,13 +90,31 @@ const RecipeCreate = () => {
     if (!field) console.log("This field is empty");
   };
 
+  //========== Creates an array for the Servings Select ==============
+  const oneToEighteenArray = () => {
+    let array = [];
+    for (let i = 1; i <= 18; i++) {
+      array.push(i);
+    }
+    return array;
+  };
+
+  //========== Creates an array for the Time Selects ==============
+  const increaseBy5 = () => {
+    let array = [];
+    for (let i = 5; i <= 120; i += 5) {
+      array.push(i);
+    }
+    return array;
+  };
+
   return (
-    <div>
-      <h1>Recipe Creation Page </h1>
-      <form onSubmit={createRecipe}>
+    <div className={"create-container"}>
+      <form className={"create-form"} onSubmit={createRecipe}>
         <div>
-          <label>Recipe Name</label>
+          <p className={"create-label"}>Recipe Name</p>
           <input
+            className={"create-input"}
             type="text"
             name="name"
             onChange={(e) => {
@@ -104,11 +123,13 @@ const RecipeCreate = () => {
             }}
             value={name}
             required={true}
+            placeholder={"Chicken Alfredo"}
           ></input>
         </div>
         <div>
-          <label>Recipe Description</label>
+          <p className={"create-label"}>Recipe Description</p>
           <textarea
+            className={"create-textarea"}
             type="text"
             name="description"
             onChange={(e) => {
@@ -117,12 +138,17 @@ const RecipeCreate = () => {
             }}
             value={description}
             required={true}
+            // ========== Recipe Description from https://easychickenrecipes.com/homemade-chicken-alfredo-recipe/ author name: Becky Hardin ==============
+            placeholder={
+              "This Chicken Alfredo recipe is perfect for a tasty homemade and easy weeknight meal. Made with creamy fettuccini pasta, heavy cream and parmesan, this traditional Italian pasta dish is simple and quick to make."
+            }
           ></textarea>
         </div>
         <div>
-          <label>Recipe Image</label>
+          <p className={"create-label"}>Image Url</p>
           <input
-            type="text"
+            className={"create-input"}
+            type="url"
             name="image"
             onChange={(e) => {
               isEmpty(e.target.value);
@@ -130,102 +156,81 @@ const RecipeCreate = () => {
             }}
             value={image}
             required={true}
+            placeholder={"https://"}
           ></input>
         </div>
-        <div>
-          <label>Recipe Servings</label>
-          <input
-            type="number"
-            name="servings"
-            onChange={(e) => {
-              isEmpty(e.target.value);
-              setServings(e.target.value);
-            }}
-            value={servings}
-            required={true}
-          ></input>
+        <div className={"create-select__container"}>
+          <div className={"create-select__div"}>
+            <span>Servings</span>
+            <select
+              className={"create-select"}
+              type="number"
+              name="servings"
+              onChange={(e) => {
+                isEmpty(e.target.value);
+                setServings(e.target.value);
+              }}
+              value={servings}
+              required={true}
+              // placeholder={'Number of Servings'}
+            >
+              {oneToEighteenArray().map((num) => {
+                return <option key={num}>{num}</option>;
+              })}
+            </select>
+          </div>
+          <div className={"create-select__div"}>
+            <span>Prep. Time</span>
+            <select
+              className={"create-select"}
+              type="number"
+              name="prep"
+              onChange={(e) => {
+                isEmpty(e.target.value);
+                setPrep(e.target.value);
+              }}
+              value={prep}
+              required={true}
+              placeholder={"Time to Prepare"}
+            >
+              {increaseBy5().map((num) => {
+                return <option key={num}>{num}</option>;
+              })}
+            </select>
+          </div>
+          <div className={"create-select__div"}>
+            <span>Cook Time</span>
+            <select
+              className={"create-select"}
+              type="number"
+              name="cook"
+              onChange={(e) => {
+                isEmpty(e.target.value);
+                setCook(e.target.value);
+              }}
+              value={cook}
+              required={true}
+              placeholder={"Time to cook"}
+            >
+              {increaseBy5().map((num) => {
+                return <option key={num}>{num}</option>;
+              })}
+            </select>
+          </div>
         </div>
-        <div>
-          <label>Time Needed To Cook</label>
-          <input
-            type="number"
-            name="time"
-            onChange={(e) => {
-              isEmpty(e.target.value);
-              setTime(e.target.value);
-            }}
-            value={time}
-            required={true}
-          ></input>
-        </div>
-        <div>
-          <label>Recipe Instructions</label>
-          <textarea
-            type="text"
-            name="instructions"
-            onChange={(e) => {
-              isEmpty(e.target.value);
-              setInstructions(e.target.value);
-            }}
-            value={instructions}
-            required={true}
-          ></textarea>
-        </div>
-        <div>
-          Time of Day:
-          <button
-            className={category1 === 0 ? null : "category_chosen"}
-            onClick={(e) => {
-              e.preventDefault();
-              category1 === 0 ? setCategory1(1) : setCategory1(0);
-            }}
-            value={category1}
-          >
-            Breakfast
-          </button>
-          <button
-            className={category2 === 0 ? null : "category_chosen"}
-            onClick={(e) => {
-              e.preventDefault();
-              category2 === 0 ? setCategory2(2) : setCategory2(0);
-            }}
-            value={category2}
-          >
-            Lunch
-          </button>
-          <button
-            className={category3 === 0 ? null : "category_chosen"}
-            onClick={(e) => {
-              e.preventDefault();
-              category3 === 0 ? setCategory3(3) : setCategory3(0);
-            }}
-            value={category3}
-          >
-            Dinner
-          </button>
-          <button
-            className={category4 === 0 ? null : "category_chosen"}
-            onClick={(e) => {
-              e.preventDefault();
-              category4 === 0 ? setCategory4(4) : setCategory4(0);
-            }}
-            value={category4}
-          >
-            Dessert
-          </button>
-          {categoryError ? <p>You must select at least one category.</p> : null}
-        </div>
-        <div>
-          <span>Ingredients:</span>
-          <input
-            type="number"
+        <div className={'create-ingredient__container'}>
+          <select
             value={quantity}
             onChange={(e) => {
               isEmpty(e.target.value);
               setQuantity(e.target.value);
             }}
             required={true}
-          ></input>
+          >
+            {oneToEighteenArray().map((num) => {
+              return <option key={num}>{num}</option>;
+            })}
+          </select>
           <select
             value={measurement}
             onChange={(e) => {
@@ -245,10 +250,10 @@ const RecipeCreate = () => {
               isEmpty(e.target.value);
               setIngredient(e.target.value);
             }}
-            placeholder="eggs"
+            placeholder="Chicken"
             value={ingredient}
           ></input>
-          <button onClick={addIngredient}>Add Ingredient</button>
+          <button className={'create-ingredient__button'} onClick={addIngredient}>Add Ingredient</button>
           <ul className="ingredient_list"></ul>
         </div>
         <div>
@@ -263,10 +268,70 @@ const RecipeCreate = () => {
               />
             );
           })}
-          {ingredientError ? <p>You must select at least one ingredient.</p> : null}
+          {ingredientError ? (
+            <p>You must select at least one ingredient.</p>
+          ) : null}
         </div>
         <div>
-          <button type="submit">Create Recipe</button>
+          <textarea
+            className={"create-textarea"}
+            type="text"
+            name="instructions"
+            onChange={(e) => {
+              isEmpty(e.target.value);
+              setInstructions(e.target.value);
+            }}
+            value={instructions}
+            required={true}
+            //========== Recipe Instructions from https://easychickenrecipes.com/homemade-chicken-alfredo-recipe/ author name: Becky Hardin ==============
+            placeholder={`Wash chicken breast then pat dry. Cut into thin strips. Boil fettuccine pasta according to box instructions, when ready, set aside. Heat a non-stick pan with olive oil and add chicken strips. Cook for 6-7 minutes on each side until golden brown, on medium heat. Remove chicken from pan when ready and set aside. Add minced garlic and saute for 3 minutes. Deglaze pan with chicken stock, add lemon juice and bring to boil. Add heavy cream, then add the cooked pasta and chicken. Add parmesan and stir until everything is well combined. Sprinkle with parsley and enjoy!`}
+          ></textarea>
+        </div>
+        <div className={'create-category__container'}>
+          <button
+            className={category1 === 0 ? 'category' : "category_chosen"}
+            onClick={(e) => {
+              e.preventDefault();
+              category1 === 0 ? setCategory1(1) : setCategory1(0);
+            }}
+            value={category1}
+          >
+            Breakfast
+          </button>
+          <button
+            className={category2 === 0 ? 'category' : "category_chosen"}
+            onClick={(e) => {
+              e.preventDefault();
+              category2 === 0 ? setCategory2(2) : setCategory2(0);
+            }}
+            value={category2}
+          >
+            Lunch
+          </button>
+          <button
+            className={category3 === 0 ? 'category' : "category_chosen"}
+            onClick={(e) => {
+              e.preventDefault();
+              category3 === 0 ? setCategory3(3) : setCategory3(0);
+            }}
+            value={category3}
+          >
+            Dinner
+          </button>
+          <button
+            className={category4 === 0 ? 'category' : "category_chosen"}
+            onClick={(e) => {
+              e.preventDefault();
+              category4 === 0 ? setCategory4(4) : setCategory4(0);
+            }}
+            value={category4}
+          >
+            Dessert
+          </button>
+          {categoryError ? <p>You must select at least one category.</p> : null}
+        </div>
+        <div>
+          <button className={'create-submit'} type="submit">Create Recipe</button>
         </div>
       </form>
     </div>

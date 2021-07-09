@@ -2,7 +2,7 @@ from app.models import db, recipe_categories
 
 
 def seed_recipe_categories():
-    db.session.execute(recipe_categories.insert().values(category_id=1, recipe_id=1));
+    db.session.execute(recipe_categories.insert().values(category_id=3, recipe_id=1));
     db.session.execute(recipe_categories.insert().values(category_id=1,recipe_id=2));
     db.session.commit()
 
