@@ -12,7 +12,7 @@
 }
 
 .recipe-card:hover > .recipe-name, .recipe-card:hover > .recipe-description {
-    opacity: 50%;
+    opacity: 0.5;
 }
 
 .recipe-name {

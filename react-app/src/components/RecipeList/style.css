@@ -30,7 +30,7 @@
 }
 
 .list-actions__create:hover {
-    opacity: 50%;
+    opacity: 0.5;
 }
 
 .list-cards {

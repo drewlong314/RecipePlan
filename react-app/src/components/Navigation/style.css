@@ -90,5 +90,5 @@
 .nav-recipes:hover,
 .nav-login:hover,
 .nav-logout:hover {
-    opacity: 50%;
+    opacity: 0.5;
 }
