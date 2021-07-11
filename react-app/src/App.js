@@ -36,22 +36,15 @@ function App() {
         <Route path="/" exact={true}>
           <LoginForm />
         </Route>
+        <Route path="/sign-up" exact={true}>
+          <SignUpForm />
+        </Route>
         <ProtectedRoute path="/recipes" exact={true}>
           <RecipeList />
         </ProtectedRoute>
         <Navigation />
       </Switch>
       <Switch>
-        <Route path="/login" exact={true}></Route>
-        <Route path="/sign-up" exact={true}>
-          <SignUpForm />
-        </Route>
-        <ProtectedRoute path="/users" exact={true}>
-          <UsersList />
-        </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId" exact={true}>
-          <User />
-        </ProtectedRoute>
         <ProtectedRoute path="/recipes/create" exact={true}>
           <RecipeCreate />
         </ProtectedRoute>
