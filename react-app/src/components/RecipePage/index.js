@@ -81,24 +81,44 @@ const RecipePage = () => {
             <p className={"recipe-page__description"} key={"r2"}>
               {recipe[0].description}
             </p>
-            <p key={"r4"}> Serves: {recipe[0].servings}</p>
-            <p key={"r5"}>Total time: {recipe[0].time} min.</p>
-            <p key={"r6"}>{recipe[0].instructions}</p>
+            <div className={"recipe-page__numbers"}>
+              <p className={"recipe-page__numbers__p"} key={"r4"}>
+                {" "}
+                Serves: {recipe[0].servings}
+              </p>
+              <p className={"recipe-page__numbers__p"} key={"r5"}>
+                Total time: {recipe[0].time} min.
+              </p>
+            </div>
+            <h2 className={"recipe-page__instructions__header"}>
+              Instructions
+            </h2>
+            <ul className={"recipe-page__instructions"} key={"r6"}>
+              {recipe[0].instructions.split(".").map((i) => {
+                console.log(recipe[0].instructions);
+                console.log(i.length);
+                return i.length ? (
+                  <li className={"recipe-page__instructions__li"}>{`${i}.`}</li>
+                ) : null;
+              })}
+            </ul>
             {/* <p key={"r7"}>{recipeCategories}</p> */}
             <h2 className={"recipe-page__ingredients__header"}>Ingredients</h2>
             <div className={"recipe-page__ingredients__container"} key={"r8"}>
               {ingredients}
             </div>
-            <Link key={"r9"} to={`/recipes/${recipe[0].id}/edit`}>
-              Edit
-            </Link>
+            <div className={"recipe-page__buttons"}>
+              <Link className={"recipe-page__edit"} key={"r9"} to={`/recipes/${recipe[0].id}/edit`}>
+                Edit Recipe
+              </Link>
 
-            <button
-              key={"r10"}
-              onClick={() => dispatch(deleteRecipe(recipe?.id))}
-            >
-              Delete Recipe
-            </button>
+              <button
+                key={"r10"}
+                onClick={() => dispatch(deleteRecipe(recipe?.id))}
+              >
+                Delete Recipe
+              </button>
+            </div>
           </div>
         </div>
       )}
