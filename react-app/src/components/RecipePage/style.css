@@ -37,7 +37,6 @@
 .recipe-page__description {
   font-size: 20pt;
   padding: 40px;
-  border-top: 2px solid black;
 }
 
 .recipe-page__numbers {
@@ -49,20 +48,6 @@
 .recipe-page__numbers__p {
   display: flex;
   flex-direction: row;
-  font-size: 20pt;
-}
-
-.recipe-page__ingredients__container {
-  padding: 20px;
-}
-
-.recipe-page__ingredients__header {
-  font-size: 28pt;
-  border-bottom: 1px solid black;
-  margin-top: 20px;
-}
-
-.recipe-page__ingredients {
   font-size: 20pt;
 }
 
@@ -80,6 +65,20 @@
 .recipe-page__instructions__li {
   font-size: 20pt;
   padding: 2px;
+}
+
+.recipe-page__ingredients__container {
+  padding: 20px;
+}
+
+.recipe-page__ingredients__header {
+  font-size: 28pt;
+  border-bottom: 1px solid black;
+  margin-top: 20px;
+}
+
+.recipe-page__ingredients {
+  font-size: 20pt;
 }
 
 .recipe-page__buttons {

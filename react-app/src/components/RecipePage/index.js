@@ -27,7 +27,12 @@ const RecipePage = () => {
 
   let index = 1;
 
-  if (loaded && allIngredients.length !== 0 && allMeasurements.length !== 0 && ingredients.length === 0 ) {
+  if (
+    loaded &&
+    allIngredients.length !== 0 &&
+    allMeasurements.length !== 0 &&
+    ingredients.length === 0
+  ) {
     const recipeCategories = recipe?.categories?.map((r) => {
       if (index === recipe[0].categories.length) return r.name;
       index++;
@@ -56,12 +61,11 @@ const RecipePage = () => {
     history.push(`/recipes/${recipe[0].id}`);
   };
 
-  useEffect(() => {
-  }, [loaded]);
+  useEffect(() => {}, [loaded]);
 
   return (
     <>
-      {recipe && ingredients &&(
+      {recipe && ingredients && (
         <div className={"recipe-page"}>
           <div className={"recipe-page__container"}>
             <h1 className={"recipe-page__name"} key={"r1"}>
@@ -100,7 +104,11 @@ const RecipePage = () => {
               {ingredients}
             </div>
             <div className={"recipe-page__buttons"}>
-              <Link className={"recipe-page__edit"} key={"r9"} to={`/recipes/${recipe[0].id}/edit`}>
+              <Link
+                className={"recipe-page__edit"}
+                key={"r9"}
+                to={`/recipes/${recipe[0].id}/edit`}
+              >
                 Edit Recipe
               </Link>
 
