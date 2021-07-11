@@ -191,7 +191,7 @@ const RecipeCreate = () => {
               }}
               value={prep}
               required={true}
-              placeholder={"Time to Prepare"}
+              // placeholder={"Time to Prepare"}
             >
               {increaseBy5().map((num) => {
                 return <option key={num}>{num}</option>;
