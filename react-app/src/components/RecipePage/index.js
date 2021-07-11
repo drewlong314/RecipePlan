@@ -114,7 +114,10 @@ const RecipePage = () => {
 
               <button
                 key={"r10"}
-                onClick={() => dispatch(deleteRecipe(recipe?.id))}
+                onClick={() => {
+                  dispatch(deleteRecipe(recipe[0].id));
+                  history.push('/recipes/')
+                }}
               >
                 Delete Recipe
               </button>
