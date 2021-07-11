@@ -11,13 +11,10 @@ const RecipePage = () => {
   const [loaded, setLoaded] = useState(false);
   const [ingredients, setIngredients] = useState([]);
   const recipes = useSelector((state) => state.recipeReducer.recipes);
-  console.log(recipes);
   const recipe = recipes?.filter((recipe) => {
-    console.log(recipe.id, id);
     return recipe?.id === Number(id);
   });
   if (recipe && !loaded) {
-    console.log(recipe);
     setLoaded(true);
   }
   const allMeasurements = useSelector(
@@ -30,18 +27,16 @@ const RecipePage = () => {
 
   let index = 1;
 
-  if (loaded && ingredients.length === 0) {
-    console.log("this is loaded", recipe);
+  if (loaded && allIngredients.length !== 0 && allMeasurements.length !== 0 && ingredients.length === 0 ) {
     const recipeCategories = recipe?.categories?.map((r) => {
       if (index === recipe[0].categories.length) return r.name;
       index++;
       return r.name + ", ";
     });
 
+    console.log(allMeasurements);
     const ingredients = recipe[0].recipe_ingredients?.map((ingredient) => {
-      console.log(ingredient);
       const ingredientMeasurement = allMeasurements.filter((m) => {
-        console.log(allMeasurements);
         return m.id === ingredient.measurement_id;
       });
       const ingredientIngredient = allIngredients.filter((i) => {
@@ -62,12 +57,11 @@ const RecipePage = () => {
   };
 
   useEffect(() => {
-    console.log(recipe);
   }, [loaded]);
 
   return (
     <>
-      {recipe && (
+      {recipe && ingredients &&(
         <div className={"recipe-page"}>
           <div className={"recipe-page__container"}>
             <h1 className={"recipe-page__name"} key={"r1"}>
@@ -95,8 +89,6 @@ const RecipePage = () => {
             </h2>
             <ul className={"recipe-page__instructions"} key={"r6"}>
               {recipe[0].instructions.split(".").map((i) => {
-                console.log(recipe[0].instructions);
-                console.log(i.length);
                 return i.length ? (
                   <li className={"recipe-page__instructions__li"}>{`${i}.`}</li>
                 ) : null;
