@@ -33,11 +33,12 @@ const LoginForm = () => {
   };
 
   if (user) {
-    return <Redirect to="/" />;
+    return <Redirect to="/recipes" />; // this might need a trailing slash for heroku
   }
 
   return (
     <div>
+      <h1>This is the landing page </h1>
     <form className={'login-form'} onSubmit={onLogin}>
       <div>
         {errors.map((error) => (
