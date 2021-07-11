@@ -1,6 +1,9 @@
 .list-container {
     background-color: #E5E5E5;
     height: 100vh;
+    background-image: url('../../recipe-list.jpg');
+    background-repeat: no-repeat;
+    background-size: 2000px;
 }
 
 .list-actions {
@@ -16,17 +19,17 @@
 
 .list-actions__create {
     display: flex;
+    height: 62px;
+    width: 120px;
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    color: black;
-    cursor: pointer;
-    width: 100px;
-    height: 30px;
+    color: #fff;
     font-weight: 600;
-    font-family: sans-serif;
-    padding: 0 5% 0 5%;
-    margin: 0 3% 0 0
+    font-family:sans-serif;
+    font-size: 16px;
+    background-color: lightslategray;
+    box-shadow: none;
 }
 
 .list-actions__create:hover {
@@ -37,7 +40,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     padding: 0 5% 0 5%;
-    margin: 0 5% 0 5%
+    margin: 0 5% 0 5%;
+    padding-top: 30px;
     /* display: flex;
     align-items: center;
     justify-content: center; */
