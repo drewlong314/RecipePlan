@@ -1,0 +1,54 @@
+.about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 93.4vh;
+    background-image: url('../../about.jpg');
+    background-repeat: no-repeat;
+    background-size: 2000px;
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    width: 500px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 6px;
+}
+
+.about-repo {
+    text-decoration: none;
+}
+
+.about-header {
+    padding-top: 50px;
+    text-align: center;
+    font-size: 26pt;
+}
+
+.about-p {
+    padding: 30px;
+    font-size: 18pt;
+}
+
+.about-links__container {
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.about-links {
+    text-decoration: none;
+    font-size: 18pt;
+}
+
+.about-madeby {
+    padding-top: 100px;
+    text-align: center;
+    font-size: 14pt;
+}
