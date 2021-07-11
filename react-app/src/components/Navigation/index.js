@@ -49,7 +49,7 @@ const Navigation = () => {
         ) : (
           <NavLink
             className={"nav-login"}
-            to="/login"
+            to="/"
             exact={true}
             activeClassName="active"
           >
