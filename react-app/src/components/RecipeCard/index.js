@@ -45,11 +45,11 @@ const RecipeCard = ({ recipe }) => {
 
   return (
     <div onClick={redirectOnClick} className={"recipe-card"}>
-      <img key={"r3"} className={"recipe-image"} src={recipe.image} />
-      <h1 key={"r1"} className={"recipe-name"}>
+      <img key={"r3"} className={"recipe-card__image"} src={recipe.image} />
+      <h1 key={"r1"} className={"recipe-card__name"}>
         {recipe.name}
       </h1>
-      <p key={"r2"} className={"recipe-description"}>
+      <p key={"r2"} className={"recipe-card__description"}>
         {recipe.description}
       </p>
       {/* <p key={"r4"}>{recipe.servings}</p>

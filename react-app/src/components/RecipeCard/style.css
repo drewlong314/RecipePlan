@@ -11,24 +11,24 @@
     cursor: pointer;
 }
 
-.recipe-card:hover > .recipe-name, .recipe-card:hover > .recipe-description {
+.recipe-card:hover > .recipe-card__name, .recipe-card:hover > .recipe-card__description {
     opacity: 0.5;
 }
 
-.recipe-name {
+.recipe-card__name {
     font-size: 30px;
     margin: 0;
     padding: 10px;
 }
 
-.recipe-image {
+.recipe-card__image {
     height: 300px;
     width: 100%;
     margin: 0;
     padding: 0;
 }
 
-.recipe-description {
+.recipe-card__description {
     height: auto;
     /* height: 24%; */
     width: 95%;
