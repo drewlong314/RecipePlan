@@ -10,11 +10,22 @@
     height: 62px;
 }
 
+.nav-title {
+    position: absolute;
+    left: 50%;
+    font-size: 30px;
+}
+
 .nav-left {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content:space-evenly
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
 }
 
 .nav-home {

@@ -4,6 +4,9 @@
     align-items: center;
     height: 100vh;
     font-weight: 600;
+    background-image: url('../../recipe-list.jpg');
+    background-repeat: no-repeat;
+    background-size: 2500px;
 }
 
 .create-form {

@@ -7,7 +7,7 @@ import { getAllRecipes } from "../../store/recipes";
 import LogoutButton from ".././auth/LogoutButton";
 import "./style.css";
 
-const Navigation = () => {
+const Navigation = ({ title, other }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const recipes = useSelector((state) => state.recipeReducer.recipes);
@@ -23,27 +23,33 @@ const Navigation = () => {
   return (
     <nav className={"nav-container"}>
       <div className={"nav-left"}>
-      <NavLink
-        className={"nav-home"}
-        to="/"
-        exact={true}
-        activeClassName="active"
-      >
-        Recipe Plan
-      </NavLink>
+        <NavLink
+          className={"nav-home"}
+          to="/recipes"
+          exact={true}
+          activeClassName="active"
+        >
+          Recipe Plan
+        </NavLink>
 
-      <input className={"nav-search"}></input>
+        {/* <input className={"nav-search"}></input> */}
 
-      <NavLink
+        {/* <NavLink
         className={"nav-recipes"}
         to="/recipes"
         exact={true}
         activeClassName="active"
       >
         Recipes
-      </NavLink>
+      </NavLink> */}
       </div>
-      <div className={'nav-right'}>
+      <div className={"nav-title"}>{title}</div>
+      <div className={"nav-right"}>
+        {other === "add" ? (
+          <NavLink className={"list-actions__create"} to={`/recipes/create`}>
+            Create Recipe
+          </NavLink>
+        ) : null}
         {user ? (
           <LogoutButton className={"nav-logout"} />
         ) : (

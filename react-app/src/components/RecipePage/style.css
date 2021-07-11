@@ -5,7 +5,9 @@
   align-items: center;
   height: 100%;
   background-color: #e5e5e5;
-  /* width: 800px; */
+  background-image: url('../../recipe.jpg');
+    background-repeat: no-repeat;
+    background-size: 4500px;
 }
 
 .recipe-page__container {
@@ -59,11 +61,11 @@
 }
 
 .recipe-page__instructions {
-  width: 400px;
+  width: 500px;
 }
 
 .recipe-page__instructions__li {
-  font-size: 20pt;
+  font-size: 16pt;
   padding: 2px;
 }
 
@@ -78,7 +80,7 @@
 }
 
 .recipe-page__ingredients {
-  font-size: 20pt;
+  font-size: 16pt;
 }
 
 .recipe-page__buttons {

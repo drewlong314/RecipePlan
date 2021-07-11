@@ -6,6 +6,9 @@
     font-weight: 600;
     padding-top: 1%;
     padding-bottom: 1%;
+    background-image: url('../../recipe-list.jpg');
+    background-repeat: no-repeat;
+    background-size: 2500px;
 }
 
 .edit-form {

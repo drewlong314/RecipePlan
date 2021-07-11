@@ -1,33 +1,36 @@
-.splash-container {
+.signup-container {
     box-sizing: border-box;
-    position: relative;
+    /* position: relative; */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70vh;
     background-color: #F1F1EF;
     z-index: 2;
-    background-image: url('../../splash.jpg');
+    background-image: url('../../sign-up.jpg');
     background-repeat: no-repeat;
     background-size: 2000px;
     height: 100vh;
     width: 100vw;
-    padding-left: 40%;
 }
 
-.splash-header {
+
+.signup-form {
+    margin-bottom: 200px;
+}
+
+.signup-header {
     font-size: 40pt;
     margin-bottom: 40px;
 }
 
-.splash-label {
+.signup-label {
     margin-top: 10px;
     margin-bottom: 10px;
-    color: lightslategray;
+    color: darkslategray;
     font-size: 14pt;
 }
 
-.splash-input {
+.signup-input {
     box-sizing: border-box;
     font-size: 17px;
     border-radius: 6px;
@@ -35,10 +38,10 @@
     width: 300px;
     height: 15px;
     margin-bottom: 15px;
-    border: 1px lightslategray solid;
+    border: 1px darkslategray solid;
 }
 
-.splash-submit {
+.signup-submit {
     width: 300px;
     height: 40px;
     margin-top: 5px;
@@ -49,12 +52,12 @@
     /* background-color: lightblue; */
 }
 
-.splash-line {
-    border-bottom: 2px solid black;
-    padding-bottom: 20px;
+.signup-line {
+    border-bottom: 2px solid darkslategray;
+    padding-bottom: 10px;
 }
 
-.splash-signup {
+.signup-login {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -70,11 +73,7 @@
     margin-top: 20px;
 }
 
-.splash-signup:hover {
-    opacity: 0.5;
-}
-
-.splash-signup__text {
+.signup-login__text {
     color: white;
     text-decoration: none;
     font-family: Arial, Helvetica, sans-serif;
