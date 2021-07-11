@@ -22,9 +22,9 @@ const IngredientCard = ({
   const measurements = useSelector(
     (state) => state.measurementReducer.measurements
   );
-  const [quantityUsed, setQuantityUsed] = useState(quantity)
-  const [measurementUsed, setMeasurementUsed] = useState(measurement)
-  const [ingredientUsed, setIngredientUsed] = useState(ingredient)
+  const [quantityUsed, setQuantityUsed] = useState(quantity);
+  const [measurementUsed, setMeasurementUsed] = useState(measurement);
+  const [ingredientUsed, setIngredientUsed] = useState(ingredient);
   const [show, setShow] = useState(false);
 
   const oneToEighteenArray = () => {
@@ -36,7 +36,6 @@ const IngredientCard = ({
   };
 
   const removeAnIngredient = () => {
-
     const ingredientToRemove = currentIngredients.filter((ingredient) => {
       return ingredient.identifier === identifier;
     });
@@ -50,53 +49,79 @@ const IngredientCard = ({
     const ingredientToEdit = currentIngredients.filter((ingredient) => {
       return ingredient.identifier === identifier;
     });
-    dispatch(editIngredient(ingredientToEdit[0], ingredientUsed, measurementUsed, quantityUsed))
-    setShow(false)
-  }
+    dispatch(
+      editIngredient(
+        ingredientToEdit[0],
+        ingredientUsed,
+        measurementUsed,
+        quantityUsed
+      )
+    );
+    setShow(false);
+  };
   return (
-    <div className={'ingredient-container'}>
+    <div className={"ingredient-container"}>
       {show === false && (
-        <li>
-          {`${quantityUsed} ${measurementUsed} ${ingredientUsed}`}
-          <span>
-            <button className={'ingredient-edit'} onClick={showEditIngredient} type="button">
-              Edit
-            </button>
-            <button className={'ingredient-remove'} onClick={removeAnIngredient} type="button">
-              Remove
-            </button>
-          </span>
-        </li>
+        <div>
+          <li className={"ingredient-card__li"}>
+            <div className={"ingredient-card__name"}>
+            {`${quantityUsed} ${measurementUsed} ${ingredientUsed}`}
+            </div>
+            <div className={"ingredient-card__buttons"}>
+              <button
+                className={"ingredient-edit"}
+                onClick={showEditIngredient}
+                type="button"
+              >
+                Edit
+              </button>
+              <button
+                className={"ingredient-remove"}
+                onClick={removeAnIngredient}
+                type="button"
+              >
+                Remove
+              </button>
+            </div>
+          </li>
+        </div>
       )}
       {show === true && (
-        <div className={'ingredient-edit__container'}>
+        <div className={"ingredient-edit__container"}>
           <select
-              value={quantityUsed}
-              onChange={(e) => setQuantityUsed(e.target.value)}
-              required={true}
-            >
-              {oneToEighteenArray().map((num) => {
+            value={quantityUsed}
+            onChange={(e) => setQuantityUsed(e.target.value)}
+            required={true}
+          >
+            {oneToEighteenArray().map((num) => {
               return <option key={num}>{num}</option>;
             })}
-            </select>
-            <select
-              value={measurementUsed}
-              onChange={(e) => {
-                setMeasurementUsed(e.target.value);
-              }}
-            >
-              {measurements.map((measurement) => {
-                return (
-                  <option key={measurement.name} value={measurement.name}>{measurement.name}</option>
-                );
-              })}
-            </select>
-            <input
-              onChange={(e) => setIngredientUsed(e.target.value)}
-              placeholder="eggs"
-              value={ingredientUsed}
-            ></input>
-            <button className={'ingredient-edit__button'} onClick={submitEditIngredient}>Submit</button>
+          </select>
+          <select
+            value={measurementUsed}
+            onChange={(e) => {
+              setMeasurementUsed(e.target.value);
+            }}
+          >
+            {measurements.map((measurement) => {
+              return (
+                <option key={measurement.name} value={measurement.name}>
+                  {measurement.name}
+                </option>
+              );
+            })}
+          </select>
+          <input
+            onChange={(e) => setIngredientUsed(e.target.value)}
+            placeholder="eggs"
+            value={ingredientUsed}
+          ></input>
+          <button
+            className={"ingredient-edit__button"}
+            onClick={submitEditIngredient}
+          >
+            Submit
+          </button>
         </div>
       )}
     </div>

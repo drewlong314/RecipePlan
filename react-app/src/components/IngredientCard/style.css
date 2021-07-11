@@ -1,6 +1,7 @@
 .ingredient-container {
     display: flex;
     align-items: flex-start;
+    width: 400px;
 }
 
 .ingredient-edit {
@@ -9,10 +10,25 @@
 
 .ingredient-edit__container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin: 20px;
 }
 
 .ingredient-edit__button {
     margin-left: 20px;
+}
+
+.ingredient-card__li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ingredient-card__name {
+    width: 180px;
+}
+
+.ingredient-card__buttons {
+    display: flex;
+    align-items: center;
 }

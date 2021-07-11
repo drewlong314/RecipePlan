@@ -38,8 +38,8 @@ const RecipeEdit = () => {
   const [ingredientList, setIngredientList] = useState([]);
   const [count, setCount] = useState(0);
   const [loaded, setLoaded] = useState(false);
-  const [categoryError, setCategoryError] = useState(false)
-  const [ingredientError, setIngredientError] = useState(false)
+  const [categoryError, setCategoryError] = useState(false);
+  const [ingredientError, setIngredientError] = useState(false);
 
   const convertRecipe = async (amount, measurement, ingredient, i) => {
     const res = await fetch("/api/recipes/convert", {
@@ -57,15 +57,14 @@ const RecipeEdit = () => {
 
     dispatch(
       addCurrentIngredient({
-          key:i,
-          quantity:amount,
-          measurement:data.info[0],
-          ingredient:data.info[1],
-          ingredient_id:ingredient,
-          recipe_id:id,
-          identifier:i,
-      }
-      )
+        key: i,
+        quantity: amount,
+        measurement: data.info[0],
+        ingredient: data.info[1],
+        ingredient_id: ingredient,
+        recipe_id: id,
+        identifier: i,
+      })
     );
   };
 
@@ -109,15 +108,15 @@ const RecipeEdit = () => {
   const createEdit = async (e) => {
     e.preventDefault();
     if (!category1 && !category2 && !category3 && !category4) {
-      setCategoryError(true)
-      return
+      setCategoryError(true);
+      return;
     }
-    setCategoryError(false)
+    setCategoryError(false);
     if (currentIngredients.length === 0) {
-      setIngredientError(true)
-      return
+      setIngredientError(true);
+      return;
     }
-    setIngredientError(false)
+    setIngredientError(false);
     dispatch(
       editRecipe(
         name,
@@ -138,10 +137,10 @@ const RecipeEdit = () => {
   const addIngredient = (e) => {
     e.preventDefault();
     if (!ingredient) {
-      setIngredientError(true)
-      return
+      setIngredientError(true);
+      return;
     }
-    setIngredientError(false)
+    setIngredientError(false);
     dispatch(
       addCurrentIngredient({
         key: count,
@@ -157,23 +156,43 @@ const RecipeEdit = () => {
     setIngredient("");
   };
 
+  //========== Creates an array for the Servings Select ==============
+  const oneToEighteenArray = () => {
+    let array = [];
+    for (let i = 1; i <= 18; i++) {
+      array.push(i);
+    }
+    return array;
+  };
+
+  //========== Creates an array for the Time Selects ==============
+  const increaseBy5 = () => {
+    let array = [];
+    for (let i = 5; i <= 120; i += 5) {
+      array.push(i);
+    }
+    return array;
+  };
+
   return (
-    <div>
-      <h1>Edit Recipe Page </h1>
-      <form onSubmit={createEdit}>
+    <div className={"edit-container"}>
+      <form className={"edit-form"} onSubmit={createEdit}>
         <div>
-          <label>Recipe Name</label>
+          <p className={"edit-label"}>Recipe Name</p>
           <input
+            className={"edit-input"}
             type="text"
             name="name"
             onChange={(e) => setName(e.target.value)}
             value={name}
             required={true}
+            placeholder={"Chicken Alfredo"}
           ></input>
         </div>
         <div>
-          <label>Recipe Description</label>
+          <p className={"edit-label"}>Recipe Description</p>
           <textarea
+            className={"edit-textarea"}
             type="text"
             name="description"
             onChange={(e) => {
@@ -181,11 +200,16 @@ const RecipeEdit = () => {
             }}
             value={description}
             required={true}
+            // ========== Recipe Description from https://easychickenrecipes.com/homemade-chicken-alfredo-recipe/ author name: Becky Hardin ==============
+            placeholder={
+              "This Chicken Alfredo recipe is perfect for a tasty homemade and easy weeknight meal. Made with creamy fettuccini pasta, heavy cream and parmesan, this traditional Italian pasta dish is simple and quick to make."
+            }
           ></textarea>
         </div>
         <div>
-          <label>Recipe Image</label>
+          <p className={"edit-label"}>Recipe Image</p>
           <input
+            className={"edit-input"}
             type="url"
             name="image"
             onChange={(e) => setImage(e.target.value)}
@@ -193,38 +217,97 @@ const RecipeEdit = () => {
             required={true}
           ></input>
         </div>
-        <div>
-          <label>Recipe Servings</label>
-          <input
-            type="number"
-            name="servings"
-            onChange={(e) => setServings(e.target.value)}
-            value={servings}
+        <div className={"edit-select__container"}>
+          <div className={"edit-select__div"}>
+            <p>Recipe Servings</p>
+            <select
+              className={"edit-select"}
+              name="servings"
+              onChange={(e) => setServings(e.target.value)}
+              value={servings}
+              required={true}
+            >
+              {oneToEighteenArray().map((num) => {
+                return <option key={num}>{num}</option>;
+              })}
+            </select>
+          </div>
+          <div className={"edit-select__div"}>
+            <p>Total Time</p>
+            <select
+              className={"edit-select"}
+              type="number"
+              name="time"
+              onChange={(e) => setTime(e.target.value)}
+              value={time}
+              required={true}
+            >
+              {increaseBy5().map((num) => {
+                return <option key={num}>{num}</option>;
+              })}
+            </select>
+          </div>
+        </div>
+        <div className={'edit-ingredient__container'}>
+          <select
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
             required={true}
+          >
+            {oneToEighteenArray().map((num) => {
+              return <option key={num}>{num}</option>;
+            })}
+          </select>
+          <select
+            value={measurement}
+            onChange={(e) => {
+              setMeasurement(e.target.value);
+            }}
+          >
+            {measurements.map((measurement) => {
+              return (
+                <option key={measurement.name} value={measurement.name}>
+                  {measurement.name}
+                </option>
+              );
+            })}
+          </select>
+          <input
+            onChange={(e) => setIngredient(e.target.value)}
+            placeholder="Chicken"
+            value={ingredient}
           ></input>
+          <button className={'edit-ingredient__button'} onClick={addIngredient}>Add Ingredient</button>
+          <ul className="ingredient_list"></ul>
         </div>
         <div>
-          <label>Time Needed To Cook</label>
-          <input
-            type="number"
-            name="time"
-            onChange={(e) => setTime(e.target.value)}
-            value={time}
-            required={true}
-          ></input>
+          {currentIngredients.map((ingredientObject) => {
+            return (
+              <IngredientCard
+                key={ingredientObject.key}
+                quantity={ingredientObject.quantity}
+                measurement={ingredientObject.measurement}
+                ingredient={ingredientObject.ingredient}
+                identifier={ingredientObject.identifier}
+              />
+            );
+          })}
+          {ingredientError ? (
+            <p>You must select at least one ingredient.</p>
+          ) : null}
         </div>
         <div>
-          <label>Recipe Instructions</label>
           <textarea
+            className={"edit-textarea"}
             type="text"
             name="instructions"
             onChange={(e) => setInstructions(e.target.value)}
             value={instructions}
             required={true}
+            placeholder={`Wash chicken breast then pat dry. Cut into thin strips. Boil fettuccine pasta according to box instructions, when ready, set aside. Heat a non-stick pan with olive oil and add chicken strips. Cook for 6-7 minutes on each side until golden brown, on medium heat. Remove chicken from pan when ready and set aside. Add minced garlic and saute for 3 minutes. Deglaze pan with chicken stock, add lemon juice and bring to boil. Add heavy cream, then add the cooked pasta and chicken. Add parmesan and stir until everything is well combined. Sprinkle with parsley and enjoy!`}
           ></textarea>
         </div>
-        <div>
-          Time of Day:
+        <div className={'edit-category__container'}>
           <button
             className={category1 === 0 ? null : "category_chosen"}
             onClick={(e) => {
@@ -268,51 +351,7 @@ const RecipeEdit = () => {
           {categoryError ? <p>You must select at least one category.</p> : null}
         </div>
         <div>
-          <span>Ingredients:</span>
-          <input
-            type="number"
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-            required={true}
-          ></input>
-          <select
-            value={measurement}
-            onChange={(e) => {
-              setMeasurement(e.target.value);
-            }}
-          >
-            {measurements.map((measurement) => {
-              return (
-                <option key={measurement.name} value={measurement.name}>
-                  {measurement.name}
-                </option>
-              );
-            })}
-          </select>
-          <input
-            onChange={(e) => setIngredient(e.target.value)}
-            placeholder="eggs"
-            value={ingredient}
-          ></input>
-          <button onClick={addIngredient}>Add Ingredient</button>
-          <ul className="ingredient_list"></ul>
-        </div>
-        <div>
-          {currentIngredients.map((ingredientObject) => {
-            return (
-              <IngredientCard
-                key={ingredientObject.key}
-                quantity={ingredientObject.quantity}
-                measurement={ingredientObject.measurement}
-                ingredient={ingredientObject.ingredient}
-                identifier={ingredientObject.identifier}
-              />
-            );
-          })}
-          {ingredientError ? <p>You must select at least one ingredient.</p> : null}
-        </div>
-        <div>
-          <button type="submit">Submit Changes</button>
+          <button className={'edit-submit'} type="submit">Submit Changes</button>
         </div>
       </form>
     </div>
