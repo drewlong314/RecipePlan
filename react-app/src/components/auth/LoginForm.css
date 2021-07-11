@@ -1,3 +1,78 @@
-.login-form {
-    /* background-color: blue; */
+.splash-container {
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    background-color: #F1F1EF;
+    z-index: 2;
+    background-image: url('../../splash.jpg');
+    background-repeat: no-repeat;
+    background-size: 2000px;
+    height: 100vh;
+    width: 100vw;
+    padding-left: 40%;
+}
+
+.splash-header {
+    font-size: 40pt;
+    margin-bottom: 40px;
+}
+
+.splash-label {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: lightslategray;
+    font-size: 14pt;
+}
+
+.splash-input {
+    box-sizing: border-box;
+    font-size: 17px;
+    border-radius: 6px;
+    padding: 20px;
+    width: 300px;
+    height: 15px;
+    margin-bottom: 15px;
+    border: 1px lightslategray solid;
+}
+
+.splash-submit {
+    width: 300px;
+    height: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: lightslategray;
+    color: #fff;
+    font-size: 14pt;
+    /* background-color: lightblue; */
+}
+
+.splash-line {
+    border-bottom: 2px solid black;
+    padding-bottom: 20px;
+}
+
+.splash-signup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: lightslategray;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.splash-signup__text {
+    color: white;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14pt;
 }

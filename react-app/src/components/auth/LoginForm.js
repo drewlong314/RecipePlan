@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import { login } from "../../store/session";
 import "./LoginForm.css";
 
 const LoginForm = () => {
-  const dispatch = useDispatch()
-  const user = useSelector(state => state.session.user)
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.session.user);
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,9 +20,9 @@ const LoginForm = () => {
   };
 
   const onDemo = async (e) => {
-    e.preventDefault()
-    const data = await dispatch(login('demo@aa.io', 'password'));
-  }
+    e.preventDefault();
+    const data = await dispatch(login("demo@aa.io", "password"));
+  };
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
@@ -37,39 +37,62 @@ const LoginForm = () => {
   }
 
   return (
-    <div>
-      <h1>This is the landing page </h1>
-    <form className={'login-form'} onSubmit={onLogin}>
+    <div className={"splash-container"}>
       <div>
-        {errors.map((error) => (
-          <div>{error}</div>
-        ))}
+      <h1 className={"splash-header"}>Recipe Plan</h1>
+        <form className={"splash-form"} onSubmit={onLogin}>
+          <div>
+            {errors.map((error) => (
+              <div>{error}</div>
+            ))}
+          </div>
+          <div>
+            <p className={"splash-label"} htmlFor="email">
+              Email
+            </p>
+            <input
+              className={"splash-input"}
+              name="email"
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={updateEmail}
+            />
+          </div>
+          <div>
+            <p className={"splash-label"} htmlFor="password">
+              Password
+            </p>
+            <input
+              className={"splash-input"}
+              name="password"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={updatePassword}
+            />
+          </div>
+          <button className={"splash-submit"} type="submit">
+            Login
+          </button>
+        </form>
+        <form onSubmit={onDemo}>
+          <button className={"splash-submit"} type="submit">
+            Demo Login
+          </button>
+        </form>
+        <div className={"splash-line"}></div>
+        <div className={"splash-signup"}>
+          <NavLink
+            className={"splash-signup__text"}
+            to="/sign-up"
+            exact={true}
+            activeClassName="active"
+          >
+            Sign Up
+          </NavLink>
+        </div>
       </div>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          name="email"
-          type="text"
-          placeholder="Email"
-          value={email}
-          onChange={updateEmail}
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={updatePassword}
-        />
-        <button type="submit">Login</button>
-      </div>
-    </form>
-    <form onSubmit={onDemo}>
-      <button type="submit">Demo Login</button>
-    </form>
     </div>
   );
 };
