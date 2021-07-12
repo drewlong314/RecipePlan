@@ -24,24 +24,13 @@ const Navigation = ({ title, other }) => {
     <nav className={"nav-container"}>
       <div className={"nav-left"}>
         <NavLink
-          className={"nav-home"}
+          className={"nav-login"}
           to="/recipes"
           exact={true}
           activeClassName="active"
         >
           Recipe Plan
         </NavLink>
-
-        {/* <input className={"nav-search"}></input> */}
-
-        {/* <NavLink
-        className={"nav-recipes"}
-        to="/recipes"
-        exact={true}
-        activeClassName="active"
-      >
-        Recipes
-      </NavLink> */}
       </div>
       <div className={"nav-title"}>{title}</div>
       <div className={"nav-right"}>
@@ -50,6 +39,7 @@ const Navigation = ({ title, other }) => {
             Create Recipe
           </NavLink>
         ) : null}
+        <NavLink className={"nav-login"} to={"/about"}>About</NavLink>
         {user ? (
           <LogoutButton className={"nav-logout"} />
         ) : (
