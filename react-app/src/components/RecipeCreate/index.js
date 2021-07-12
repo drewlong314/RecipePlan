@@ -86,8 +86,6 @@ const RecipeCreate = () => {
   };
 
   const isEmpty = (field) => {
-    console.log(field, !!field);
-    if (!field) console.log("This field is empty");
   };
 
   //========== Creates an array for the Servings Select ==============

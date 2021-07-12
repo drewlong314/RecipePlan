@@ -39,7 +39,6 @@ const RecipeCard = ({ recipe }) => {
   });
 
   const redirectOnClick = () => {
-    console.log(recipe.id)
     history.push(`/recipes/${recipe.id}`)
   }
 

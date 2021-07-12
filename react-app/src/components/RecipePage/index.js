@@ -39,7 +39,6 @@ const RecipePage = () => {
       return r.name + ", ";
     });
 
-    console.log(allMeasurements);
     const ingredients = recipe[0].recipe_ingredients?.map((ingredient) => {
       const ingredientMeasurement = allMeasurements.filter((m) => {
         return m.id === ingredient.measurement_id;
