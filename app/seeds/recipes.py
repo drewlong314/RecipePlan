@@ -67,7 +67,7 @@ def seed_recipes():
                   plan_category="Dinner",
                   )
     d = Recipe(name='Sesame Crusted Hamachi (Yellowtail)',
-                  description="Sesame crusted hamachi sashimi (yellowtail) with edamame soba noodle salad is a simple yet elegant meal! Served with savory noodles and crisp vegetables. This post is sponsored by Luxe Gourmets.",
+                  description="Sesame crusted hamachi sashimi (yellowtail) with edamame soba noodle salad is a simple yet elegant meal! Served with savory noodles and crisp vegetables.",
                   image='https://www.jessicagavin.com/wp-content/uploads/2016/07/sesame-crusted-hamachi-with-edamame-soba-noodle-salad-1200.jpg',
                   servings=2,
                   time=30,

@@ -16,6 +16,13 @@ def seed_ingredients():
     k = Ingredient(name='parmesan cheese')
     l = Ingredient(name='nutmeg')
     m = Ingredient(name='chopped parsley')
+    n = Ingredient(name='soy sauce')
+    o = Ingredient(name='sesame oil')
+    p = Ingredient(name='vegetable oil')
+    q = Ingredient(name='quinoa')
+    r = Ingredient(name='hamachi')
+    s = Ingredient(name='grapeseed oil')
+    t = Ingredient(name='sesame seeds')
 
     db.session.add(a)
     db.session.add(b)
@@ -30,6 +37,13 @@ def seed_ingredients():
     db.session.add(k)
     db.session.add(l)
     db.session.add(m)
+    db.session.add(n)
+    db.session.add(o)
+    db.session.add(p)
+    db.session.add(q)
+    db.session.add(r)
+    db.session.add(s)
+    db.session.add(t)
 
     db.session.commit()
 
