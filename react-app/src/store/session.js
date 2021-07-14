@@ -65,7 +65,6 @@ export const signUp = (username, email, password) => async (dispatch) => {
     }),
   });
   const data = await response.json();
-  console.log("----------------------", data)
   if (data.errors) {
     return data;
   }
