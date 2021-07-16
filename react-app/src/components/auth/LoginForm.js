@@ -14,7 +14,7 @@ const LoginForm = () => {
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
-    if (!data.errors) {
+    if (data.errors) {
       setErrors(data.errors);
     }
   };
@@ -43,7 +43,7 @@ const LoginForm = () => {
         <form className={"splash-form"} onSubmit={onLogin}>
           <div>
             {errors.map((error) => (
-              <div>{error}</div>
+              <div className={"splash-errors"}>{error}</div>
             ))}
           </div>
           <div>

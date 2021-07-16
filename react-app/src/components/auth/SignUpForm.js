@@ -7,6 +7,7 @@ import "./SignUpForm.css";
 const SignUpForm = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
+  const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +17,10 @@ const SignUpForm = () => {
     e.preventDefault();
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
-    }
+      if (data.errors) {
+        setErrors(data.errors);
+      }
+    } else setErrors(["Passwords do not match"]);
   };
 
   const updateUsername = (e) => {
@@ -49,6 +53,11 @@ const SignUpForm = () => {
       <div className={"signup-form"}>
         <form onSubmit={onSignUp}>
           <div>
+            {errors.map((error) => (
+              <div className={"signup-errors"}>{error}</div>
+            ))}
+          </div>
+          <div>
             <p className={"signup-label"}>User Name</p>
             <input
               className={"signup-input"}
@@ -56,16 +65,18 @@ const SignUpForm = () => {
               name="username"
               onChange={updateUsername}
               value={username}
+              required={true}
             ></input>
           </div>
           <div>
             <p className={"signup-label"}>Email</p>
             <input
               className={"signup-input"}
-              type="text"
+              type="email"
               name="email"
               onChange={updateEmail}
               value={email}
+              required={true}
             ></input>
           </div>
           <div>
@@ -76,6 +87,7 @@ const SignUpForm = () => {
               name="password"
               onChange={updatePassword}
               value={password}
+              required={true}
             ></input>
           </div>
           <div>
