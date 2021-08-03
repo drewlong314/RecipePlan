@@ -1,0 +1,21 @@
+.calendar-name {
+    height: 50px;
+    width: 200px;
+    border: 2px solid black;
+    text-align: center;
+}
+
+.calendar-image {
+    height: 200px;
+    width: 200px;
+}
+
+.calendar-box {
+    height: 200px;
+    width: 200px;
+    border: 2px solid black;
+}
+
+.calendar-not {
+    text-align: center;
+}
