@@ -23,8 +23,8 @@ const removeRecipe = (recipe) => ({
   payload: recipe,
 });
 
-export const getAllRecipes = () => async (dispatch) => {
-  const res = await fetch("/api/recipes/");
+export const getAllRecipes = (user) => async (dispatch) => {
+  const res = await fetch(`/api/recipes/${user.id}`);
   const data = await res.json();
   dispatch(setRecipes(data));
 };

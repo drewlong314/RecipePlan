@@ -14,7 +14,7 @@ const Navigation = ({ title, other }) => {
 
   useEffect(() => {
     if (recipes === null) {
-      dispatch(getAllRecipes());
+      dispatch(getAllRecipes(user));
       dispatch(getAllMeasurements());
       dispatch(getAllIngredients());
     }
@@ -35,10 +35,16 @@ const Navigation = ({ title, other }) => {
       <div className={"nav-title"}>{title}</div>
       <div className={"nav-right"}>
         {other === "add" ? (
-          <NavLink className={"list-actions__create"} to={`/recipes/create`}>
+          <NavLink className={"nav-login"} to={`/recipes/create`}>
             Create Recipe
           </NavLink>
-        ) : null}
+        ) :
+        <NavLink className={"nav-login"} to={`/recipes/`}>
+          Recipes
+        </NavLink>}
+        <NavLink className={"nav-login"} to={`/recipes/plan`}>
+          Meal Plan
+        </NavLink>
         <NavLink className={"nav-login"} to={"/about"}>About</NavLink>
         {user ? (
           <LogoutButton className={"nav-logout"} />
