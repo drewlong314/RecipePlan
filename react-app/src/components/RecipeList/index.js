@@ -54,7 +54,8 @@ const RecipeList = () => {
   return (
     <>
       <Navigation title={"Recipes"} other={"add"} />
-      <SearchFilter setFilterCategory={setFilterCategory}/>
+
+      <div className={"list-container"}>
       <form onSubmit={(e) => e.preventDefault()}>
         <input
         value={input}
@@ -69,8 +70,10 @@ const RecipeList = () => {
           }}
         ></input>
       </form>
-      <div className={"list-container"}>
         <div className={"list-cards"}>
+          <div className={"list-filter"}>
+          <SearchFilter setFilterCategory={setFilterCategory}/>
+          </div>
           {!input.length && filterCategory ? filterSearch?.map((recipe) => {
             return <RecipeCard key={recipe.id} recipe={recipe}></RecipeCard>;
           }) : null}

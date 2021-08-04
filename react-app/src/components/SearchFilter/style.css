@@ -12,7 +12,7 @@
   }
 
   .results-toggle-button {
-    background-color: #afd5f4;
+    background-color: white;
     border: none;
     height: 50px;
     font-size: 18px;
@@ -22,13 +22,13 @@
   }
 
   .results-toggle-button:hover {
-    background-color: #7190a8;
+    background-color: white;
     top: 2px;
     cursor: pointer;
   }
 
   .selected-toggle {
-    background-color: #7190a8;
+    background-color: white;
     border: none;
     height: 50px;
     font-size: 18px;
@@ -43,15 +43,27 @@
 
   .sort-categories-list {
     /* border-left: 3px solid #a9a9a9; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0;
   }
 
   .sort-category {
-    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
     text-align: center;
     cursor: pointer;
-    background-color: #c8c8c8;
+    background-color: rgb(66, 65, 65);
+    color: white;
     padding: 5px;
     list-style: none;
+    width: 94%;
+    border-radius: 2%;
+    height: 50px;
   }
 
   .sort-category:hover {

@@ -47,3 +47,9 @@
     justify-content: center; */
     /* flex-wrap: wrap; */
 }
+
+.list-filter {
+    position: absolute;
+    left: 0;
+    /* margin: 10px; */
+}
