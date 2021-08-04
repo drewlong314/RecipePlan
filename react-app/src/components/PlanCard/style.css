@@ -11,6 +11,7 @@
 }
 
 .calendar-box {
+    position: relative;
     height: 200px;
     width: 200px;
     border: 2px solid black;
@@ -18,4 +19,48 @@
 
 .calendar-not {
     text-align: center;
+}
+
+.calendar-options {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    right: 0;
+    top: 0;
+    /* background-color: white; */
+    height: 200px;
+    width: 120px;
+    margin: 1px;
+    /* opacity: 0.92; */
+    padding: 5px;
+}
+
+.calendar-options__button {
+    width: 105px;
+    margin: 2px;
+}
+
+.calendar-options__x {
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    color: white;
+}
+
+.calendar-options__dots {
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: white;
+    border: black 1px solid;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    margin: 1px;
+    cursor: pointer;
+    opacity: 0.92;
+    margin: 5px;
 }

@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import PlanOptions from "../PlanOptions";
 import "./style.css";
 
 const PlanCard = ({ day, dayName }) => {
-  const recipes = useSelector((state) => state.recipeReducer.recipes);
   let breakfast = <h1 className={"calendar-not"}>None</h1>;
   let lunch = <h1 className={"calendar-not"}>None</h1>;
   let dinner = <h1 className={"calendar-not"}>None</h1>;
   let dessert = <h1 className={"calendar-not"}>None</h1>;
+
+  //========== Sorts the day's recipes and shows the pictures on the calendar ==============
   if (day.length) {
     day.forEach((recipe) => {
       if (recipe.plan_category === "Breakfast")
@@ -40,10 +41,11 @@ const PlanCard = ({ day, dayName }) => {
     <div>
       <div>
         <h1 className={"calendar-name"}>{dayName}</h1>
-        <div className={"calendar-box"}>{breakfast}</div>
-        <div className={"calendar-box"}>{lunch}</div>
-        <div className={"calendar-box"}>{dinner}</div>
-        <div className={"calendar-box"}>{dessert}</div>
+        {/* Can add meal name and dayName for adding recipes */}
+        <PlanOptions meal={breakfast} />
+        <PlanOptions meal={lunch} />
+        <PlanOptions meal={dinner} />
+        <PlanOptions meal={dessert} />
       </div>
     </div>
   );

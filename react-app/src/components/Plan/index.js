@@ -13,9 +13,18 @@ const Plan = () => {
   let friday = [];
   let saturday = [];
   let sunday = [];
+
+  //========== Sorts all the recipes for a user into days ==============
   const daySorter = recipes?.forEach((recipe) => {
     if (recipe.day === "Monday") monday.push(recipe);
+    else if (recipe.day === "Tuesday") tuesday.push(recipe);
+    else if (recipe.day === "Wednesday") wednesday.push(recipe);
+    else if (recipe.day === "Thursday") thursday.push(recipe);
+    else if (recipe.day === "Friday") friday.push(recipe);
+    else if (recipe.day === "Saturday") saturday.push(recipe);
+    else if (recipe.day === "Sunday") sunday.push(recipe);
   });
+
   return (
     <div className={"calendar"}>
       <PlanCard day={monday} dayName={'Monday'} />
