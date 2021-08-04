@@ -53,3 +53,16 @@
     left: 0;
     /* margin: 10px; */
 }
+
+.list-search {
+    width: 500px;
+    height: 30px;
+    font-size: 20pt;
+}
+
+.list-search__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}

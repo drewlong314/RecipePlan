@@ -31,7 +31,7 @@ const SearchFilter = ({setFilterCategory}) => {
     return (
         <div className="results-toggle-container">
             <div className="sort-section">
-                <button className={`${showCategories === true ? "selected-toggle" : "results-toggle-button"}`} onClick={e => toggleActions(e)}>Sort by category</button>
+                <button className={`${showCategories === true ? "selected-toggle" : "results-toggle-button"}`} onClick={e => toggleActions(e)}>Sort By Category</button>
                 {showCategories && <div className="sort-categories-list-container">
                     <ul className="sort-categories-list">
                         <li className="sort-category" onClick={(e) => selectCategory(1, e)}>Breakfast</li>

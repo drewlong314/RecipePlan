@@ -56,8 +56,9 @@ const RecipeList = () => {
       <Navigation title={"Recipes"} other={"add"} />
 
       <div className={"list-container"}>
-      <form onSubmit={(e) => e.preventDefault()}>
+      <form className={"list-search__container"} onSubmit={(e) => e.preventDefault()}>
         <input
+        className={"list-search"}
         value={input}
           onChange={(e) => {
             if (e.target.value) {
