@@ -1,0 +1,72 @@
+.search-results-container {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    column-gap: 10px;
+  }
+
+  .results-toggle-container {
+    display: grid;
+    grid-auto-columns: 180px;
+    padding-left: 10px;
+    padding-top: 5px;
+  }
+
+  .results-toggle-button {
+    background-color: #afd5f4;
+    border: none;
+    height: 50px;
+    font-size: 18px;
+    padding: 0 20px;
+    position: relative;
+    width: 100%;
+  }
+
+  .results-toggle-button:hover {
+    background-color: #7190a8;
+    top: 2px;
+    cursor: pointer;
+  }
+
+  .selected-toggle {
+    background-color: #7190a8;
+    border: none;
+    height: 50px;
+    font-size: 18px;
+    padding: 0 20px;
+    width: 100%;
+  }
+
+  .sort-categories-list-container {
+    /* display: flex;
+    justify-content: flex-end; */
+  }
+
+  .sort-categories-list {
+    /* border-left: 3px solid #a9a9a9; */
+  }
+
+  .sort-category {
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #c8c8c8;
+    padding: 5px;
+    list-style: none;
+  }
+
+  .sort-category:hover {
+    background-color: #a9a9a9;
+  }
+
+  .selected-category {
+    background-color: #a9a9a9;
+  }
+
+  .red-button {
+      color: white;
+      background-color: #cb2934;
+  }
+
+  .red-button:hover {
+      background-color: #ff0112;
+  }
