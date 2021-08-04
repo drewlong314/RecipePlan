@@ -16,10 +16,10 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-@recipe_routes.route('/')
+@recipe_routes.route('/<id>')
 # @login_required
-def get_recipes():
-    recipes = Recipe.query.all()
+def get_recipes(id):
+    recipes = Recipe.query.filter(Recipe.user_id == id).all()
     return {"recipes": [recipe.to_dict() for recipe in recipes]}
 
 
