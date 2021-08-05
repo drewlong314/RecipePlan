@@ -4,7 +4,7 @@ import MiniRecipeCard from "../MiniRecipeCard";
 import RecipeCard from "../RecipeCard";
 import "./style.css";
 
-function Calendar() {
+function Calendar({day, time}) {
   const dispatch = useDispatch();
   const allRecipes = useSelector((state) => state.recipeReducer.recipes);
   const [searchResults, setSearchResults] = useState([]);
@@ -45,7 +45,7 @@ function Calendar() {
         <div className={"mini-recipe-inner"}>
           {allRecipes?.map((recipe) => {
             return (
-              <MiniRecipeCard key={recipe.id} recipe={recipe}></MiniRecipeCard>
+              <MiniRecipeCard key={recipe.id} recipe={recipe} day={day} time={time}></MiniRecipeCard>
             );
           })}
         </div>

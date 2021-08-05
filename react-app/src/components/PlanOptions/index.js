@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CalendarModal from "../CalendarModal";
 
-const PlanOptions = ({ meal }) => {
+const PlanOptions = ({ meal, day, time }) => {
   const [options, setOptions] = useState(false);
   const [modal, setModal] = useState(false)
   const addRecipe = () => {
@@ -13,7 +13,7 @@ const PlanOptions = ({ meal }) => {
       {options ? (
         <div className={"calendar-options"}>
           <button className={"calendar-options__x"} onClick={(e) => setOptions(false)}>X</button>
-          <CalendarModal />
+          <CalendarModal day={day} time={time}/>
           {/* <button onClick={addRecipe} className={"calendar-options__button"}>Add recipe</button> */}
           <button className={"calendar-options__button"}>Remove recipe</button>
         </div>

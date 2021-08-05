@@ -1,51 +1,35 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteRecipe } from "../../store/recipes";
+import { deleteRecipe, editRecipe } from "../../store/recipes";
 import { Link, useHistory } from "react-router-dom";
 import "./style.css";
 
-const MiniRecipeCard = ({ recipe }) => {
+const MiniRecipeCard = ({ recipe, day, time }) => {
   const dispatch = useDispatch();
   const history = useHistory()
 
-  const allMeasurements = useSelector(
-    (state) => state.measurementReducer.measurements
-  );
-
-  const allIngredients = useSelector(
-    (state) => state.ingredientReducer.ingredients
-  );
-
-  let index = 1;
-
-  const recipeCategories = recipe.categories.map((r) => {
-    if (index === recipe.categories.length) return r.name;
-    index++;
-    return r.name + ", ";
-  });
-
-  const ingredients = recipe.recipe_ingredients.map((ingredient) => {
-    const ingredientMeasurement = allMeasurements.filter((m) => {
-      return m.id === ingredient.measurement_id;
-    });
-    const ingredientIngredient = allIngredients.filter((i) => {
-      return i.id === ingredient.ingredient_id;
-    });
-    return (
-      <p
-        key={`${ingredient.id}${ingredient.amount}${index}`}
-      >{`${ingredient.amount} ${ingredientMeasurement[0]?.name} ${ingredientIngredient[0]?.name}`}</p>
-    );
-  });
-
-  const redirectOnClick = () => {
-    history.push(`/recipes/${recipe.id}`)
+  const redirectOnClick = () => { // set the day and time of a project here
+    console.log(recipe, day, time)
+    dispatch(editRecipe(
+        recipe.name,
+        recipe.description,
+        recipe.image,
+        recipe.servings,
+        recipe.time,
+        recipe.instructions,
+        recipe.user_id,
+        recipe.id,
+        recipe.categories,
+        recipe.recipe_ingredients,
+        day,
+        time
+        ))
   }
 
   return (
-    <div onClick={redirectOnClick} className={"recipe-card"}>
-      <img key={"r3"} className={"recipe-card__image"} src={recipe.image} />
-      <h1 key={"r1"} className={"recipe-card__name"}>
+    <div onClick={redirectOnClick} className={"mini-recipe-card"}>
+      <img key={"r3"} className={"mini-recipe-card__image"} src={recipe.image} />
+      <h1 key={"r1"} className={"mini-recipe-card__name"}>
         {recipe.name}
       </h1>
     </div>

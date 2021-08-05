@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "../../context/Modal";
 import Calendar from "./Calendar";
 
-function CalendarModal() {
+function CalendarModal({day, time}) {
   const dispatch = useDispatch();
   //   const showModal = useSelector((state) => state.modals.create);
   const [showModal, setShowModal] = useState(false);
@@ -23,7 +23,7 @@ function CalendarModal() {
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <Calendar />
+          <Calendar day={day} time={time}/>
         </Modal>
       )}
     </>

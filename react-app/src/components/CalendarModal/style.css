@@ -3,7 +3,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 20px;
 }
 
 .mini-recipe-container {
@@ -21,6 +20,8 @@
     border: solid black 2px;
     height: 600px;
     width: 950px;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 .mini-search__container {
@@ -34,4 +35,5 @@
     width: 500px;
     height: 30px;
     font-size: 20pt;
+    margin-top: 30px;
 }

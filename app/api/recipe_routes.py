@@ -78,7 +78,9 @@ def edit_recipes(id):
     recipe = Recipe.query.get(id)
     form = RecipeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    # print(form.data['day'], form.data['plan_category'], recipe.to_dict(), '______________________________________')
     if form.validate_on_submit():
+        print('This made it in')
         recipe.name = form.data['name']
         recipe.description = form.data['description']
         recipe.image = form.data['image']
@@ -121,6 +123,7 @@ def edit_recipes(id):
         db.session.commit()
         return recipe.to_dict()
     else:
+        print({'errors': validation_errors_to_error_messages(form.errors)})
         return {'errors': validation_errors_to_error_messages(form.errors)}
 
 

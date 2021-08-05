@@ -42,10 +42,10 @@ const PlanCard = ({ day, dayName }) => {
       <div>
         <h1 className={"calendar-name"}>{dayName}</h1>
         {/* Can add meal name and dayName for adding recipes */}
-        <PlanOptions meal={breakfast} />
-        <PlanOptions meal={lunch} />
-        <PlanOptions meal={dinner} />
-        <PlanOptions meal={dessert} />
+        <PlanOptions meal={breakfast} day={dayName} time={'Breakfast'} />
+        <PlanOptions meal={lunch} day={dayName} time={'Lunch'} />
+        <PlanOptions meal={dinner} day={dayName} time={'Dinner'} />
+        <PlanOptions meal={dessert} day={dayName} time={'Dessert'} />
       </div>
     </div>
   );
