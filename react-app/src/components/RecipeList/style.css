@@ -4,6 +4,7 @@
     background-image: url('../../recipe-list.jpg');
     background-repeat: no-repeat;
     background-size: 2500px;
+    padding-left: 20px;
 }
 
 .list-actions {
@@ -46,4 +47,23 @@
     align-items: center;
     justify-content: center; */
     /* flex-wrap: wrap; */
+}
+
+.list-filter {
+    position: absolute;
+    left: 0;
+    /* margin: 10px; */
+}
+
+.list-search {
+    width: 500px;
+    height: 30px;
+    font-size: 20pt;
+}
+
+.list-search__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }

@@ -1,0 +1,39 @@
+.mini-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.mini-recipe-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* flex-direction: column; */
+    height: 700px;
+    width: 1000px;
+}
+
+.mini-recipe-inner {
+    box-sizing: border-box;
+    display: flex;
+    border: solid black 2px;
+    height: 600px;
+    width: 950px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.mini-search__container {
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; */
+}
+
+.mini-search {
+    width: 500px;
+    height: 30px;
+    font-size: 20pt;
+    margin-top: 30px;
+}
