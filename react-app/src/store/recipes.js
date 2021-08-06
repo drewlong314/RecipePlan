@@ -110,6 +110,8 @@ export default function recipeReducer(state = initialState, action) {
       recipe[0].instructions = action.payload.instructions;
       recipe[0].categories = action.payload.categories
       recipe[0].recipe_ingredients = action.payload.recipe_ingredients
+      recipe[0].day = action.payload.day
+      recipe[0].plan_category = action.payload.plan_category
       return (state.recipes = { recipes: updateState });
     case REMOVE_RECIPE:
         const deleteState = [...state.recipes]
