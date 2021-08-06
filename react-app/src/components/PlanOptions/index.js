@@ -8,16 +8,26 @@ const PlanOptions = ({ meal, day, time }) => {
       setModal(true)
       // this will open the modal that contains the search bar
   }
+
+  // How can you tell if the box already has a recipe in it
+  console.log(meal[1])
   return (
     <div className={"calendar-box"}>
-      {options ? (
+      {options && meal[1] && (
+        <div className={"calendar-options"}>
+          <button className={"calendar-options__x"} onClick={(e) => setOptions(false)}>X</button>
+          <button className={"calendar-options__button"}>Remove recipe</button>
+          {/* <CalendarModal day={day} time={time}/> */}
+        </div>
+      )}
+      {options && !meal[1] && (
         <div className={"calendar-options"}>
           <button className={"calendar-options__x"} onClick={(e) => setOptions(false)}>X</button>
           <CalendarModal day={day} time={time}/>
-          {/* <button onClick={addRecipe} className={"calendar-options__button"}>Add recipe</button> */}
-          <button className={"calendar-options__button"}>Remove recipe</button>
+          {/* <button className={"calendar-options__button"}>Remove recipe</button> */}
         </div>
-      ) : (
+      )}
+      {!options && (
         <div className={'calendar-options'}>
           <button
             className={"calendar-options__dots"}
@@ -27,7 +37,7 @@ const PlanOptions = ({ meal, day, time }) => {
           </button>
         </div>
       )}
-      {meal}
+      {meal[0]}
     </div>
   );
 };

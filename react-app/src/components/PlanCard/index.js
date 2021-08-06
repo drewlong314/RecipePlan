@@ -12,29 +12,29 @@ const PlanCard = ({ day, dayName }) => {
   if (day.length) {
     day.forEach((recipe) => {
       if (recipe.plan_category === "Breakfast")
-        breakfast = (
+        breakfast = [(
           <a href={recipe.id}>
             <img className={"calendar-image"} src={recipe.image} />
           </a>
-        );
+        ), recipe];
       else if (recipe.plan_category === "Lunch")
-        lunch = (
+        lunch = [(
           <a href={recipe.id}>
             <img className={"calendar-image"} src={recipe.image} />
           </a>
-        );
+        ), recipe];
       else if (recipe.plan_category === "Dinner")
-        dinner = (
+        dinner = [(
           <a href={recipe.id}>
             <img className={"calendar-image"} src={recipe.image} />
           </a>
-        );
+        ), recipe];
       else if (recipe.dessert === "Dessert")
-        dessert = (
+        dessert = [(
           <a href={recipe.id}>
             <img className={"calendar-image"} src={recipe.image} />
           </a>
-        );
+        ), recipe];
     });
   }
   return (
