@@ -91,8 +91,13 @@ def edit_recipes(id):
         recipe.plan_category = form.data['plan_category']
         db.session.commit()
         recipe.categories = []
+        print(form.data['category'], '---------------------')
         for category in form.data['category']:
-            if category != 0:
+            if category['id']:
+                print('THIS DID WORK', '+++++++++++++++++++++++')
+                recipe.categories.append(
+                    Category.query.filter_by(id=category['id']).first())
+            elif category != 0:
                 recipe.categories.append(
                     Category.query.filter_by(id=category).first())
         for ingredient in form.data['ingredient_list']:
