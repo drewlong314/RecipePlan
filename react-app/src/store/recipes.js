@@ -76,7 +76,6 @@ export const editRecipe =
       }),
     });
     const data = await res.json();
-    console.log(data, 'check this for the name of the recipe')
     if (!data.errors) dispatch(updateRecipe(data));
   };
 
