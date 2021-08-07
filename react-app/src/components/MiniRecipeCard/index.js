@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteRecipe, editRecipe } from "../../store/recipes";
-import { Link, useHistory } from "react-router-dom";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { editRecipe } from "../../store/recipes";
+import { useHistory } from "react-router-dom";
 import "./style.css";
 
 const MiniRecipeCard = ({ recipe, day, time }) => {
@@ -45,8 +45,6 @@ const MiniRecipeCard = ({ recipe, day, time }) => {
   });
 
   const redirectOnClick = () => {
-    // set the day and time of a project here
-    console.log(recipe, day, time);
     dispatch(
       editRecipe(
         recipe.name,

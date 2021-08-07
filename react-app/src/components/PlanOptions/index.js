@@ -10,7 +10,6 @@ const PlanOptions = ({ meal, day, time }) => {
   }
 
   // How can you tell if the box already has a recipe in it
-  console.log(meal[1])
   return (
     <div className={"calendar-box"}>
       {options && meal[1] && (

@@ -79,7 +79,6 @@ def edit_recipes(id):
     form = RecipeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        print('This made it in')
         recipe.name = form.data['name']
         recipe.description = form.data['description']
         recipe.image = form.data['image']
@@ -98,7 +97,6 @@ def edit_recipes(id):
             elif category != 0:
                 recipe.categories.append(
                     Category.query.filter_by(id=category).first())
-        print(form.data['ingredient_list'], '-------------------------')
         for ingredient in form.data['ingredient_list']:
             check_ingredient = Ingredient.query.filter_by(
                 name=ingredient['ingredient']).first()
