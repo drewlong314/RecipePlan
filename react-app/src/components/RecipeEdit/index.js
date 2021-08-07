@@ -131,7 +131,7 @@ const RecipeEdit = () => {
         ingredientList
       )
     );
-    history.push("/recipes");
+    history.push(`/recipes/${Number(id)}`); // this should go to the recipes/id
   };
 
   const addIngredient = (e) => {

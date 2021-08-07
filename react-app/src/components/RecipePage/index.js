@@ -60,7 +60,7 @@ const RecipePage = () => {
     history.push(`/recipes/${recipe[0].id}`);
   };
 
-  useEffect(() => {}, [loaded]);
+  useEffect(() => {}, [loaded, recipes]);
 
   return (
     <>
