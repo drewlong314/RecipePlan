@@ -7,7 +7,6 @@ function CalendarModal({day, time}) {
   const dispatch = useDispatch();
   //   const showModal = useSelector((state) => state.modals.create);
   const [showModal, setShowModal] = useState(false);
-  console.log(showModal);
   return (
     <>
       <button
