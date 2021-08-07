@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { editRecipe } from "../../store/recipes";
 import CalendarModal from "../CalendarModal";
 
@@ -7,6 +7,12 @@ const PlanOptions = ({ meal, day, time }) => {
   const dispatch = useDispatch();
   const [options, setOptions] = useState(false);
   const ingredientList = [];
+
+  const recipes = useSelector((state) => state.recipeReducer.recipes);
+
+  useEffect(() => {
+    setOptions(false)
+  }, [recipes])
 
   const convertRecipe = async (amount, measurement, ingredient, i) => {
     const res = await fetch("/api/recipes/convert", {

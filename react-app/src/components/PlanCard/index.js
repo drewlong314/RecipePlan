@@ -8,6 +8,7 @@ const PlanCard = ({ day, dayName }) => {
   let dinner = <h1 className={"calendar-not"}>None</h1>;
   let dessert = <h1 className={"calendar-not"}>None</h1>;
 
+  console.log(day, dayName)
   //========== Sorts the day's recipes and shows the pictures on the calendar ==============
   if (day.length) {
     day.forEach((recipe) => {
@@ -29,7 +30,7 @@ const PlanCard = ({ day, dayName }) => {
             <img className={"calendar-image"} src={recipe.image} />
           </a>
         ), recipe];
-      else if (recipe.dessert === "Dessert")
+      else if (recipe.plan_category === "Dessert")
         dessert = [(
           <a href={recipe.id}>
             <img className={"calendar-image"} src={recipe.image} />
