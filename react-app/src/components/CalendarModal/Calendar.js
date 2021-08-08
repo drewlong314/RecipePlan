@@ -15,7 +15,6 @@ function Calendar({day, time}) {
   const handleSearch = async (input) => {
     const res = await fetch(`/api/search/${input}`);
     const json = await res.json();
-    setInput(input);
     setSearchResults(json["recipes"]);
   };
 
@@ -32,6 +31,7 @@ function Calendar({day, time}) {
             value={input}
             onChange={(e) => {
               if (e.target.value) {
+                setInput(e.target.value);
                 handleSearch(e.target.value);
               } else {
                 setSearchResults([]);
@@ -43,11 +43,12 @@ function Calendar({day, time}) {
       </form>
       <div className={"mini-recipe-container"}>
         <div className={"mini-recipe-inner"}>
-          {allRecipes?.map((recipe) => {
-            return (
-              <MiniRecipeCard key={recipe.id} recipe={recipe} day={day} time={time}></MiniRecipeCard>
-            );
-          })}
+          {input.length ? searchResults?.map((recipe) => {
+            return <MiniRecipeCard key={recipe.id} recipe={recipe} day={day} time={time}/>
+          }) : null}
+          {!input.length ? allRecipes?.map((recipe) => {
+            return <MiniRecipeCard key={recipe.id} recipe={recipe} day={day} time={time}/>
+          }) : null}
         </div>
       </div>
     </div>

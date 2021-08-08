@@ -91,7 +91,7 @@ def edit_recipes(id):
         db.session.commit()
         recipe.categories = []
         for category in form.data['category']:
-            if category['id']:
+            if type(category) is dict:
                 recipe.categories.append(
                     Category.query.filter_by(id=category['id']).first())
             elif category != 0:

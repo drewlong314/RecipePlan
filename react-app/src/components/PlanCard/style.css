@@ -1,8 +1,9 @@
 .calendar-name {
-    height: 50px;
+    height: 40px;
     width: 200px;
     border: 2px solid black;
     text-align: center;
+    background-color: white;
 }
 
 .calendar-image {
@@ -15,6 +16,7 @@
     height: 200px;
     width: 200px;
     border: 2px solid black;
+    background-color: white;
 }
 
 .calendar-not {
