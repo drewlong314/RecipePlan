@@ -1,7 +1,9 @@
 .calendar {
     width: 100vw;
+    height: 93.4vh;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    background-color: lightslategray;
 }
