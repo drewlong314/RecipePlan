@@ -1,5 +1,12 @@
-## Recipe Plan Overview
-Recipe Plan is a full stack app that lets users create recipes and make meal plans using those recipes.
+# Recipe Plan Overview
+![Splash Page](https://i.imgur.com/B9O8AKJ.png)
+## [Recipe Plan](https://recipeplan.herokuapp.com/) is a full stack app that lets users create recipes and make meal plans using those recipes.
+  * User Authentication
+  * The user can create, update, and delete recipes.
+  * The user can create, update, and delete ingredients.
+  * The user can search all recipes by using the search bar.
+  * The user can create a calendar with chosen recipes scheduled on it.
+
 
 ![Home Page](recipe-plan-home.PNG)
 
